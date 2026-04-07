@@ -14,7 +14,7 @@
 
 (function () {
   // ---- SET YOUR PASSWORD HERE ----
-  const PASSWORD = "w8nwh39nt@XMMS";
+  const PASSWORD = "sunshine2024";
   // --------------------------------
 
   const SESSION_KEY = "wx_auth";
