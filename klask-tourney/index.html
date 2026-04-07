@@ -98,6 +98,32 @@
   <div id="loading"><div class="spinner"></div><br>Loading tournament data&#8230;</div>
   <div id="content">
 
+    <!-- ORIGIN POPOUT -->
+    <div id="origin-bar" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;cursor:pointer;" onclick="toggleOrigin()">
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.06em;color:var(--accent2);">&#9836; The Origins of musiKLASK</span>
+      <span id="origin-arrow" style="color:var(--muted);font-size:0.85rem;transition:transform 0.2s;">&#9660;</span>
+    </div>
+    <div id="origin-content" style="display:none;background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:1.25rem 1.5rem;margin-top:-1.25rem;margin-bottom:1.25rem;">
+      <p style="color:var(--text);font-size:0.92rem;line-height:1.75;max-width:720px;">
+        It started with an argument. SK, GM of the County Cougars, and YK, GM of the Garden State Guardians, 
+        were debating the age-old question: who was the greater composer — Bach or Marcello? 
+        Words weren't settling it. So SK proposed they do what any reasonable person would do: 
+        play a game of KLASK. Winner's composer wins the argument.
+        <br><br>
+        SK won. Bach won. And in that moment, musiKLASK was born — a league where composers 
+        don't just live on in concert halls, but compete on the KLASK board, 
+        their legacies riding on every goal scored and every magnet snapped.
+      </p>
+    </div>
+    <script>
+    function toggleOrigin(){
+      const c=document.getElementById('origin-content');
+      const a=document.getElementById('origin-arrow');
+      if(c.style.display==='none'){c.style.display='block';a.style.transform='rotate(180deg)';}
+      else{c.style.display='none';a.style.transform='rotate(0deg)';}
+    }
+    </script>
+
     <!-- NOW PLAYING -->
     <div id="now-playing" style="display:none;">
       <span class="np-icon">&#9835;</span>
@@ -167,8 +193,16 @@ function barCell(p){
   return`<td class="bar-cell"><span class="win-pct ${pc}">${p}%</span> <span class="bar-outer"><span class="bar-inner ${pc}" style="width:${p}%"></span></span></td>`;
 }
 
-// Sort: by wins desc, then losses asc
-function standingsSort(a,b){return b.w-a.w||a.l-b.l;}
+// Teams: wins desc -> win% desc
+function teamSort(a,b){
+  const pa=a.w+a.l?a.w/(a.w+a.l):0,pb=b.w+b.l?b.w/(b.w+b.l):0;
+  return b.w-a.w||pb-pa;
+}
+// Players: wins desc -> win% desc -> birth year asc (older = better)
+function playerSort(a,b){
+  const pa=a.w+a.l?a.w/(a.w+a.l):0,pb=b.w+b.l?b.w/(b.w+b.l):0;
+  return b.w-a.w||pb-pa||a.birth_year-b.birth_year;
+}
 
 (async function(){
   try{
@@ -213,7 +247,7 @@ function standingsSort(a,b){return b.w-a.w||a.l-b.l;}
     // Summary
     const totalGames=matches.length;
     const closestGames=matches.filter(r=>Math.abs(parseInt(r.score_1)-parseInt(r.score_2))<=1).length;
-    const playersSorted=Object.values(playerStats).filter(p=>p.w+p.l>0).sort(standingsSort);
+    const playersSorted=Object.values(playerStats).filter(p=>p.w+p.l>0).sort(playerSort);
     const topPlayer=playersSorted[0];
 
     // Music
@@ -249,7 +283,7 @@ function standingsSort(a,b){return b.w-a.w||a.l-b.l;}
       <div class="stat-card"><div class="label">Current Leader</div><div class="value" style="font-size:1.1rem;padding-top:0.3rem;">${topPlayer?topPlayer.name:'—'}</div></div>`;
 
     // Teams table
-    const teamsSorted=Object.values(teamStats).sort(standingsSort);
+    const teamsSorted=Object.values(teamStats).sort(teamSort);
     document.getElementById('teams-count').textContent=`${teamsSorted.length} teams`;
     document.querySelector('#teams-table tbody').innerHTML=teamsSorted.map((t,i)=>{
       const gp=t.w+t.l,p=pct(t.w,gp);
