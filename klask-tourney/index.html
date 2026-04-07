@@ -25,6 +25,22 @@
     .spinner{display:inline-block;width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:1rem;}
     @keyframes spin{to{transform:rotate(360deg);}}
     #content{display:none;}
+
+    /* NOW PLAYING */
+    #now-playing{
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+      padding:1rem 1.5rem;margin-bottom:2rem;
+      display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;
+    }
+    .np-icon{font-size:1.5rem;animation:pulse 2s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
+    .np-label{font-family:'Source Code Pro',monospace;font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.2rem;}
+    .np-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--accent2);letter-spacing:0.05em;}
+    .np-controls{margin-left:auto;display:flex;align-items:center;gap:0.75rem;}
+    .np-btn{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);padding:0.4rem 0.9rem;cursor:pointer;font-size:0.82rem;font-family:'Inter',sans-serif;transition:background 0.15s;}
+    .np-btn:hover{background:var(--border);}
+    .np-vol{width:80px;accent-color:var(--accent2);}
+
     .section-header{display:flex;align-items:baseline;gap:0.75rem;margin:2.5rem 0 1.25rem;}
     .section-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.06em;color:var(--accent2);}
     .section-header .count{font-family:'Source Code Pro',monospace;font-size:0.75rem;color:var(--muted);}
@@ -45,11 +61,15 @@
     .rank.gold{color:#ffd700;}.rank.silver{color:#c0c0c0;}.rank.bronze{color:#cd7f32;}
     .player-name{font-weight:500;}
     .team-pill{display:inline-block;font-size:0.7rem;padding:0.15rem 0.5rem;border-radius:20px;font-family:'Source Code Pro',monospace;white-space:nowrap;}
-    .win-pct{font-family:'Source Code Pro',monospace;font-size:0.82rem;}
+    .win-pct{font-family:'Source Code Pro',monospace;font-size:0.82rem;min-width:42px;display:inline-block;}
     .win-pct.high{color:var(--accent3);}.win-pct.mid{color:var(--accent2);}.win-pct.low{color:var(--danger);}
-    .pct-bar-wrap{width:80px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:0.5rem;}
-    .pct-bar{height:100%;border-radius:2px;background:var(--accent3);}
-    .pct-bar.mid{background:var(--accent2);}.pct-bar.low{background:var(--danger);}
+
+    /* FIX: pct bar uses a table cell with fixed width */
+    .bar-cell{width:120px;}
+    .bar-outer{width:100px;height:6px;background:var(--border);border-radius:3px;display:inline-block;vertical-align:middle;position:relative;overflow:hidden;}
+    .bar-inner{position:absolute;left:0;top:0;height:100%;border-radius:3px;background:var(--accent3);transition:width 0.4s ease;}
+    .bar-inner.mid{background:var(--accent2);}.bar-inner.low{background:var(--danger);}
+
     .score-badge{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;}
     .score-badge .w{color:var(--accent3);}.score-badge .sep{color:var(--muted);margin:0 0.1rem;}.score-badge .l{color:var(--danger);}
     .won{color:var(--accent3);font-weight:500;font-size:0.78rem;font-family:'Source Code Pro',monospace;}
@@ -65,7 +85,7 @@
     .t-guardians{background:rgba(79,255,160,0.15);color:#4ff7a0;border:1px solid rgba(79,255,160,0.3);}
     .t-doom{background:rgba(180,79,247,0.15);color:#b44ff7;border:1px solid rgba(180,79,247,0.3);}
     .t-cougars{background:rgba(247,130,79,0.15);color:#f7824f;border:1px solid rgba(247,130,79,0.3);}
-    @media(max-width:600px){header{padding:0.75rem 1rem;}main{padding:1.25rem 1rem;}.site-title{font-size:1.5rem;}th,td{padding:0.5rem 0.6rem;}}
+    @media(max-width:600px){header{padding:0.75rem 1rem;}main{padding:1.25rem 1rem;}.site-title{font-size:1.5rem;}th,td{padding:0.5rem 0.6rem;}.bar-cell,.bar-outer{display:none;}}
   </style>
 </head>
 <body>
@@ -77,17 +97,35 @@
 <main>
   <div id="loading"><div class="spinner"></div><br>Loading tournament data&#8230;</div>
   <div id="content">
+
+    <!-- NOW PLAYING -->
+    <div id="now-playing" style="display:none;">
+      <span class="np-icon">&#9835;</span>
+      <div>
+        <div class="np-label">Now Playing &#8212; Current Leader</div>
+        <div class="np-name" id="np-name"></div>
+      </div>
+      <div class="np-controls">
+        <input type="range" class="np-vol" id="np-vol" min="0" max="1" step="0.05" value="0.4" title="Volume" />
+        <button class="np-btn" id="np-toggle">&#9646;&#9646; Pause</button>
+      </div>
+    </div>
+    <audio id="bg-audio" loop></audio>
+
     <div class="stat-grid" id="stat-grid"></div>
+
     <div class="section-header"><h2>Team Standings</h2><span class="count" id="teams-count"></span></div>
     <div class="table-wrap"><table id="teams-table">
-      <thead><tr><th class="center">#</th><th>Team</th><th class="right">W</th><th class="right">L</th><th class="right">GP</th><th>Win %</th><th class="right">Pts For</th><th class="right">Pts Against</th></tr></thead>
+      <thead><tr><th class="center">#</th><th>Team</th><th class="right">W</th><th class="right">L</th><th class="right">GP</th><th colspan="2">Win %</th></tr></thead>
       <tbody></tbody>
     </table></div>
+
     <div class="section-header"><h2>Player Leaderboard</h2><span class="count" id="players-count"></span></div>
     <div class="table-wrap"><table id="players-table">
-      <thead><tr><th class="center">#</th><th>Composer</th><th>Team</th><th class="right">W</th><th class="right">L</th><th class="right">GP</th><th>Win %</th><th class="right">Born</th><th>Opens</th></tr></thead>
+      <thead><tr><th class="center">#</th><th>Composer</th><th>Team</th><th class="right">W</th><th class="right">L</th><th class="right">GP</th><th colspan="2">Win %</th></tr></thead>
       <tbody></tbody>
     </table></div>
+
     <div class="section-header"><h2>Match Log</h2><span class="count" id="matches-count"></span></div>
     <div class="filter-row" id="match-filters"></div>
     <div class="table-wrap"><table id="matches-table">
@@ -100,7 +138,10 @@
 const MATCHES_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vRWrZyrlr5nuwNRGJfsnKPU8GTH02g8goiWo3YCWMDZZ1fi3GeXZiQYi9NDVDrjhyx5VrH-Tp_rCYVs/pub?gid=1348517281&single=true&output=csv';
 const PLAYERS_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vRWrZyrlr5nuwNRGJfsnKPU8GTH02g8goiWo3YCWMDZZ1fi3GeXZiQYi9NDVDrjhyx5VrH-Tp_rCYVs/pub?gid=2088474691&single=true&output=csv';
 const TEAM_CLASS={'passaic panthers':'t-panthers','passaic peacocks':'t-peacocks','teaneck termites':'t-termites','garden state guardians':'t-guardians','rolling eye of doom':'t-doom','county cougars':'t-cougars'};
-function teamClass(n){return TEAM_CLASS[n.toLowerCase().trim()]||'t-cougars';}
+
+function teamClass(n){return TEAM_CLASS[(n||'').toLowerCase().trim()]||'t-cougars';}
+function teamPill(name){return`<span class="team-pill ${teamClass(name)}">${name}</span>`;}
+
 function parseCSV(text){
   const lines=text.trim().split('\n');
   const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
@@ -115,61 +156,137 @@ function parseCSV(text){
     const obj={};headers.forEach((h,i)=>obj[h]=vals[i]||'');return obj;
   });
 }
-async function fetchCSV(url){const res=await fetch(url);const text=await res.text();return parseCSV(text);}
-function pct(w,total){if(total===0)return 0;return Math.round((w/total)*1000)/10;}
+
+async function fetchCSV(url){const res=await fetch(url);return parseCSV(await res.text());}
+
+function pct(w,total){if(!total)return 0;return Math.round((w/total)*1000)/10;}
 function pctClass(p){if(p>=60)return'high';if(p>=40)return'mid';return'low';}
-function teamPill(name){const cls=teamClass(name);return`<span class="team-pill ${cls}">${name}</span>`;}
+
+function barCell(p){
+  const pc=pctClass(p);
+  return`<td class="bar-cell"><span class="win-pct ${pc}">${p}%</span> <span class="bar-outer"><span class="bar-inner ${pc}" style="width:${p}%"></span></span></td>`;
+}
+
+// Sort: by wins desc, then losses asc
+function standingsSort(a,b){return b.w-a.w||a.l-b.l;}
+
 (async function(){
   try{
     const[matchRows,playerRows]=await Promise.all([fetchCSV(MATCHES_URL),fetchCSV(PLAYERS_URL)]);
+
     const playerInfo={};
-    playerRows.forEach(r=>{if(r.player)playerInfo[r.player.trim()]={team:(r.team||'').trim(),birth_year:parseInt(r.birth_year)||0};});
-    const matches=matchRows.filter(r=>{const s1=parseInt(r.score_1),s2=parseInt(r.score_2);return r.player_1&&r.player_2&&!isNaN(s1)&&!isNaN(s2)&&(s1===6||s2===6);});
+    playerRows.forEach(r=>{
+      if(r.player)playerInfo[r.player.trim()]={team:(r.team||'').trim(),birth_year:parseInt(r.birth_year)||0};
+    });
+
+    const matches=matchRows.filter(r=>{
+      const s1=parseInt(r.score_1),s2=parseInt(r.score_2);
+      return r.player_1&&r.player_2&&!isNaN(s1)&&!isNaN(s2)&&(s1===6||s2===6);
+    });
+
+    // Player stats
     const playerStats={};
-    function ep(name){if(!playerStats[name]){const info=playerInfo[name]||{team:'Unknown',birth_year:0};playerStats[name]={name,team:info.team,birth_year:info.birth_year,w:0,l:0,pf:0,pa:0};}}
+    function ep(name){
+      if(!playerStats[name]){
+        const info=playerInfo[name]||{team:'Unknown',birth_year:0};
+        playerStats[name]={name,team:info.team,birth_year:info.birth_year,w:0,l:0,pf:0,pa:0};
+      }
+    }
     matches.forEach(r=>{
       const p1=r.player_1.trim(),p2=r.player_2.trim();
       const s1=parseInt(r.score_1),s2=parseInt(r.score_2);
       ep(p1);ep(p2);
       playerStats[p1].pf+=s1;playerStats[p1].pa+=s2;
       playerStats[p2].pf+=s2;playerStats[p2].pa+=s1;
-      if(s1===6){playerStats[p1].w++;playerStats[p2].l++;}else{playerStats[p2].w++;playerStats[p1].l++;}
+      if(s1===6){playerStats[p1].w++;playerStats[p2].l++;}
+      else{playerStats[p2].w++;playerStats[p1].l++;}
     });
+
+    // Team stats
     const teamStats={};
     Object.values(playerStats).forEach(p=>{
       const t=p.team||'Unknown';
       if(!teamStats[t])teamStats[t]={name:t,w:0,l:0,pf:0,pa:0};
       teamStats[t].w+=p.w;teamStats[t].l+=p.l;teamStats[t].pf+=p.pf;teamStats[t].pa+=p.pa;
     });
+
+    // Summary
     const totalGames=matches.length;
     const closestGames=matches.filter(r=>Math.abs(parseInt(r.score_1)-parseInt(r.score_2))<=1).length;
-    const topPlayer=Object.values(playerStats).filter(p=>p.w+p.l>0).sort((a,b)=>b.w-a.w)[0];
+    const playersSorted=Object.values(playerStats).filter(p=>p.w+p.l>0).sort(standingsSort);
+    const topPlayer=playersSorted[0];
+
+    // Music
+    if(topPlayer){
+      const audio=document.getElementById('bg-audio');
+      const np=document.getElementById('now-playing');
+      const npName=document.getElementById('np-name');
+      const npToggle=document.getElementById('np-toggle');
+      const npVol=document.getElementById('np-vol');
+      const musicFile='music/'+topPlayer.name.toLowerCase().replace(/\s+/g,'')+'.mp3';
+      audio.src=musicFile;
+      audio.volume=parseFloat(npVol.value);
+      npName.textContent=topPlayer.name;
+      audio.play().then(()=>{
+        np.style.display='flex';
+      }).catch(()=>{
+        // Autoplay blocked — show play button instead
+        np.style.display='flex';
+        npToggle.textContent='&#9654; Play';
+      });
+      npToggle.addEventListener('click',()=>{
+        if(audio.paused){audio.play();npToggle.innerHTML='&#9646;&#9646; Pause';}
+        else{audio.pause();npToggle.innerHTML='&#9654; Play';}
+      });
+      npVol.addEventListener('input',()=>{audio.volume=parseFloat(npVol.value);});
+    }
+
     document.getElementById('stat-grid').innerHTML=`
       <div class="stat-card"><div class="label">Total Matches</div><div class="value">${totalGames}</div></div>
       <div class="stat-card"><div class="label">Teams</div><div class="value">${Object.keys(teamStats).length}</div></div>
-      <div class="stat-card"><div class="label">Active Composers</div><div class="value">${Object.keys(playerStats).length}</div></div>
+      <div class="stat-card"><div class="label">Active Composers</div><div class="value">${playersSorted.length}</div></div>
       <div class="stat-card"><div class="label">Close Games (&le;1 pt)</div><div class="value">${closestGames}</div></div>
-      <div class="stat-card"><div class="label">Top Composer</div><div class="value" style="font-size:1.2rem;padding-top:0.2rem;">${topPlayer?topPlayer.name:'—'}</div></div>`;
-    const teamsSorted=Object.values(teamStats).sort((a,b)=>{const pa=pct(a.w,a.w+a.l),pb=pct(b.w,b.w+b.l);return pb-pa||b.w-a.w;});
+      <div class="stat-card"><div class="label">Current Leader</div><div class="value" style="font-size:1.1rem;padding-top:0.3rem;">${topPlayer?topPlayer.name:'—'}</div></div>`;
+
+    // Teams table
+    const teamsSorted=Object.values(teamStats).sort(standingsSort);
     document.getElementById('teams-count').textContent=`${teamsSorted.length} teams`;
     document.querySelector('#teams-table tbody').innerHTML=teamsSorted.map((t,i)=>{
-      const gp=t.w+t.l,p=pct(t.w,gp),pc=pctClass(p);
+      const gp=t.w+t.l,p=pct(t.w,gp);
       const rc=i===0?'gold':i===1?'silver':i===2?'bronze':'';
-      return`<tr><td class="rank center ${rc}">${i+1}</td><td>${teamPill(t.name)}</td><td class="right" style="color:var(--accent3)">${t.w}</td><td class="right" style="color:var(--danger)">${t.l}</td><td class="right" style="color:var(--muted)">${gp}</td><td><span class="win-pct ${pc}">${p}%</span><span class="pct-bar-wrap"><span class="pct-bar ${pc}" style="width:${p}%"></span></span></td><td class="right" style="font-family:'Source Code Pro',monospace;font-size:0.82rem;">${t.pf}</td><td class="right" style="font-family:'Source Code Pro',monospace;font-size:0.82rem;">${t.pa}</td></tr>`;
+      return`<tr>
+        <td class="rank center ${rc}">${i+1}</td>
+        <td>${teamPill(t.name)}</td>
+        <td class="right" style="color:var(--accent3)">${t.w}</td>
+        <td class="right" style="color:var(--danger)">${t.l}</td>
+        <td class="right" style="color:var(--muted)">${gp}</td>
+        ${barCell(p)}
+      </tr>`;
     }).join('');
-    const playersSorted=Object.values(playerStats).filter(p=>p.w+p.l>0).sort((a,b)=>{const pa=pct(a.w,a.w+a.l),pb=pct(b.w,b.w+b.l);return pb-pa||b.w-a.w;});
+
+    // Players table
     document.getElementById('players-count').textContent=`${playersSorted.length} composers`;
-    const maxYear=Math.max(...playersSorted.map(p=>p.birth_year));
     document.querySelector('#players-table tbody').innerHTML=playersSorted.map((p,i)=>{
-      const gp=p.w+p.l,pv=pct(p.w,gp),pc=pctClass(pv);
+      const gp=p.w+p.l,pv=pct(p.w,gp);
       const rc=i===0?'gold':i===1?'silver':i===2?'bronze':'';
-      const opens=p.birth_year===maxYear?'<span style="color:var(--accent2);font-size:0.72rem;">&#9733; opens</span>':'';
-      return`<tr><td class="rank ${rc}">${i+1}</td><td class="player-name">${p.name}</td><td>${teamPill(p.team)}</td><td class="right" style="color:var(--accent3)">${p.w}</td><td class="right" style="color:var(--danger)">${p.l}</td><td class="right" style="color:var(--muted)">${gp}</td><td><span class="win-pct ${pc}">${pv}%</span><span class="pct-bar-wrap"><span class="pct-bar ${pc}" style="width:${pv}%"></span></span></td><td class="right" style="font-family:'Source Code Pro',monospace;font-size:0.82rem;color:var(--muted)">${p.birth_year}</td><td>${opens}</td></tr>`;
+      return`<tr>
+        <td class="rank ${rc}">${i+1}</td>
+        <td class="player-name">${p.name}</td>
+        <td>${teamPill(p.team)}</td>
+        <td class="right" style="color:var(--accent3)">${p.w}</td>
+        <td class="right" style="color:var(--danger)">${p.l}</td>
+        <td class="right" style="color:var(--muted)">${gp}</td>
+        ${barCell(pv)}
+      </tr>`;
     }).join('');
+
+    // Match log filters
     const allTeams=[...new Set(Object.values(playerInfo).map(p=>p.team))].filter(Boolean).sort();
     const filterRow=document.getElementById('match-filters');
-    filterRow.innerHTML=`<button class="filter-btn active" data-filter="all">All</button>`+allTeams.map(t=>`<button class="filter-btn" data-filter="${t}">${t}</button>`).join('');
+    filterRow.innerHTML=`<button class="filter-btn active" data-filter="all">All</button>`+
+      allTeams.map(t=>`<button class="filter-btn" data-filter="${t}">${t}</button>`).join('');
     document.getElementById('matches-count').textContent=`${matches.length} matches`;
+
     function renderMatches(filter){
       const filtered=filter==='all'?matches:matches.filter(r=>{
         const t1=(playerInfo[r.player_1.trim()]||{}).team||'';
@@ -184,10 +301,21 @@ function teamPill(name){const cls=teamClass(name);return`<span class="team-pill 
         const t2=(playerInfo[p2]||{}).team||'';
         const by1=(playerInfo[p1]||{}).birth_year||0;
         const by2=(playerInfo[p2]||{}).birth_year||0;
-        const serves=by1>by2?`<span style="color:var(--accent2);font-size:0.72rem;font-family:'Source Code Pro',monospace;">&#9655; ${p1} opens</span>`:by2>by1?`<span style="color:var(--accent2);font-size:0.72rem;font-family:'Source Code Pro',monospace;">&#9655; ${p2} opens</span>`:'';
-        return`<tr><td class="match-num">${r.match_id}</td><td><span class="player-name">${p1}</span><br><span style="font-size:0.72rem;">${teamPill(t1)}</span></td><td class="center"><span class="score-badge"><span class="${p1won?'w':'l'}">${s1}</span><span class="sep">&#8212;</span><span class="${p1won?'l':'w'}">${s2}</span></span></td><td><span class="player-name">${p2}</span><br><span style="font-size:0.72rem;">${teamPill(t2)}</span></td><td><span class="${p1won?'won':'lost'}">${p1won?'WIN':'LOSS'}</span> ${p1}<br>${serves}</td></tr>`;
+        const serves=by1>by2
+          ?`<span style="color:var(--accent2);font-size:0.72rem;font-family:'Source Code Pro',monospace;">&#9655; ${p1} opens</span>`
+          :by2>by1
+          ?`<span style="color:var(--accent2);font-size:0.72rem;font-family:'Source Code Pro',monospace;">&#9655; ${p2} opens</span>`
+          :'';
+        return`<tr>
+          <td class="match-num">${r.match_id}</td>
+          <td><span class="player-name">${p1}</span><br><span style="font-size:0.72rem;">${teamPill(t1)}</span></td>
+          <td class="center"><span class="score-badge"><span class="${p1won?'w':'l'}">${s1}</span><span class="sep">&#8212;</span><span class="${p1won?'l':'w'}">${s2}</span></span></td>
+          <td><span class="player-name">${p2}</span><br><span style="font-size:0.72rem;">${teamPill(t2)}</span></td>
+          <td><span class="${p1won?'won':'lost'}">${p1won?'WIN':'LOSS'}</span> ${p1}<br>${serves}</td>
+        </tr>`;
       }).join('');
     }
+
     renderMatches('all');
     filterRow.querySelectorAll('.filter-btn').forEach(btn=>{
       btn.addEventListener('click',()=>{
@@ -196,10 +324,14 @@ function teamPill(name){const cls=teamClass(name);return`<span class="team-pill 
         renderMatches(btn.dataset.filter);
       });
     });
+
     document.getElementById('loading').style.display='none';
     document.getElementById('content').style.display='block';
+
   }catch(e){
-    document.getElementById('loading').innerHTML='<p style="color:var(--danger)">Failed to load data. Check your connection and refresh.</p><p style="color:var(--muted);font-size:0.8rem;margin-top:0.5rem;">'+e.message+'</p>';
+    document.getElementById('loading').innerHTML=
+      '<p style="color:var(--danger)">Failed to load data. Check your connection and refresh.</p>'+
+      '<p style="color:var(--muted);font-size:0.8rem;margin-top:0.5rem;">'+e.message+'</p>';
   }
 })();
 </script>
