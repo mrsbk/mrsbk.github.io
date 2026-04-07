@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Station — Stage 1 Data</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth.js"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="site-title">&#9729; <span>Sky</span>Watch Station</a>
+  <span class="stage-badge">● Stage 1 — Manual</span>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="instruments.html">Instruments</a>
+    <a href="data-stage1.html" class="active">Stage 1 Data</a>
+    <a href="data-stage2.html">Stage 2 Data</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="archive.html">Archive</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Stage 1 — Manual Observation Data</h1>
+  <p class="lead">
+    All readings below were taken by hand using our homemade instruments.
+    Data is entered manually after each observation session.
+  </p>
+
+  <div class="notice">
+    <strong>How to read this page:</strong> Charts show trends over time.
+    The tables below each chart list individual readings, newest first.
+    All times are local time.
+  </div>
+
+  <!-- TEMPERATURE CHART -->
+  <h2>Temperature &amp; Humidity</h2>
+  <div class="chart-wrap">
+    <h3>Temperature over time (°F)</h3>
+    <canvas id="chart-temp" height="100"></canvas>
+  </div>
+  <div class="data-table-wrap">
+    <table id="table-temp">
+      <thead></thead>
+      <tbody><tr><td colspan="8" style="color:var(--muted);">Loading data…</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- RAINFALL CHART -->
+  <h2>Rainfall</h2>
+  <div class="chart-wrap">
+    <h3>Daily rainfall (inches)</h3>
+    <canvas id="chart-rain" height="100"></canvas>
+  </div>
+  <div class="data-table-wrap">
+    <table id="table-rain">
+      <thead></thead>
+      <tbody><tr><td colspan="6" style="color:var(--muted);">Loading data…</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- WIND CHART -->
+  <h2>Wind Speed &amp; Direction</h2>
+  <div class="chart-wrap">
+    <h3>Wind speed over time (mph)</h3>
+    <canvas id="chart-wind" height="100"></canvas>
+  </div>
+  <div class="data-table-wrap">
+    <table id="table-wind">
+      <thead></thead>
+      <tbody><tr><td colspan="7" style="color:var(--muted);">Loading data…</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- PRESSURE CHART -->
+  <h2>Atmospheric Pressure</h2>
+  <div class="chart-wrap">
+    <h3>Pressure over time (inHg)</h3>
+    <canvas id="chart-pressure" height="100"></canvas>
+  </div>
+  <div class="data-table-wrap">
+    <table id="table-pressure">
+      <thead></thead>
+      <tbody><tr><td colspan="6" style="color:var(--muted);">Loading data…</td></tr></tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:2rem; color:var(--muted); font-family:'Source Code Pro',monospace; font-size:0.82rem;">
+    Data files: data/stage1/temperature.csv · rain.csv · wind.csv · pressure.csv
+  </p>
+
+</main>
+
+<footer>
+  SkyWatch Station &mdash; A family science project &mdash; No location data stored or displayed
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="js/charts.js"></script>
+<script>
+  (async function () {
+    // Temperature
+    const tempRows = await loadCSV("data/stage1/temperature.csv");
+    if (tempRows.length) {
+      populateTable("table-temp", tempRows);
+      renderLineChart("chart-temp",
+        tempRows.map(r => r.date + " " + r.time),
+        [
+          { label: "Temp (°F)", data: tempRows.map(r => parseFloat(r.temperature_f)), color: "#b85a2e" },
+          { label: "Humidity (%)", data: tempRows.map(r => parseFloat(r.humidity_pct)), color: "#2e5f8a" },
+        ]
+      );
+    } else {
+      document.querySelector("#table-temp tbody").innerHTML =
+        '<tr><td colspan="8" style="color:var(--muted);">No data yet — add rows to data/stage1/temperature.csv</td></tr>';
+    }
+
+    // Rainfall
+    const rainRows = await loadCSV("data/stage1/rain.csv");
+    if (rainRows.length) {
+      populateTable("table-rain", rainRows);
+      renderBarChart("chart-rain",
+        rainRows.map(r => r.date),
+        { label: "Rainfall (in)", data: rainRows.map(r => parseFloat(r.rainfall_in)) }
+      );
+    } else {
+      document.querySelector("#table-rain tbody").innerHTML =
+        '<tr><td colspan="6" style="color:var(--muted);">No data yet — add rows to data/stage1/rain.csv</td></tr>';
+    }
+
+    // Wind
+    const windRows = await loadCSV("data/stage1/wind.csv");
+    if (windRows.length) {
+      populateTable("table-wind", windRows);
+      renderLineChart("chart-wind",
+        windRows.map(r => r.date + " " + r.time),
+        [{ label: "Speed (mph)", data: windRows.map(r => parseFloat(r.speed_mph)), color: "#5a8a4a" }]
+      );
+    } else {
+      document.querySelector("#table-wind tbody").innerHTML =
+        '<tr><td colspan="7" style="color:var(--muted);">No data yet — add rows to data/stage1/wind.csv</td></tr>';
+    }
+
+    // Pressure
+    const pressRows = await loadCSV("data/stage1/pressure.csv");
+    if (pressRows.length) {
+      populateTable("table-pressure", pressRows);
+      renderLineChart("chart-pressure",
+        pressRows.map(r => r.date + " " + r.time),
+        [{ label: "Pressure (inHg)", data: pressRows.map(r => parseFloat(r.pressure_inhg)), color: "#7a6e62" }]
+      );
+    } else {
+      document.querySelector("#table-pressure tbody").innerHTML =
+        '<tr><td colspan="6" style="color:var(--muted);">No data yet — add rows to data/stage1/pressure.csv</td></tr>';
+    }
+  })();
+</script>
+</body>
+</html>

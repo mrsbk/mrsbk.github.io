@@ -1,5 +1,175 @@
 <!DOCTYPE html>
-<html>
-<head><title>Kister Homeschool</title></head>
-<body>Weather station coming soon....</body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Station — Home</title>
+  <!-- No location metadata. Robots blocked. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth.js"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="site-title">&#9729; <span>Sky</span>Watch Station</a>
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <span class="stage-badge" id="stage-badge">● Stage 1 — Manual</span>
+  </div>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="instruments.html">Instruments</a>
+    <a href="data-stage1.html">Stage 1 Data</a>
+    <a href="data-stage2.html">Stage 2 Data</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="archive.html">Archive</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Welcome to SkyWatch Station</h1>
+  <p class="lead">
+    A hands-on weather station built and operated by our family.
+    We measure rainfall, temperature, wind, and pressure — first by hand,
+    then with custom electronics. Follow along as the project grows.
+  </p>
+
+  <div class="notice" id="stage-notice">
+    <strong>Currently in Stage 1 — Manual Observations.</strong>
+    Readings are taken by hand and entered manually. Check back for updates!
+  </div>
+
+  <!-- Latest readings summary -->
+  <h2>Latest Readings</h2>
+  <p style="color:var(--muted); font-size:0.88rem; font-family:'Source Code Pro',monospace;">
+    Updated manually after each observation session.
+  </p>
+
+  <div class="card-grid">
+    <div class="card" id="card-temp">
+      <div class="label">Temperature</div>
+      <div><span class="value">—</span><span class="unit">°F</span></div>
+      <div class="time">loading…</div>
+    </div>
+    <div class="card" id="card-rain">
+      <div class="label">Rainfall (today)</div>
+      <div><span class="value">—</span><span class="unit">in</span></div>
+      <div class="time">loading…</div>
+    </div>
+    <div class="card" id="card-wind">
+      <div class="label">Wind Speed</div>
+      <div><span class="value">—</span><span class="unit">mph</span></div>
+      <div class="time">loading…</div>
+    </div>
+    <div class="card" id="card-pressure">
+      <div class="label">Pressure</div>
+      <div><span class="value">—</span><span class="unit">inHg</span></div>
+      <div class="time">loading…</div>
+    </div>
+    <div class="card" id="card-wind-dir">
+      <div class="label">Wind Direction</div>
+      <div><span class="value">—</span><span class="unit"></span></div>
+      <div class="time">loading…</div>
+    </div>
+    <div class="card" id="card-humidity">
+      <div class="label">Humidity</div>
+      <div><span class="value">—</span><span class="unit">%</span></div>
+      <div class="time">loading…</div>
+    </div>
+  </div>
+
+  <!-- Project progress -->
+  <h2>Project Progress</h2>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:1.25rem; margin:1.25rem 0;">
+    <div class="card">
+      <div class="label">Stage 1 — Manual</div>
+      <div style="margin-top:0.5rem;">
+        <div style="background:var(--bg); border-radius:20px; height:10px; overflow:hidden;">
+          <div id="progress-bar" style="background:var(--accent2); height:100%; width:30%; border-radius:20px;"></div>
+        </div>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:0.5rem; font-family:'Source Code Pro',monospace;">
+          Week <span id="week-count">1</span> of manual observations
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="label">Stage 2 — Digital</div>
+      <div style="color:var(--muted); font-size:0.9rem; margin-top:0.5rem;">
+        In progress — chip-based system being built with mentor.
+      </div>
+    </div>
+    <div class="card">
+      <div class="label">Total Observations</div>
+      <div><span class="value" id="obs-count">—</span></div>
+      <div class="time">data rows recorded</div>
+    </div>
+  </div>
+
+  <!-- Recent gallery preview -->
+  <h2>Recent Photos</h2>
+  <div class="gallery-grid" id="recent-gallery">
+    <div class="gallery-item">
+      <div class="photo-placeholder">[ Add your first photo ]<br>images/gallery/</div>
+    </div>
+    <div class="gallery-item">
+      <div class="photo-placeholder">[ Building the rain gauge ]</div>
+    </div>
+    <div class="gallery-item">
+      <div class="photo-placeholder">[ First measurement session ]</div>
+    </div>
+    <div class="gallery-item">
+      <div class="photo-placeholder">[ Instrument closeup ]</div>
+    </div>
+  </div>
+  <p style="margin-top:1rem;"><a href="gallery.html" style="color:var(--accent); font-weight:600;">View full gallery →</a></p>
+
+</main>
+
+<footer>
+  SkyWatch Station &mdash; A family science project &mdash; No location data stored or displayed
+</footer>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="js/charts.js"></script>
+<script>
+  // Load latest row from each CSV and populate cards
+  (async function() {
+    const files = [
+      { path: "data/stage1/temperature.csv", card: "card-temp",     field: "temperature_f",  unit: "°F" },
+      { path: "data/stage1/rain.csv",        card: "card-rain",     field: "rainfall_in",    unit: "in" },
+      { path: "data/stage1/wind.csv",        card: "card-wind",     field: "speed_mph",      unit: "mph" },
+      { path: "data/stage1/pressure.csv",    card: "card-pressure", field: "pressure_inhg",  unit: "inHg" },
+      { path: "data/stage1/wind.csv",        card: "card-wind-dir", field: "direction",      unit: "" },
+      { path: "data/stage1/temperature.csv", card: "card-humidity", field: "humidity_pct",   unit: "%" },
+    ];
+
+    let totalRows = 0;
+    for (const f of files) {
+      const rows = await loadCSV(f.path);
+      if (rows.length > 0) {
+        updateCard(f.card, rows[rows.length - 1], f.field, f.unit);
+        if (!totalRows) totalRows = rows.length;
+      }
+    }
+    const obsEl = document.getElementById("obs-count");
+    if (obsEl && totalRows) obsEl.textContent = totalRows;
+
+    // Rough week count from temperature start date
+    const tempRows = await loadCSV("data/stage1/temperature.csv");
+    if (tempRows.length > 1) {
+      const first = new Date(tempRows[0].date);
+      const last  = new Date(tempRows[tempRows.length - 1].date);
+      const weeks = Math.max(1, Math.ceil((last - first) / (7 * 86400000)));
+      const weekEl = document.getElementById("week-count");
+      if (weekEl) weekEl.textContent = weeks;
+      // Progress bar: assume 12-week Stage 1 target
+      const pct = Math.min(100, Math.round((weeks / 12) * 100));
+      const bar = document.getElementById("progress-bar");
+      if (bar) bar.style.width = pct + "%";
+    }
+  })();
+</script>
+</body>
 </html>

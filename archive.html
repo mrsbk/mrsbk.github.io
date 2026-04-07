@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Station — Stage 1 Archive</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth.js"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="site-title">&#9729; <span>Sky</span>Watch Station</a>
+  <span class="stage-badge">● Stage 1 — Manual</span>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="instruments.html">Instruments</a>
+    <a href="data-stage1.html">Stage 1 Data</a>
+    <a href="data-stage2.html">Stage 2 Data</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="archive.html" class="active">Archive</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Stage 1 Archive</h1>
+
+  <!--
+    CURRENT STATE: During Stage 1, show a placeholder notice.
+    When Stage 2 goes live, remove this notice and fill in the real summary data below.
+  -->
+  <div class="notice coming-soon" id="archive-pending-notice">
+    <strong>Archive not yet available.</strong><br>
+    This page will contain a permanent record of our Stage 1 manual observations
+    once we transition to Stage 2. The archive will remain here indefinitely —
+    Stage 1 data will never be deleted.
+  </div>
+
+  <!--
+    FILL IN WHEN STAGE 2 GOES LIVE — remove the notice above and uncomment below:
+  -->
+  <!--
+  <div class="notice archive">
+    <strong>Stage 1 ran from [START DATE] to [END DATE].</strong>
+    This is a permanent record of our manual observation period.
+    All data and photos are preserved exactly as recorded.
+  </div>
+
+  <h2>Summary Statistics</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="label">Total Days</div>
+      <div><span class="value">[XX]</span><span class="unit">days</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Total Readings</div>
+      <div><span class="value">[XXX]</span><span class="unit">rows</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Total Rainfall</div>
+      <div><span class="value">[X.XX]</span><span class="unit">in</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Avg Temperature</div>
+      <div><span class="value">[XX]</span><span class="unit">°F</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Highest Temp</div>
+      <div><span class="value">[XX]</span><span class="unit">°F</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Lowest Temp</div>
+      <div><span class="value">[XX]</span><span class="unit">°F</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Highest Wind</div>
+      <div><span class="value">[XX]</span><span class="unit">mph</span></div>
+    </div>
+    <div class="card">
+      <div class="label">Rainy Days</div>
+      <div><span class="value">[XX]</span><span class="unit">days</span></div>
+    </div>
+  </div>
+
+  <h2>Complete Stage 1 Data</h2>
+  <p class="lead">All manual readings from Stage 1, preserved as recorded.</p>
+
+  <h3>Temperature &amp; Humidity</h3>
+  <div class="data-table-wrap">
+    <table id="archive-table-temp"><thead></thead><tbody></tbody></table>
+  </div>
+
+  <h3>Rainfall</h3>
+  <div class="data-table-wrap">
+    <table id="archive-table-rain"><thead></thead><tbody></tbody></table>
+  </div>
+
+  <h3>Wind</h3>
+  <div class="data-table-wrap">
+    <table id="archive-table-wind"><thead></thead><tbody></tbody></table>
+  </div>
+
+  <h3>Pressure</h3>
+  <div class="data-table-wrap">
+    <table id="archive-table-pressure"><thead></thead><tbody></tbody></table>
+  </div>
+
+  <h2>Stage 1 Gallery</h2>
+  <div class="gallery-grid" id="archive-gallery">
+    [Gallery items will appear here — same photos from the gallery page, filtered to Stage 1]
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    (async function () {
+      const files = [
+        { path: "data/archive/stage1/temperature.csv", table: "archive-table-temp" },
+        { path: "data/archive/stage1/rain.csv",        table: "archive-table-rain" },
+        { path: "data/archive/stage1/wind.csv",        table: "archive-table-wind" },
+        { path: "data/archive/stage1/pressure.csv",    table: "archive-table-pressure" },
+      ];
+      for (const f of files) {
+        const rows = await loadCSV(f.path);
+        if (rows.length) populateTable(f.table, rows);
+      }
+    })();
+  </script>
+  -->
+
+</main>
+
+<footer>
+  SkyWatch Station &mdash; A family science project &mdash; No location data stored or displayed
+</footer>
+
+</body>
+</html>

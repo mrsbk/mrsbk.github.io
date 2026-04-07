@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Station — Our Instruments</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/auth.js"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="site-title">&#9729; <span>Sky</span>Watch Station</a>
+  <span class="stage-badge">● Stage 1 — Manual</span>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="instruments.html" class="active">Instruments</a>
+    <a href="data-stage1.html">Stage 1 Data</a>
+    <a href="data-stage2.html">Stage 2 Data</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="archive.html">Archive</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Our Instruments</h1>
+  <p class="lead">
+    Every instrument we use — from handmade cups and cardboard to electronic sensors.
+    We built most of Stage 1 ourselves; Stage 2 uses chips programmed with our mentor.
+  </p>
+
+  <!-- RAIN GAUGE -->
+  <h2>Rain Gauge</h2>
+  <div class="instrument">
+    <div>
+      <div class="photo-placeholder">
+        [ Photo: our homemade rain gauge ]<br><br>
+        Place image at:<br>images/instruments/rain-gauge.jpg
+      </div>
+    </div>
+    <div>
+      <h3>Stage 1 — Handmade</h3>
+      <p>
+        Our rain gauge is made from a clear plastic cup with measurement markings
+        drawn on the outside. We place it in an open area away from trees and
+        buildings. After each rain event, we measure the water level with a ruler
+        and record the amount in inches.
+      </p>
+      <h3>How we measure</h3>
+      <p>
+        We check the gauge at the same times each day. After recording, we empty
+        the cup and set it back in place. For very heavy rain, we check more often
+        to avoid overflow.
+      </p>
+      <h3>Stage 2 — Tipping Bucket Sensor</h3>
+      <p class="notice coming-soon">
+        Coming in Stage 2: an electronic tipping-bucket rain gauge connected to
+        our microcontroller will record rainfall automatically every time 0.01 in
+        of rain falls.
+      </p>
+    </div>
+  </div>
+
+  <!-- THERMOMETER -->
+  <h2>Thermometer</h2>
+  <div class="instrument">
+    <div>
+      <div class="photo-placeholder">
+        [ Photo: thermometer in shelter ]<br><br>
+        Place image at:<br>images/instruments/thermometer.jpg
+      </div>
+    </div>
+    <div>
+      <h3>Stage 1 — Standard Thermometer</h3>
+      <p>
+        We use a standard outdoor thermometer mounted inside a simple shelter we
+        built from cardboard and white paint to reflect sunlight. The shelter
+        lets air flow through so we get an accurate air temperature reading,
+        not a reading heated by direct sun.
+      </p>
+      <h3>How we measure</h3>
+      <p>
+        Temperature and humidity are recorded at our morning and evening
+        observation times. We also note what the sky looks like (clear, cloudy,
+        partly cloudy, overcast).
+      </p>
+      <h3>Stage 2 — DHT22 Digital Sensor</h3>
+      <p class="notice coming-soon">
+        Coming in Stage 2: a DHT22 sensor measures both temperature and humidity
+        digitally and sends readings to our data file automatically.
+      </p>
+    </div>
+  </div>
+
+  <!-- ANEMOMETER -->
+  <h2>Anemometer (Wind Speed)</h2>
+  <div class="instrument">
+    <div>
+      <div class="photo-placeholder">
+        [ Photo: our cup anemometer ]<br><br>
+        Place image at:<br>images/instruments/anemometer.jpg
+      </div>
+    </div>
+    <div>
+      <h3>Stage 1 — Cup Anemometer</h3>
+      <p>
+        We made a cup anemometer using four small paper cups attached to a
+        pencil spindle. When the wind blows, the cups spin. We count the number
+        of rotations in 30 seconds and use a formula to estimate wind speed in
+        miles per hour.
+      </p>
+      <h3>How we measure</h3>
+      <p>
+        We count rotations during a 30-second window and multiply by a
+        calibration factor we worked out by testing against a known reference.
+        This gives an approximate speed — not lab-grade, but genuinely useful
+        for observing patterns over time.
+      </p>
+      <h3>Stage 2 — Hall-Effect Sensor</h3>
+      <p class="notice coming-soon">
+        Coming in Stage 2: a magnetic switch on the spinning arm will count
+        rotations electronically, giving accurate readings every few seconds.
+      </p>
+    </div>
+  </div>
+
+  <!-- WIND VANE -->
+  <h2>Wind Vane (Wind Direction)</h2>
+  <div class="instrument">
+    <div>
+      <div class="photo-placeholder">
+        [ Photo: our cardboard wind vane ]<br><br>
+        Place image at:<br>images/instruments/wind-vane.jpg
+      </div>
+    </div>
+    <div>
+      <h3>Stage 1 — Cardboard Vane</h3>
+      <p>
+        Our wind vane is made from a stiff piece of cardboard cut into an arrow
+        shape, balanced on a pencil point so it can spin freely. We marked a
+        compass rose on a piece of wood below it and aligned it with a real
+        compass so the cardinal directions are correct.
+      </p>
+      <h3>How we measure</h3>
+      <p>
+        We observe which direction the arrow is pointing during our measurement
+        window. Wind direction is recorded as the direction the wind is coming
+        FROM (e.g., "NW" means wind coming from the northwest).
+      </p>
+      <h3>Stage 2 — Magnetic Encoder</h3>
+      <p class="notice coming-soon">
+        Coming in Stage 2: a rotary magnetic encoder will report the vane angle
+        digitally, giving 16-point compass resolution automatically.
+      </p>
+    </div>
+  </div>
+
+  <!-- BAROMETER -->
+  <h2>Barometer (Atmospheric Pressure)</h2>
+  <div class="instrument">
+    <div>
+      <div class="photo-placeholder">
+        [ Photo: barometer we are using ]<br><br>
+        Place image at:<br>images/instruments/barometer.jpg
+      </div>
+    </div>
+    <div>
+      <h3>Stage 1 — Consumer Barometer</h3>
+      <p>
+        For Stage 1 we use a standard analog barometer (store-bought) to read
+        atmospheric pressure in inches of mercury (inHg). Building a barometer
+        from scratch is a future project goal.
+      </p>
+      <h3>How we measure</h3>
+      <p>
+        We read the barometer dial at each observation session and record the
+        value and whether it appears to be rising, steady, or falling — which
+        is useful for predicting weather changes.
+      </p>
+      <h3>Stage 2 — BMP280 Sensor</h3>
+      <p class="notice coming-soon">
+        Coming in Stage 2: a BMP280 pressure sensor gives precise digital
+        readings and can detect very small pressure changes that often precede
+        weather shifts.
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  SkyWatch Station &mdash; A family science project &mdash; No location data stored or displayed
+</footer>
+
+</body>
+</html>
