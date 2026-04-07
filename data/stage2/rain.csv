@@ -1,0 +1,3 @@
+date,time,rainfall_in,cumulative_daily_in,sensor_id,notes
+2024-12-01,08:00,0.00,0.00,TIPPING-01,No rain at first reading.
+2024-12-01,14:22,0.01,0.01,TIPPING-01,Tipping bucket triggered — first automated rain event.

@@ -1,0 +1,3 @@
+date,time,temperature_f,humidity_pct,sensor_id,notes
+2024-12-01,08:00,52.3,81,DHT22-01,First automated reading from Stage 2 system.
+2024-12-01,08:05,52.1,82,DHT22-01,Second automated reading. System stable.

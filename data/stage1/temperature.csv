@@ -1,0 +1,3 @@
+date,time,temperature_f,humidity_pct,sky_condition,observer_initials,notes
+2024-09-02,08:00,68.5,74,partly cloudy,A.K.,First observation day. Instrument shelter just installed.
+2024-09-02,18:00,75.2,61,clear,A.K.,Warm afternoon. Wind picking up from the southwest.

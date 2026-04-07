@@ -1,0 +1,3 @@
+date,time,pressure_inhg,trend,observer_initials,notes
+2024-09-02,08:00,30.12,steady,A.K.,High pressure system. Clear skies expected.
+2024-09-02,18:00,30.08,falling,A.K.,Slight drop in pressure since morning. May indicate incoming weather.
