@@ -127,13 +127,12 @@
     <!-- NOW PLAYING -->
     <div id="now-playing" style="display:none;">
       <span class="np-icon">&#9835;</span>
-      <div>
-        <div class="np-label">Now Playing &#8212; Current Leader</div>
-        <div class="np-name" id="np-name"></div>
+      <div style="flex:1;">
+        <div class="np-label">Now Playing</div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;" id="np-podium"></div>
       </div>
       <div class="np-controls">
         <input type="range" class="np-vol" id="np-vol" min="0" max="1" step="0.05" value="0.4" title="Volume" />
-        <button class="np-btn" id="np-toggle">&#9646;&#9646; Pause</button>
       </div>
     </div>
     <audio id="bg-audio" loop></audio>
@@ -250,29 +249,64 @@ function playerSort(a,b){
     const playersSorted=Object.values(playerStats).filter(p=>p.w+p.l>0).sort(playerSort);
     const topPlayer=playersSorted[0];
 
-    // Music
-    if(topPlayer){
-      const audio=document.getElementById('bg-audio');
-      const np=document.getElementById('now-playing');
-      const npName=document.getElementById('np-name');
-      const npToggle=document.getElementById('np-toggle');
-      const npVol=document.getElementById('np-vol');
-      const musicFile='music/'+topPlayer.name.toLowerCase().replace(/\s+/g,'')+'.mp3';
-      audio.src=musicFile;
-      audio.volume=parseFloat(npVol.value);
-      npName.textContent=topPlayer.name;
-      audio.play().then(()=>{
-        np.style.display='flex';
-      }).catch(()=>{
-        // Autoplay blocked — show play button instead
-        np.style.display='flex';
-        npToggle.textContent='&#9654; Play';
-      });
-      npToggle.addEventListener('click',()=>{
-        if(audio.paused){audio.play();npToggle.innerHTML='&#9646;&#9646; Pause';}
-        else{audio.pause();npToggle.innerHTML='&#9654; Play';}
-      });
-      npVol.addEventListener('input',()=>{audio.volume=parseFloat(npVol.value);});
+    // Music — top 3 podium
+    const TROPHIES = ['🥇','🥈','🥉'];
+    const podiumPlayers = playersSorted.slice(0,3);
+    const audio = document.getElementById('bg-audio');
+    const np = document.getElementById('now-playing');
+    const npVol = document.getElementById('np-vol');
+    const podiumEl = document.getElementById('np-podium');
+
+    if(podiumPlayers.length > 0){
+      let currentIdx = 0;
+
+      function musicFile(name){
+        return 'music/'+name.toLowerCase().replace(/\s+/g,'')+'.mp3';
+      }
+
+      function playTrack(idx){
+        currentIdx = idx;
+        audio.src = musicFile(podiumPlayers[idx].name);
+        audio.volume = parseFloat(npVol.value);
+        audio.play().catch(()=>{});
+        renderPodium();
+      }
+
+      function renderPodium(){
+        podiumEl.innerHTML = podiumPlayers.map((p,i) => {
+          const isPlaying = !audio.paused && currentIdx === i;
+          const isActive = currentIdx === i;
+          return `<button onclick="window._klaskPlay(${i})" style="
+            background:${isActive?'rgba(247,196,79,0.15)':'var(--surface2)'};
+            border:1px solid ${isActive?'rgba(247,196,79,0.4)':'var(--border)'};
+            border-radius:var(--radius);padding:0.35rem 0.85rem;cursor:pointer;
+            display:flex;align-items:center;gap:0.4rem;transition:all 0.15s;">
+            <span style="font-size:1rem;">${TROPHIES[i]}</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.04em;color:${isActive?'var(--accent2)':'var(--text)'};">${p.name}</span>
+            <span style="font-size:0.75rem;color:var(--muted);">${isPlaying ? '⏸' : '▶'}</span>
+          </button>`;
+        }).join('');
+      }
+
+      window._klaskPlay = function(idx){
+        if(currentIdx === idx && !audio.paused){
+          audio.pause();
+          renderPodium();
+        } else {
+          playTrack(idx);
+        }
+      };
+
+      // Try autoplay #1
+      audio.src = musicFile(podiumPlayers[0].name);
+      audio.volume = parseFloat(npVol.value);
+      np.style.display = 'flex';
+      renderPodium();
+      audio.play().then(()=>{ renderPodium(); }).catch(()=>{ renderPodium(); });
+
+      npVol.addEventListener('input',()=>{ audio.volume=parseFloat(npVol.value); });
+      audio.addEventListener('pause', renderPodium);
+      audio.addEventListener('play', renderPodium);
     }
 
     document.getElementById('stat-grid').innerHTML=`
