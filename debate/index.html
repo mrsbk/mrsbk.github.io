@@ -6,35 +6,605 @@
   <title>Debate — NSDA Nationals 2026</title>
   <meta name="robots" content="noindex, nofollow" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Raleway:wght@300;400;600&display=swap');
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      min-height: 100vh;
-      background: #1a1512;
-      font-family: 'Raleway', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      text-align: center;
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Source+Code+Pro:wght@400;600&display=swap');
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f8f8;
+      --surface2: #f0f0f0;
+      --border: #e0e0e0;
+      --navy: #1a2744;
+      --navy-light: #2e3f6e;
+      --aff: #1a4fa8;
+      --aff-bg: #eef3fc;
+      --aff-border: #b8cef5;
+      --neg: #a81a1a;
+      --neg-bg: #fceee e;
+      --neg-border: #f5b8b8;
+      --text: #1a1a1a;
+      --muted: #666;
+      --radius: 6px;
+      --shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
-    .back { font-size: 0.85rem; color: #a89e94; text-decoration: none; margin-bottom: 2rem; display: block; }
-    .back:hover { color: #fff; }
-    img { width: 240px; margin-bottom: 2rem; }
-    h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.8rem; color: #fff; margin-bottom: 0.75rem; }
-    p { color: #a89e94; font-size: 1rem; max-width: 420px; line-height: 1.7; }
-    .coming { display: inline-block; margin-top: 1.5rem; padding: 0.5rem 1.25rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: #fff; font-size: 0.85rem; font-weight: 600; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+    /* HEADER */
+    header {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .back-link { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none; }
+    .back-link:hover { color: #fff; }
+    .site-title { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: #fff; }
+    .nsda-badge {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .nsda-badge img { height: 48px; }
+    .nsda-text { color: rgba(255,255,255,0.85); font-size: 0.8rem; line-height: 1.4; }
+    .nsda-text strong { color: #fff; font-size: 0.9rem; display: block; }
+
+    /* TOPIC TABS */
+    .topic-tabs {
+      background: var(--navy-light);
+      display: flex; gap: 0;
+      border-bottom: 3px solid var(--navy);
+    }
+    .topic-tab {
+      padding: 0.85rem 1.75rem;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .topic-tab:hover { color: rgba(255,255,255,0.9); }
+    .topic-tab.active { color: #fff; border-bottom-color: #f0c040; background: rgba(255,255,255,0.08); }
+
+    /* MAIN */
+    main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* RESOLUTION BANNER */
+    .resolution-banner {
+      background: var(--navy);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 2rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .resolution-banner .label {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.7rem;
+      color: #f0c040;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin: 2rem 0 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-header h2 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem;
+      color: var(--navy);
+    }
+
+    /* SIDE TABS */
+    .side-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .side-tab {
+      padding: 0.45rem 1.25rem;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.15s;
+      color: var(--muted);
+    }
+    .side-tab.aff.active { background: var(--aff-bg); border-color: var(--aff); color: var(--aff); }
+    .side-tab.neg.active { background: #fceee e; border-color: var(--neg); color: var(--neg); }
+    .side-tab:hover { border-color: var(--navy); color: var(--navy); }
+
+    /* CONTENTION ACCORDION */
+    .contention {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .contention-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.25rem;
+      cursor: pointer;
+      background: var(--surface);
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .contention-header:hover { background: var(--surface2); }
+    .contention-header.aff { border-left: 4px solid var(--aff); }
+    .contention-header.neg { border-left: 4px solid var(--neg); }
+    .contention-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.98rem;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .contention-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .card-count {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: var(--surface2);
+      padding: 0.15rem 0.5rem;
+      border-radius: 10px;
+    }
+    .chevron {
+      color: var(--muted);
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+    .chevron.open { transform: rotate(180deg); }
+
+    /* CARDS */
+    .contention-body { display: none; padding: 1rem 1.25rem; background: #fff; }
+    .contention-body.open { display: block; }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+    .card-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      cursor: pointer;
+      gap: 1rem;
+    }
+    .card-header:hover { background: var(--surface2); }
+    .card-tagline {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--navy);
+      flex: 1;
+    }
+    .card-byline {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .card-body {
+      display: none;
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .card-body.open { display: block; }
+    .card-citation {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .card-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--text);
+      padding-left: 1rem;
+      border-left: 3px solid var(--aff-border);
+    }
+    .card-quote.neg { border-left-color: #f5b8b8; }
+
+    /* LOADING / PLACEHOLDER */
+    .placeholder-notice {
+      background: #fffbea;
+      border: 1px solid #f0d060;
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      font-size: 0.88rem;
+      color: #7a6020;
+      margin-bottom: 1.5rem;
+      font-family: 'Source Code Pro', monospace;
+    }
+    .placeholder-notice strong { display: block; margin-bottom: 0.25rem; }
+
+    .loading-spinner {
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: 0.88rem;
+    }
+
+    /* MOCKS TABLE */
+    .table-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    thead tr { background: var(--navy); }
+    th {
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-size: 0.72rem;
+      font-family: 'Source Code Pro', monospace;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    .win  { color: #1a7a1a; font-weight: 600; font-family: 'Source Code Pro', monospace; font-size: 0.78rem; }
+    .loss { color: var(--neg); font-weight: 600; font-family: 'Source Code Pro', monospace; font-size: 0.78rem; }
+    .side-aff { color: var(--aff); font-weight: 600; font-size: 0.78rem; font-family: 'Source Code Pro', monospace; }
+    .side-neg { color: var(--neg); font-weight: 600; font-size: 0.78rem; font-family: 'Source Code Pro', monospace; }
+    .topic-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 10px;
+      font-family: 'Source Code Pro', monospace;
+      background: var(--surface2);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* TOPIC SECTIONS */
+    .topic-section { display: none; }
+    .topic-section.active { display: block; }
+
+    @media (max-width: 600px) {
+      header { padding: 0.75rem 1rem; }
+      main { padding: 1.25rem 1rem; }
+      .topic-tab { padding: 0.65rem 1rem; font-size: 0.8rem; }
+      .nsda-badge img { height: 36px; }
+    }
   </style>
 </head>
 <body>
-  <a href="../" class="back">&#8592; Back to Kister Homeschool</a>
-  <img src="../images/nsda.png" alt="NSDA Nationals 2026 Richmond" />
-  <h1>&#127908; Debate</h1>
-  <p>
-    NSDA Nationals 2026 — Richmond, VA.<br>
-    Schedules, rounds, evidence cards, and mock session notes coming soon.
-  </p>
-  <span class="coming">Under construction</span>
+
+<header>
+  <a href="../" class="back-link">&#8592; Kister Homeschool</a>
+  <span class="site-title">Debate</span>
+  <div class="nsda-badge">
+    <img src="../images/nsda.png" alt="NSDA" />
+    <div class="nsda-text">
+      <strong>NSDA Nationals 2026</strong>
+      Richmond, VA &mdash; Public Forum
+    </div>
+  </div>
+</header>
+
+<div class="topic-tabs">
+  <div class="topic-tab active" data-topic="mil" onclick="switchTopic('mil')">Military Intervention</div>
+  <div class="topic-tab" data-topic="std" onclick="switchTopic('std')">Standardized Tests</div>
+</div>
+
+<main>
+
+  <!-- ===================== MILITARY INTERVENTION ===================== -->
+  <div class="topic-section active" id="topic-mil">
+
+    <div class="resolution-banner">
+      <div class="label">Resolution &mdash; Military Intervention</div>
+      Resolved: The United States is justified in using force to remove authoritarian leaders from power.
+    </div>
+
+    <!-- CASES -->
+    <div class="section-header">
+      <h2>&#128196; Cases</h2>
+    </div>
+
+    <div class="placeholder-notice" id="mil-cases-placeholder">
+      <strong>&#9888; Placeholder</strong>
+      Cards will load automatically once the Google Sheet URL is connected.<br>
+      To activate: open debate/index.html and set <code>MIL_CASES_URL</code> at the top of the script.
+    </div>
+
+    <div class="side-tabs">
+      <button class="side-tab aff active" onclick="switchSide('mil','aff')">&#9646; Affirmative</button>
+      <button class="side-tab neg" onclick="switchSide('mil','neg')">&#9646; Negative</button>
+    </div>
+
+    <div id="mil-aff-cases">
+      <!-- Placeholder contentions -->
+      <div class="contention">
+        <div class="contention-header aff" onclick="toggleContention(this)">
+          <span class="contention-title">Contention 1: [Name will appear from sheet]</span>
+          <div class="contention-meta">
+            <span class="card-count">0 cards</span>
+            <span class="chevron">&#9660;</span>
+          </div>
+        </div>
+        <div class="contention-body">
+          <div class="loading-spinner">No cards loaded yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="mil-neg-cases" style="display:none;">
+      <div class="contention">
+        <div class="contention-header neg" onclick="toggleContention(this)">
+          <span class="contention-title">Contention 1: [Name will appear from sheet]</span>
+          <div class="contention-meta">
+            <span class="card-count">0 cards</span>
+            <span class="chevron">&#9660;</span>
+          </div>
+        </div>
+        <div class="contention-body">
+          <div class="loading-spinner">No cards loaded yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOCKS -->
+    <div class="section-header" style="margin-top:3rem;">
+      <h2>&#127947; Mock Sessions</h2>
+    </div>
+
+    <div class="placeholder-notice" id="mil-mocks-placeholder">
+      <strong>&#9888; Placeholder</strong>
+      Mock results will load automatically once the Google Sheet URL is connected.<br>
+      To activate: set <code>MOCKS_URL</code> at the top of the script.
+    </div>
+
+    <div id="mil-mocks-table" style="display:none;">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date</th><th>Side</th><th>Result</th><th>Notes</th></tr></thead>
+          <tbody id="mil-mocks-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- end mil -->
+
+
+  <!-- ===================== STANDARDIZED TESTS ===================== -->
+  <div class="topic-section" id="topic-std">
+
+    <div class="resolution-banner">
+      <div class="label">Resolution &mdash; Standardized Tests</div>
+      Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.
+    </div>
+
+    <!-- CASES -->
+    <div class="section-header">
+      <h2>&#128196; Cases</h2>
+    </div>
+
+    <div class="placeholder-notice" id="std-cases-placeholder">
+      <strong>&#9888; Placeholder</strong>
+      Cards will load automatically once the Google Sheet URL is connected.<br>
+      To activate: set <code>STD_CASES_URL</code> at the top of the script.
+    </div>
+
+    <div class="side-tabs">
+      <button class="side-tab aff active" onclick="switchSide('std','aff')">&#9646; Affirmative</button>
+      <button class="side-tab neg" onclick="switchSide('std','neg')">&#9646; Negative</button>
+    </div>
+
+    <div id="std-aff-cases">
+      <div class="contention">
+        <div class="contention-header aff" onclick="toggleContention(this)">
+          <span class="contention-title">Contention 1: [Name will appear from sheet]</span>
+          <div class="contention-meta">
+            <span class="card-count">0 cards</span>
+            <span class="chevron">&#9660;</span>
+          </div>
+        </div>
+        <div class="contention-body">
+          <div class="loading-spinner">No cards loaded yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="std-neg-cases" style="display:none;">
+      <div class="contention">
+        <div class="contention-header neg" onclick="toggleContention(this)">
+          <span class="contention-title">Contention 1: [Name will appear from sheet]</span>
+          <div class="contention-meta">
+            <span class="card-count">0 cards</span>
+            <span class="chevron">&#9660;</span>
+          </div>
+        </div>
+        <div class="contention-body">
+          <div class="loading-spinner">No cards loaded yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOCKS -->
+    <div class="section-header" style="margin-top:3rem;">
+      <h2>&#127947; Mock Sessions</h2>
+    </div>
+
+    <div class="placeholder-notice" id="std-mocks-placeholder">
+      <strong>&#9888; Placeholder</strong>
+      Mock results will load here once connected.
+    </div>
+
+    <div id="std-mocks-table" style="display:none;">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date</th><th>Side</th><th>Result</th><th>Notes</th></tr></thead>
+          <tbody id="std-mocks-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- end std -->
+
+</main>
+
+<script>
+// ============================================================
+// GOOGLE SHEET URLs — SWAP THESE IN WHEN READY
+// Each should be a published CSV URL from Google Sheets
+// ============================================================
+const MIL_CASES_URL = '';   // Tab: military intervention cards
+const STD_CASES_URL = '';   // Tab: standardized tests cards
+const MOCKS_URL     = '';   // Tab: mock session results
+// ============================================================
+
+function parseCSV(text){
+  const lines=text.trim().split('\n');
+  const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
+  return lines.slice(1).map(line=>{
+    const vals=[];let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){
+      if(line[i]==='"'){inQ=!inQ;}
+      else if(line[i]===','&&!inQ){vals.push(cur.trim());cur='';}
+      else{cur+=line[i];}
+    }
+    vals.push(cur.trim());
+    const obj={};headers.forEach((h,i)=>obj[h]=(vals[i]||'').replace(/^"|"$/g,''));
+    return obj;
+  });
+}
+
+async function fetchCSV(url){
+  const res=await fetch(url);
+  return parseCSV(await res.text());
+}
+
+function renderCards(rows, side, containerId, placeholderId){
+  const container = document.getElementById(containerId);
+  const placeholder = document.getElementById(placeholderId);
+  if(!rows||rows.length===0) return;
+
+  // Group by contention
+  const byContention = {};
+  rows.filter(r=>r.side&&r.side.toLowerCase()===side).forEach(r=>{
+    const c = r.contention||'Uncategorized';
+    if(!byContention[c]) byContention[c]=[];
+    byContention[c].push(r);
+  });
+
+  if(Object.keys(byContention).length===0) return;
+  if(placeholder) placeholder.style.display='none';
+
+  container.innerHTML = Object.entries(byContention).map(([contention, cards])=>`
+    <div class="contention">
+      <div class="contention-header ${side}" onclick="toggleContention(this)">
+        <span class="contention-title">${contention}</span>
+        <div class="contention-meta">
+          <span class="card-count">${cards.length} card${cards.length!==1?'s':''}</span>
+          <span class="chevron">&#9660;</span>
+        </div>
+      </div>
+      <div class="contention-body">
+        ${cards.map(card=>`
+          <div class="card">
+            <div class="card-header" onclick="toggleCard(this)">
+              <span class="card-tagline">${card.tagline||'—'}</span>
+              <span class="card-byline">${card.author||''} ${card.year?'('+card.year+')':''}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-citation">${card.full_citation||''}</div>
+              <blockquote class="card-quote ${side}">${card.quote||''}</blockquote>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function renderMocks(rows, topic, tbodyId, tableId, placeholderId){
+  const filtered = rows.filter(r=>{
+    const t=(r.topic||'').toLowerCase();
+    return topic==='mil'?t.includes('military')||t.includes('force')||t.includes('authoritarian')
+                        :t.includes('standard')||t.includes('test')||t.includes('admissions');
+  });
+  if(filtered.length===0) return;
+  document.getElementById(placeholderId).style.display='none';
+  document.getElementById(tableId).style.display='block';
+  document.getElementById(tbodyId).innerHTML=[...filtered].reverse().map(r=>`
+    <tr>
+      <td style="font-family:'Source Code Pro',monospace;font-size:0.82rem;">${r.date||'—'}</td>
+      <td><span class="side-${(r.side||'').toLowerCase()}">${(r.side||'').toUpperCase()}</span></td>
+      <td><span class="${(r.result||'').toLowerCase()==='w'||r.result==='Win'?'win':'loss'}">${r.result||'—'}</span></td>
+      <td style="font-size:0.85rem;color:var(--muted);">${r.notes||''}</td>
+    </tr>`).join('');
+}
+
+// Load data if URLs are set
+(async function(){
+  if(MIL_CASES_URL){
+    try{
+      const rows=await fetchCSV(MIL_CASES_URL);
+      renderCards(rows,'aff','mil-aff-cases','mil-cases-placeholder');
+      renderCards(rows,'neg','mil-neg-cases','mil-cases-placeholder');
+    }catch(e){console.warn('MIL cases failed:',e);}
+  }
+  if(STD_CASES_URL){
+    try{
+      const rows=await fetchCSV(STD_CASES_URL);
+      renderCards(rows,'aff','std-aff-cases','std-cases-placeholder');
+      renderCards(rows,'neg','std-neg-cases','std-cases-placeholder');
+    }catch(e){console.warn('STD cases failed:',e);}
+  }
+  if(MOCKS_URL){
+    try{
+      const rows=await fetchCSV(MOCKS_URL);
+      renderMocks(rows,'mil','mil-mocks-body','mil-mocks-table','mil-mocks-placeholder');
+      renderMocks(rows,'std','std-mocks-body','std-mocks-table','std-mocks-placeholder');
+    }catch(e){console.warn('Mocks failed:',e);}
+  }
+})();
+
+// UI interactions
+function switchTopic(topic){
+  document.querySelectorAll('.topic-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`[data-topic="${topic}"]`).classList.add('active');
+  document.querySelectorAll('.topic-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('topic-'+topic).classList.add('active');
+}
+
+function switchSide(topic, side){
+  const tabs=document.querySelectorAll(`#topic-${topic} .side-tab`);
+  tabs.forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(`${topic}-aff-cases`).style.display=side==='aff'?'block':'none';
+  document.getElementById(`${topic}-neg-cases`).style.display=side==='neg'?'block':'none';
+}
+
+function toggleContention(header){
+  const body=header.nextElementSibling;
+  const chevron=header.querySelector('.chevron');
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  chevron.classList.toggle('open',!isOpen);
+}
+
+function toggleCard(header){
+  const body=header.nextElementSibling;
+  body.classList.toggle('open');
+}
+</script>
 </body>
 </html>
