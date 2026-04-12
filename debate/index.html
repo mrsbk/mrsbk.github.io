@@ -163,10 +163,7 @@
 </div>
 
 
-<!-- ══════════ MILITARY INTERVENTION ══════════ -->
-<div class="topic-section active" id="topic-mil">
-
-  <div class="hero">
+<div class="hero">
     <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:0 auto;">
   <!-- Spotlights -->
   <polygon points="170,0 80,280 260,280" fill="#1a4fa8" opacity="0.05"/>
@@ -231,11 +228,18 @@
   <!-- VS -->
   <text x="340" y="178" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="800" fill="#cccccc" opacity="0.45">VS</text>
 </svg>
-    <div class="resolution-strip">
-      <div class="resolution-label">Resolution</div>
-      <div class="resolution-text">Resolved: The United States is justified in using force to remove authoritarian leaders from power.</div>
+    <div class="resolution-strip" id="res-mil">
+      
+      <div class="resolution-label">Resolution
+    </div>
+    <div class="resolution-strip" id="res-std" style="display:none;">
+      
+      <div class="resolution-label">Resolution
     </div>
   </div>
+
+<!-- ══════════ MILITARY INTERVENTION ══════════ -->
+<div class="topic-section active" id="topic-mil">
 
   <main>
     <div id="mil-placeholder" class="placeholder-notice" style="display:none;">
@@ -397,77 +401,6 @@
 
 <!-- ══════════ STANDARDIZED TESTS ══════════ -->
 <div class="topic-section" id="topic-std">
-
-  <div class="hero">
-    <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:0 auto;">
-  <!-- Spotlights -->
-  <polygon points="170,0 80,280 260,280" fill="#1a4fa8" opacity="0.05"/>
-  <polygon points="510,0 420,280 600,280" fill="#a81a1a" opacity="0.05"/>
-
-  <!-- ── LEFT LECTERN (AFF) ── -->
-  <!-- Base -->
-  <rect x="96" y="248" width="128" height="14" rx="3" fill="#2a1c0e"/>
-  <rect x="104" y="238" width="112" height="13" rx="2" fill="#3a2510"/>
-  <!-- Body — slimmer trapezoid -->
-  <path d="M116 238 L100 108 L220 108 L204 238 Z" fill="#4e3318"/>
-  <!-- Wood grain — finer lines -->
-  <line x1="116" y1="238" x2="101" y2="118" stroke="#3a2408" stroke-width="0.6" opacity="0.7"/>
-  <line x1="133" y1="238" x2="119" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.5"/>
-  <line x1="152" y1="238" x2="139" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.4"/>
-  <line x1="171" y1="238" x2="158" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.5"/>
-  <line x1="190" y1="238" x2="178" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.7"/>
-  <!-- Shoulder -->
-  <rect x="93" y="97" width="134" height="14" rx="3" fill="#3a2510"/>
-  <!-- Blue top panel -->
-  <rect x="99" y="89" width="122" height="11" rx="2" fill="#1a4fa8"/>
-  <rect x="99" y="89" width="122" height="4" rx="2" fill="#2e62c0" opacity="0.6"/>
-  <!-- Left face -->
-  <path d="M100 108 L93 97 L93 112 L100 124 Z" fill="#2a1808" opacity="0.8"/>
-  <!-- Right face -->
-  <path d="M220 108 L227 97 L227 112 L220 124 Z" fill="#6a4428" opacity="0.35"/>
-  <!-- Mic left 1 -->
-  <line x1="146" y1="89" x2="135" y2="62" stroke="#777" stroke-width="1.2"/>
-  <line x1="135" y1="62" x2="128" y2="53" stroke="#777" stroke-width="1.2"/>
-  <ellipse cx="127" cy="51" rx="3.5" ry="5" fill="#555"/>
-  <!-- Mic left 2 -->
-  <line x1="162" y1="89" x2="153" y2="64" stroke="#777" stroke-width="1.2"/>
-  <line x1="153" y1="64" x2="147" y2="56" stroke="#777" stroke-width="1.2"/>
-  <ellipse cx="146" cy="54" rx="3" ry="4.5" fill="#555"/>
-  <!-- Label -->
-  <text x="160" y="272" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="800" fill="#1a4fa8">AFFIRMATIVE</text>
-
-  <!-- ── RIGHT LECTERN (NEG) ── -->
-  <rect x="456" y="248" width="128" height="14" rx="3" fill="#2a1c0e"/>
-  <rect x="464" y="238" width="112" height="13" rx="2" fill="#3a2510"/>
-  <path d="M476 238 L460 108 L580 108 L564 238 Z" fill="#4e3318"/>
-  <line x1="476" y1="238" x2="461" y2="118" stroke="#3a2408" stroke-width="0.6" opacity="0.7"/>
-  <line x1="493" y1="238" x2="479" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.5"/>
-  <line x1="512" y1="238" x2="499" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.4"/>
-  <line x1="531" y1="238" x2="518" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.5"/>
-  <line x1="550" y1="238" x2="538" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.7"/>
-  <rect x="453" y="97" width="134" height="14" rx="3" fill="#3a2510"/>
-  <rect x="459" y="89" width="122" height="11" rx="2" fill="#a81a1a"/>
-  <rect x="459" y="89" width="122" height="4" rx="2" fill="#c42828" opacity="0.6"/>
-  <path d="M460 108 L453 97 L453 112 L460 124 Z" fill="#2a1808" opacity="0.8"/>
-  <path d="M580 108 L587 97 L587 112 L580 124 Z" fill="#6a4428" opacity="0.35"/>
-  <!-- Mic right 1 — mirrored -->
-  <line x1="494" y1="89" x2="505" y2="62" stroke="#777" stroke-width="1.2"/>
-  <line x1="505" y1="62" x2="512" y2="53" stroke="#777" stroke-width="1.2"/>
-  <ellipse cx="513" cy="51" rx="3.5" ry="5" fill="#555"/>
-  <!-- Mic right 2 — mirrored -->
-  <line x1="510" y1="89" x2="519" y2="64" stroke="#777" stroke-width="1.2"/>
-  <line x1="519" y1="64" x2="525" y2="56" stroke="#777" stroke-width="1.2"/>
-  <ellipse cx="526" cy="54" rx="3" ry="4.5" fill="#555"/>
-  <text x="520" y="272" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="800" fill="#a81a1a">NEGATIVE</text>
-
-  <!-- VS -->
-  <text x="340" y="178" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="800" fill="#cccccc" opacity="0.45">VS</text>
-</svg>
-    <div class="resolution-strip">
-      <div class="resolution-label">Resolution</div>
-      <div class="resolution-text">Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.</div>
-    </div>
-  </div>
 
   <main>
             <div class="rolodex-counter" id="std-rc-counter"></div>
@@ -805,6 +738,9 @@ function switchTopic(topic){
   document.querySelector(`[data-topic="${topic}"]`).classList.add('active');
   document.querySelectorAll('.topic-section').forEach(s => s.classList.remove('active'));
   document.getElementById('topic-'+topic).classList.add('active');
+  // Swap resolution strip
+  document.getElementById('res-mil').style.display = topic==='mil' ? '' : 'none';
+  document.getElementById('res-std').style.display = topic==='std' ? '' : 'none';
 }
 
 // Load all data
