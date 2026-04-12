@@ -116,6 +116,73 @@
     .mock-date{font-family:'Source Code Pro',monospace;font-size:0.72rem;color:var(--muted);margin-top:0.25rem;}
     .mocks-empty{text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;}
 
+    /* ROLODEX WIDGET */
+    .rolodex-widget{
+      position:relative;
+      margin-bottom:2rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:2rem;
+      padding:1.5rem;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      min-height:120px;
+      overflow:hidden;
+    }
+    .rolodex-svg-wrap{flex-shrink:0;}
+    .rolodex-cards-wrap{flex:1;position:relative;height:90px;overflow:hidden;}
+    .rolodex-card-item{
+      position:absolute;
+      top:0;left:0;right:0;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity 0.6s ease,transform 0.6s ease;
+      pointer-events:none;
+    }
+    .rolodex-card-item.visible{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+    .rolodex-card-item.exiting{
+      opacity:0;
+      transform:translateY(-20px);
+    }
+    .rc-side-pill{
+      display:inline-block;
+      font-family:'Source Code Pro',monospace;
+      font-size:0.68rem;
+      font-weight:600;
+      padding:0.15rem 0.55rem;
+      border-radius:10px;
+      margin-bottom:0.4rem;
+      letter-spacing:0.06em;
+    }
+    .rc-side-pill.aff{background:var(--aff-bg);color:var(--aff-dark);}
+    .rc-side-pill.neg{background:var(--neg-bg);color:var(--neg-dark);}
+    .rc-tagline{
+      font-family:'Libre Baskerville',serif;
+      font-size:0.95rem;
+      color:var(--navy);
+      font-weight:700;
+      line-height:1.3;
+      margin-bottom:0.3rem;
+    }
+    .rc-contention{
+      font-size:0.75rem;
+      color:var(--muted);
+      font-family:'Source Code Pro',monospace;
+    }
+    .rolodex-counter{
+      font-family:'Source Code Pro',monospace;
+      font-size:0.7rem;
+      color:var(--muted);
+      text-align:center;
+      margin-top:0.5rem;
+    }
+
     @media(max-width:640px){
       header{padding:0.75rem 1rem;}
       .podium-row{grid-template-columns:1fr;}
@@ -206,6 +273,48 @@
       Cards will appear once the sheet has data.
     </div>
 
+    <div class="rolodex-widget" id="mil-rolodex-widget">
+      <div class="rolodex-svg-wrap">
+        <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Base legs -->
+          <path d="M25 85 Q20 95 15 98" stroke="#7a7aaa" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M75 85 Q80 95 85 98" stroke="#7a7aaa" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M10 98 Q50 104 90 98" stroke="#7a7aaa" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Drum wheel -->
+          <ellipse cx="50" cy="72" rx="28" ry="10" fill="#b8b8d8"/>
+          <ellipse cx="50" cy="68" rx="28" ry="10" fill="#c8c8e8"/>
+          <!-- Left hub -->
+          <ellipse cx="22" cy="68" rx="8" ry="8" fill="#9090b8"/>
+          <ellipse cx="22" cy="68" rx="4" ry="4" fill="#6060a0"/>
+          <ellipse cx="22" cy="68" rx="2" ry="2" fill="#303070"/>
+          <!-- Right hub -->
+          <ellipse cx="78" cy="68" rx="8" ry="8" fill="#9090b8"/>
+          <ellipse cx="78" cy="68" rx="4" ry="4" fill="#6060a0"/>
+          <ellipse cx="78" cy="68" rx="2" ry="2" fill="#303070"/>
+          <!-- Stacked cards -->
+          <rect x="28" y="12" width="44" height="58" rx="2" fill="#e8e4cc" transform="rotate(-2 50 40)"/>
+          <rect x="28" y="10" width="44" height="58" rx="2" fill="#f0eccc" transform="rotate(-1 50 40)"/>
+          <rect x="28" y="8" width="44" height="58" rx="2" fill="#fffef0" stroke="#d4c88a" stroke-width="0.5"/>
+          <!-- Card lines -->
+          <line x1="34" y1="20" x2="66" y2="20" stroke="#d4c88a" stroke-width="1"/>
+          <line x1="34" y1="28" x2="66" y2="28" stroke="#e0d4a0" stroke-width="0.7"/>
+          <line x1="34" y1="34" x2="60" y2="34" stroke="#e0d4a0" stroke-width="0.7"/>
+          <line x1="34" y1="40" x2="62" y2="40" stroke="#e0d4a0" stroke-width="0.7"/>
+          <!-- Spine marks -->
+          <path d="M47 10 Q45 40 47 66" stroke="#c8c0a0" stroke-width="1" fill="none"/>
+          <path d="M53 10 Q55 40 53 66" stroke="#c8c0a0" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+      <div>
+        <div class="rolodex-cards-wrap" id="mil-rc-wrap">
+          <div class="rolodex-card-item visible">
+            <div class="rc-side-pill aff">AFF</div>
+            <div class="rc-tagline">Loading cards...</div>
+          </div>
+        </div>
+        <div class="rolodex-counter" id="mil-rc-counter"></div>
+      </div>
+    </div>
     <div class="podium-row">
       <button class="podium-btn aff" id="mil-aff-btn" onclick="toggleSide('mil','aff')">
         <div class="pb-label">Click to open</div>
@@ -296,6 +405,48 @@
   </div>
 
   <main>
+    <div class="rolodex-widget" id="std-rolodex-widget">
+      <div class="rolodex-svg-wrap">
+        <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Base legs -->
+          <path d="M25 85 Q20 95 15 98" stroke="#7a7aaa" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M75 85 Q80 95 85 98" stroke="#7a7aaa" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M10 98 Q50 104 90 98" stroke="#7a7aaa" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Drum wheel -->
+          <ellipse cx="50" cy="72" rx="28" ry="10" fill="#b8b8d8"/>
+          <ellipse cx="50" cy="68" rx="28" ry="10" fill="#c8c8e8"/>
+          <!-- Left hub -->
+          <ellipse cx="22" cy="68" rx="8" ry="8" fill="#9090b8"/>
+          <ellipse cx="22" cy="68" rx="4" ry="4" fill="#6060a0"/>
+          <ellipse cx="22" cy="68" rx="2" ry="2" fill="#303070"/>
+          <!-- Right hub -->
+          <ellipse cx="78" cy="68" rx="8" ry="8" fill="#9090b8"/>
+          <ellipse cx="78" cy="68" rx="4" ry="4" fill="#6060a0"/>
+          <ellipse cx="78" cy="68" rx="2" ry="2" fill="#303070"/>
+          <!-- Stacked cards -->
+          <rect x="28" y="12" width="44" height="58" rx="2" fill="#e8e4cc" transform="rotate(-2 50 40)"/>
+          <rect x="28" y="10" width="44" height="58" rx="2" fill="#f0eccc" transform="rotate(-1 50 40)"/>
+          <rect x="28" y="8" width="44" height="58" rx="2" fill="#fffef0" stroke="#d4c88a" stroke-width="0.5"/>
+          <!-- Card lines -->
+          <line x1="34" y1="20" x2="66" y2="20" stroke="#d4c88a" stroke-width="1"/>
+          <line x1="34" y1="28" x2="66" y2="28" stroke="#e0d4a0" stroke-width="0.7"/>
+          <line x1="34" y1="34" x2="60" y2="34" stroke="#e0d4a0" stroke-width="0.7"/>
+          <line x1="34" y1="40" x2="62" y2="40" stroke="#e0d4a0" stroke-width="0.7"/>
+          <!-- Spine marks -->
+          <path d="M47 10 Q45 40 47 66" stroke="#c8c0a0" stroke-width="1" fill="none"/>
+          <path d="M53 10 Q55 40 53 66" stroke="#c8c0a0" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+      <div>
+        <div class="rolodex-cards-wrap" id="std-rc-wrap">
+          <div class="rolodex-card-item visible">
+            <div class="rc-side-pill aff">AFF</div>
+            <div class="rc-tagline">Loading cards...</div>
+          </div>
+        </div>
+        <div class="rolodex-counter" id="std-rc-counter"></div>
+      </div>
+    </div>
     <div class="podium-row">
       <button class="podium-btn aff" id="std-aff-btn" onclick="toggleSide('std','aff')">
         <div class="pb-label">Click to open</div>
@@ -531,6 +682,7 @@ function switchTopic(topic){
     document.getElementById('mil-neg-meta').textContent =
       milNegCount ? `${milNegCount} card${milNegCount!==1?'s':''}` : 'No cards yet';
     buildMocks(mockRows, 'mil', 'mil-mocks-content');
+    startRolodex('mil', milRows);
 
     // Standardized
     const stdAffCount = buildContentions(stdRows, 'aff', 'std-aff-contentions');
@@ -540,11 +692,58 @@ function switchTopic(topic){
     document.getElementById('std-neg-meta').textContent =
       stdNegCount ? `${stdNegCount} card${stdNegCount!==1?'s':''}` : 'No cards yet';
     buildMocks(mockRows, 'std', 'std-mocks-content');
+    startRolodex('std', stdRows);
 
   } catch(e) {
     console.error('Debate data load failed:', e);
   }
 })();
+
+// Rolodex widget animation
+function startRolodex(topic, rows){
+  const wrap = document.getElementById(topic+'-rc-wrap');
+  const counter = document.getElementById(topic+'-rc-counter');
+  if(!wrap || !rows.length) return;
+
+  // Build card list from all rows with taglines
+  const cards = rows.filter(r => r.tagline && r.tagline.trim()).map(r => ({
+    tagline: r.tagline,
+    side: (r.side||'aff').toLowerCase(),
+    contention: r.contention||''
+  }));
+
+  if(!cards.length) return;
+
+  let idx = 0;
+
+  function showCard(i){
+    const c = cards[i];
+    // Fade out existing
+    const existing = wrap.querySelector('.rolodex-card-item.visible');
+    if(existing){
+      existing.classList.remove('visible');
+      existing.classList.add('exiting');
+      setTimeout(()=>{ if(existing.parentNode) existing.remove(); }, 650);
+    }
+    // Create new card
+    const div = document.createElement('div');
+    div.className = 'rolodex-card-item';
+    div.innerHTML = `<div class="rc-side-pill ${c.side}">${c.side.toUpperCase()}</div>
+      <div class="rc-tagline">${c.tagline}</div>
+      <div class="rc-contention">${c.contention}</div>`;
+    wrap.appendChild(div);
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{ div.classList.add('visible'); });
+    });
+    counter.textContent = (i+1)+' / '+cards.length;
+  }
+
+  showCard(0);
+  setInterval(()=>{
+    idx = (idx+1) % cards.length;
+    showCard(idx);
+  }, 3500);
+}
 </script>
 </body>
 </html>
