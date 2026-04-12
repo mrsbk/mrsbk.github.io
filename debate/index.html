@@ -237,6 +237,7 @@
       <div class="resolution-text">Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.</div>
     </div>
   </div>
+  </div>
 
 
 <!-- ══════════ MILITARY INTERVENTION ══════════ -->
@@ -404,9 +405,6 @@
 <div class="topic-section" id="topic-std">
 
   <main>
-            <div class="rolodex-counter" id="std-rc-counter"></div>
-      </div>
-    </div>
     <div class="podium-row">
       <button class="briefcase-btn" id="std-aff-btn" onclick="toggleSide('std','aff')">
         <div class="briefcase-outer">
@@ -586,48 +584,64 @@ async function fetchCSV(url){
   return parseCSV(await res.text());
 }
 
+// Global rolodex state registry
+const _rolState = {};
+
+function rolNav(containerId, dir){
+  const s = _rolState[containerId];
+  if(!s) return;
+  if(dir === 'prev' && s.idx > 0) s.idx--;
+  else if(dir === 'next' && s.idx < s.cards.length-1) s.idx++;
+  else if(typeof dir === 'number') s.idx = dir;
+  renderRolodex(containerId);
+}
+
+function renderRolodex(containerId){
+  const s = _rolState[containerId];
+  const el = document.getElementById(containerId);
+  if(!s || !el) return;
+  const {cards, side, idx} = s;
+
+  const stack = cards.map((c, i) => {
+    let cls = 'rcard';
+    if(i === idx) cls += ' active';
+    else if(i === idx - 1) cls += ' prev';
+    else if(i === idx + 1) cls += ' next-card';
+    return `<div class="${cls}">
+      <div>
+        <div class="rcard-tag">${c.tagline||'—'}</div>
+        <div class="rcard-cite">${c.full_citation||c['full citation']||''}</div>
+        <blockquote class="rcard-quote ${side}">${c.quote||''}</blockquote>
+      </div>
+      <div class="rcard-author">${c.author||''} ${c.year?'('+c.year+')':''}</div>
+    </div>`;
+  }).join('');
+
+  const dots = cards.map((_, i) =>
+    `<span class="rol-dot ${i===idx?'active '+side:''}" onclick="rolNav('${containerId}',${i})"></span>`
+  ).join('');
+
+  el.innerHTML = `
+    <div class="rolodex">
+      <div class="rolodex-stack">${stack}</div>
+      <div class="rolodex-controls">
+        <button class="rol-btn" onclick="rolNav('${containerId}','prev')" ${idx===0?'disabled':''}>&#8592;</button>
+        <span class="rol-counter">${idx+1} / ${cards.length}</span>
+        <button class="rol-btn" onclick="rolNav('${containerId}','next')" ${idx===cards.length-1?'disabled':''}>&#8594;</button>
+        <div class="rol-dots">${dots}</div>
+      </div>
+    </div>`;
+}
+
 function buildRolodex(cards, side, containerId){
   const el = document.getElementById(containerId);
-  if(!cards.length){ el.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;">No cards yet.</div>'; return; }
-
-  let idx = 0;
-
-  function render(){
-    const stack = cards.map((c, i) => {
-      let cls = 'rcard';
-      if(i === idx) cls += ' active';
-      else if(i === idx - 1) cls += ' prev';
-      else if(i === idx + 1) cls += ' next-card';
-      return `<div class="${cls}">
-        <div>
-          <div class="rcard-tag">${c.tagline||'—'}</div>
-          <div class="rcard-cite">${c.full_citation||c['full citation']||''}</div>
-          <blockquote class="rcard-quote ${side}">${c.quote||''}</blockquote>
-        </div>
-        <div class="rcard-author">${c.author||''} ${c.year?'('+c.year+')':''}</div>
-      </div>`;
-    }).join('');
-
-    const dots = cards.map((_, i) =>
-      `<span class="rol-dot ${i===idx?'active '+side:''}" onclick="window._rolJump_${containerId}(${i})"></span>`
-    ).join('');
-
-    el.innerHTML = `
-      <div class="rolodex">
-        <div class="rolodex-stack">${stack}</div>
-        <div class="rolodex-controls">
-          <button class="rol-btn" id="rb-prev-${containerId}" onclick="window._rolPrev_${containerId}()" ${idx===0?'disabled':''}>&#8592;</button>
-          <span class="rol-counter">${idx+1} / ${cards.length}</span>
-          <button class="rol-btn" id="rb-next-${containerId}" onclick="window._rolNext_${containerId}()" ${idx===cards.length-1?'disabled':''}>&#8594;</button>
-          <div class="rol-dots">${dots}</div>
-        </div>
-      </div>`;
+  if(!el) return;
+  if(!cards.length){
+    el.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;">No cards yet.</div>';
+    return;
   }
-
-  window[`_rolPrev_${containerId}`] = () => { if(idx > 0){ idx--; render(); } };
-  window[`_rolNext_${containerId}`] = () => { if(idx < cards.length-1){ idx++; render(); } };
-  window[`_rolJump_${containerId}`] = (i) => { idx = i; render(); };
-  render();
+  _rolState[containerId] = {cards, side, idx: 0};
+  renderRolodex(containerId);
 }
 
 function buildContentions(rows, side, containerId){
