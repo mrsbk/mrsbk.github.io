@@ -41,7 +41,7 @@
     .resolution-label{font-family:'Source Code Pro',monospace;font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.3rem;}
     .resolution-text{font-family:'Libre Baskerville',serif;font-size:1rem;color:var(--navy);line-height:1.6;max-width:780px;margin:0 auto;font-style:italic;}
 
-    main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+    .topic-main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
 
     /* PODIUM BUTTONS */
     .podium-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
@@ -138,7 +138,7 @@
     @media(max-width:640px){
       header{padding:0.75rem 1rem;}
       .podium-row{grid-template-columns:1fr;}
-      main{padding:1.25rem 1rem;}
+      .topic-main{padding:1.25rem 1rem;}
       .topic-tab{padding:0.65rem 1rem;font-size:0.8rem;}
       .mock-card{grid-template-columns:auto auto 1fr;}
     }
@@ -243,7 +243,7 @@
 <!-- ══════════ MILITARY INTERVENTION ══════════ -->
 <div class="topic-section active" id="topic-mil">
 
-  <main>
+  <div class="topic-main">
     <div id="mil-placeholder" class="placeholder-notice" style="display:none;">
       <strong>&#9888; No data yet</strong>
       Cards will appear once the sheet has data.
@@ -397,14 +397,14 @@
       <div class="section-label">Mock Sessions &mdash; Military Intervention</div>
       <div id="mil-mocks-content"><div class="mocks-empty">Loading mock results...</div></div>
     </div>
-  </main>
+  </div>
 </div>
 
 
 <!-- ══════════ STANDARDIZED TESTS ══════════ -->
 <div class="topic-section" id="topic-std">
 
-  <main>
+  <div class="topic-main">
     <div class="podium-row">
       <button class="briefcase-btn" id="std-aff-btn" onclick="toggleSide('std','aff')">
         <div class="briefcase-outer">
@@ -550,7 +550,7 @@
       <div class="section-label">Mock Sessions &mdash; Standardized Tests</div>
       <div id="std-mocks-content"><div class="mocks-empty">Loading mock results...</div></div>
     </div>
-  </main>
+  </div>
 </div>
 
 
