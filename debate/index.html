@@ -7,282 +7,121 @@
   <meta name="robots" content="noindex, nofollow" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Source+Code+Pro:wght@400;600&display=swap');
-
     :root {
-      --bg: #ffffff;
-      --surface: #f8f8f8;
-      --surface2: #f0f0f0;
-      --border: #e0e0e0;
-      --navy: #1a2744;
-      --navy-light: #2e3f6e;
-      --aff: #1a4fa8;
-      --aff-bg: #eef3fc;
-      --aff-border: #b8cef5;
-      --neg: #a81a1a;
-      --neg-bg: #fceee e;
-      --neg-border: #f5b8b8;
-      --text: #1a1a1a;
-      --muted: #666;
-      --radius: 6px;
-      --shadow: 0 1px 4px rgba(0,0,0,0.08);
+      --bg:#fff;--surface:#f8f8f8;--surface2:#f0f0f0;--border:#e0e0e0;
+      --navy:#1a2744;--navy2:#0f1a30;
+      --aff:#1a4fa8;--aff-bg:#eef3fc;--aff-border:#b8cef5;--aff-dark:#0c347c;
+      --neg:#a81a1a;--neg-bg:#fceeed;--neg-border:#f5b8b8;--neg-dark:#7c0c0c;
+      --text:#1a1a1a;--muted:#666;--radius:8px;--shadow:0 2px 8px rgba(0,0,0,0.08);
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:16px;scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    header{background:var(--navy);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .back-link{font-size:0.82rem;color:rgba(255,255,255,0.6);text-decoration:none;}
+    .back-link:hover{color:#fff;}
+    .nsda-badge{display:flex;align-items:center;gap:0.75rem;}
+    .nsda-badge img{height:44px;}
+    .nsda-text{color:rgba(255,255,255,0.85);font-size:0.8rem;line-height:1.4;}
+    .nsda-text strong{color:#fff;font-size:0.9rem;display:block;}
 
-    /* HEADER */
-    header {
-      background: var(--navy);
-      padding: 1rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    .back-link { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none; }
-    .back-link:hover { color: #fff; }
-    .site-title { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: #fff; }
-    .nsda-badge {
-      display: flex; align-items: center; gap: 0.75rem;
-    }
-    .nsda-badge img { height: 48px; }
-    .nsda-text { color: rgba(255,255,255,0.85); font-size: 0.8rem; line-height: 1.4; }
-    .nsda-text strong { color: #fff; font-size: 0.9rem; display: block; }
+    .topic-tabs{background:var(--navy2);display:flex;border-bottom:3px solid #0a1020;}
+    .topic-tab{padding:0.85rem 1.75rem;color:rgba(255,255,255,0.5);cursor:pointer;font-size:0.88rem;font-weight:500;border-bottom:3px solid transparent;margin-bottom:-3px;transition:all 0.15s;white-space:nowrap;}
+    .topic-tab:hover{color:rgba(255,255,255,0.85);}
+    .topic-tab.active{color:#fff;border-bottom-color:#f0c040;background:rgba(255,255,255,0.06);}
 
-    /* TOPIC TABS */
-    .topic-tabs {
-      background: var(--navy-light);
-      display: flex; gap: 0;
-      border-bottom: 3px solid var(--navy);
-    }
-    .topic-tab {
-      padding: 0.85rem 1.75rem;
-      color: rgba(255,255,255,0.6);
-      cursor: pointer;
-      font-size: 0.88rem;
-      font-weight: 500;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -3px;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .topic-tab:hover { color: rgba(255,255,255,0.9); }
-    .topic-tab.active { color: #fff; border-bottom-color: #f0c040; background: rgba(255,255,255,0.08); }
+    .topic-section{display:none;}
+    .topic-section.active{display:block;}
 
-    /* MAIN */
-    main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+    /* HERO */
+    .hero{background:transparent;position:relative;overflow:hidden;text-align:center;padding:0 1rem 1.5rem;}
+    .hero svg{display:block;max-width:700px;margin:0 auto;}
+    .resolution-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 2rem;margin-top:-0.5rem;}
+    .resolution-label{font-family:'Source Code Pro',monospace;font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.3rem;}
+    .resolution-text{font-family:'Libre Baskerville',serif;font-size:1rem;color:var(--navy);line-height:1.6;max-width:780px;margin:0 auto;font-style:italic;}
 
-    /* RESOLUTION BANNER */
-    .resolution-banner {
-      background: var(--navy);
-      color: #fff;
-      border-radius: var(--radius);
-      padding: 1.25rem 1.75rem;
-      margin-bottom: 2rem;
-      font-family: 'Libre Baskerville', serif;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    .resolution-banner .label {
-      font-family: 'Source Code Pro', monospace;
-      font-size: 0.7rem;
-      color: #f0c040;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.4rem;
-    }
+    main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
 
-    /* SECTION HEADER */
-    .section-header {
-      display: flex; align-items: center; gap: 0.75rem;
-      margin: 2rem 0 1.25rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 2px solid var(--border);
-    }
-    .section-header h2 {
-      font-family: 'Libre Baskerville', serif;
-      font-size: 1.3rem;
-      color: var(--navy);
-    }
+    /* PODIUM BUTTONS */
+    .podium-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+    .podium-btn{border:none;cursor:pointer;border-radius:var(--radius);padding:1.25rem 1.5rem;text-align:left;transition:transform 0.15s,box-shadow 0.15s;position:relative;overflow:hidden;}
+    .podium-btn.aff{background:var(--aff);color:#fff;}
+    .podium-btn.neg{background:var(--neg);color:#fff;}
+    .podium-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.18);}
+    .podium-btn.active-side{box-shadow:0 0 0 3px #f0c040;}
+    .pb-label{font-family:'Source Code Pro',monospace;font-size:0.7rem;letter-spacing:0.1em;opacity:0.75;margin-bottom:0.3rem;}
+    .pb-title{font-family:'Libre Baskerville',serif;font-size:1.5rem;font-weight:700;letter-spacing:0.04em;}
+    .pb-meta{font-size:0.78rem;opacity:0.75;margin-top:0.4rem;}
+    .pb-arrow{position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);font-size:1.5rem;opacity:0.5;transition:opacity 0.15s;}
+    .podium-btn:hover .pb-arrow{opacity:1;}
 
-    /* SIDE TABS */
-    .side-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .side-tab {
-      padding: 0.45rem 1.25rem;
-      border-radius: 20px;
-      border: 1.5px solid var(--border);
-      background: transparent;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: all 0.15s;
-      color: var(--muted);
-    }
-    .side-tab.aff.active { background: var(--aff-bg); border-color: var(--aff); color: var(--aff); }
-    .side-tab.neg.active { background: #fceee e; border-color: var(--neg); color: var(--neg); }
-    .side-tab:hover { border-color: var(--navy); color: var(--navy); }
+    /* SIDE PANEL */
+    .side-panel{display:none;}
+    .side-panel.open{display:block;}
 
-    /* CONTENTION ACCORDION */
-    .contention {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      margin-bottom: 1rem;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-    .contention-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.9rem 1.25rem;
-      cursor: pointer;
-      background: var(--surface);
-      transition: background 0.15s;
-      user-select: none;
-    }
-    .contention-header:hover { background: var(--surface2); }
-    .contention-header.aff { border-left: 4px solid var(--aff); }
-    .contention-header.neg { border-left: 4px solid var(--neg); }
-    .contention-title {
-      font-family: 'Libre Baskerville', serif;
-      font-size: 0.98rem;
-      color: var(--navy);
-      font-weight: 700;
-    }
-    .contention-meta {
-      display: flex; align-items: center; gap: 0.75rem;
-    }
-    .card-count {
-      font-family: 'Source Code Pro', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      background: var(--surface2);
-      padding: 0.15rem 0.5rem;
-      border-radius: 10px;
-    }
-    .chevron {
-      color: var(--muted);
-      font-size: 0.8rem;
-      transition: transform 0.2s;
-    }
-    .chevron.open { transform: rotate(180deg); }
+    .section-label{font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
 
-    /* CARDS */
-    .contention-body { display: none; padding: 1rem 1.25rem; background: #fff; }
-    .contention-body.open { display: block; }
+    /* CONTENTION */
+    .contention{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow);}
+    .contention-hdr{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;cursor:pointer;background:var(--surface);transition:background 0.15s;user-select:none;}
+    .contention-hdr:hover{background:var(--surface2);}
+    .contention-hdr.aff{border-left:4px solid var(--aff);}
+    .contention-hdr.neg{border-left:4px solid var(--neg);}
+    .contention-title{font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--navy);font-weight:700;}
+    .cont-meta{display:flex;align-items:center;gap:0.75rem;}
+    .card-count{font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--muted);background:var(--surface2);padding:0.15rem 0.5rem;border-radius:10px;}
+    .chevron{color:var(--muted);transition:transform 0.2s;font-size:0.8rem;}
+    .chevron.open{transform:rotate(180deg);}
+    .contention-body{display:none;padding:1.25rem;background:#fff;}
+    .contention-body.open{display:block;}
 
-    .card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      margin-bottom: 0.75rem;
-      overflow: hidden;
-    }
-    .card-header {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      padding: 0.75rem 1rem;
-      background: var(--surface);
-      cursor: pointer;
-      gap: 1rem;
-    }
-    .card-header:hover { background: var(--surface2); }
-    .card-tagline {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--navy);
-      flex: 1;
-    }
-    .card-byline {
-      font-family: 'Source Code Pro', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .card-body {
-      display: none;
-      padding: 1rem;
-      border-top: 1px solid var(--border);
-    }
-    .card-body.open { display: block; }
-    .card-citation {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-      font-style: italic;
-      line-height: 1.5;
-    }
-    .card-quote {
-      font-family: 'Libre Baskerville', serif;
-      font-size: 0.88rem;
-      line-height: 1.75;
-      color: var(--text);
-      padding-left: 1rem;
-      border-left: 3px solid var(--aff-border);
-    }
-    .card-quote.neg { border-left-color: #f5b8b8; }
+    /* ROLODEX */
+    .rolodex{position:relative;user-select:none;}
+    .rolodex-stack{position:relative;height:240px;margin-bottom:1rem;}
+    .rcard{position:absolute;top:0;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem 1.5rem;transition:opacity 0.25s,transform 0.25s;opacity:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;height:220px;overflow:hidden;}
+    .rcard.active{opacity:1;pointer-events:auto;z-index:2;}
+    .rcard.prev{opacity:0.4;transform:translateY(-8px) scale(0.97);z-index:1;}
+    .rcard.next-card{opacity:0.4;transform:translateY(8px) scale(0.97);z-index:1;}
+    .rcard-tag{font-weight:600;font-size:0.95rem;color:var(--navy);font-family:'Libre Baskerville',serif;line-height:1.4;margin-bottom:0.5rem;}
+    .rcard-cite{font-size:0.75rem;color:var(--muted);font-style:italic;margin-bottom:0.75rem;line-height:1.4;}
+    .rcard-quote{font-family:'Libre Baskerville',serif;font-size:0.85rem;line-height:1.7;color:var(--text);padding-left:0.85rem;border-left:3px solid var(--aff-border);flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;}
+    .rcard-quote.neg{border-left-color:var(--neg-border);}
+    .rcard-author{font-family:'Source Code Pro',monospace;font-size:0.72rem;color:var(--muted);margin-top:0.5rem;}
 
-    /* LOADING / PLACEHOLDER */
-    .placeholder-notice {
-      background: #fffbea;
-      border: 1px solid #f0d060;
-      border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      font-size: 0.88rem;
-      color: #7a6020;
-      margin-bottom: 1.5rem;
-      font-family: 'Source Code Pro', monospace;
-    }
-    .placeholder-notice strong { display: block; margin-bottom: 0.25rem; }
+    .rolodex-controls{display:flex;align-items:center;gap:0.75rem;}
+    .rol-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:36px;height:36px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background 0.15s;color:var(--text);}
+    .rol-btn:hover{background:var(--surface2);}
+    .rol-btn:disabled{opacity:0.3;cursor:default;}
+    .rol-counter{font-family:'Source Code Pro',monospace;font-size:0.78rem;color:var(--muted);min-width:60px;text-align:center;}
+    .rol-dots{display:flex;gap:4px;flex-wrap:wrap;max-width:200px;}
+    .rol-dot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:background 0.15s;}
+    .rol-dot.active{background:var(--aff);}
+    .rol-dot.active.neg{background:var(--neg);}
 
-    .loading-spinner {
-      text-align: center; padding: 2rem;
-      color: var(--muted); font-size: 0.88rem;
-    }
+    /* LOADING PLACEHOLDER */
+    .placeholder-notice{background:#fffbea;border:1px solid #f0d060;border-radius:var(--radius);padding:1rem 1.25rem;font-size:0.85rem;color:#7a6020;margin-bottom:1.5rem;font-family:'Source Code Pro',monospace;}
+    .placeholder-notice strong{display:block;margin-bottom:0.25rem;}
 
-    /* MOCKS TABLE */
-    .table-wrap {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      margin-bottom: 2rem;
-    }
-    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-    thead tr { background: var(--navy); }
-    th {
-      padding: 0.65rem 1rem;
-      text-align: left;
-      font-size: 0.72rem;
-      font-family: 'Source Code Pro', monospace;
-      color: rgba(255,255,255,0.8);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-    }
-    td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
-    tr:last-child td { border-bottom: none; }
-    tbody tr:hover { background: var(--surface); }
-    .win  { color: #1a7a1a; font-weight: 600; font-family: 'Source Code Pro', monospace; font-size: 0.78rem; }
-    .loss { color: var(--neg); font-weight: 600; font-family: 'Source Code Pro', monospace; font-size: 0.78rem; }
-    .side-aff { color: var(--aff); font-weight: 600; font-size: 0.78rem; font-family: 'Source Code Pro', monospace; }
-    .side-neg { color: var(--neg); font-weight: 600; font-size: 0.78rem; font-family: 'Source Code Pro', monospace; }
-    .topic-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      padding: 0.1rem 0.5rem;
-      border-radius: 10px;
-      font-family: 'Source Code Pro', monospace;
-      background: var(--surface2);
-      color: var(--muted);
-      white-space: nowrap;
-    }
+    /* MOCKS */
+    .mocks-grid{display:grid;gap:0.75rem;}
+    .mock-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;display:grid;grid-template-columns:auto auto 1fr;gap:0.75rem;align-items:start;}
+    .mock-result{font-family:'Libre Baskerville',serif;font-size:1.5rem;font-weight:700;width:36px;text-align:center;}
+    .mock-result.W{color:#1a7a1a;}
+    .mock-result.L{color:var(--neg);}
+    .mock-side{font-family:'Source Code Pro',monospace;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:10px;font-weight:600;align-self:start;margin-top:0.15rem;}
+    .mock-side.aff{background:var(--aff-bg);color:var(--aff-dark);}
+    .mock-side.neg{background:var(--neg-bg);color:var(--neg-dark);}
+    .mock-notes{font-size:0.85rem;color:var(--muted);line-height:1.5;}
+    .mock-date{font-family:'Source Code Pro',monospace;font-size:0.72rem;color:var(--muted);margin-top:0.25rem;}
+    .mocks-empty{text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;}
 
-    /* TOPIC SECTIONS */
-    .topic-section { display: none; }
-    .topic-section.active { display: block; }
-
-    @media (max-width: 600px) {
-      header { padding: 0.75rem 1rem; }
-      main { padding: 1.25rem 1rem; }
-      .topic-tab { padding: 0.65rem 1rem; font-size: 0.8rem; }
-      .nsda-badge img { height: 36px; }
+    @media(max-width:640px){
+      header{padding:0.75rem 1rem;}
+      .podium-row{grid-template-columns:1fr;}
+      main{padding:1.25rem 1rem;}
+      .topic-tab{padding:0.65rem 1rem;font-size:0.8rem;}
+      .mock-card{grid-template-columns:auto auto 1fr;}
     }
   </style>
 </head>
@@ -290,7 +129,6 @@
 
 <header>
   <a href="../" class="back-link">&#8592; Kister Homeschool</a>
-  <span class="site-title">Debate</span>
   <div class="nsda-badge">
     <img src="../images/nsda.png" alt="NSDA" />
     <div class="nsda-text">
@@ -305,306 +143,408 @@
   <div class="topic-tab" data-topic="std" onclick="switchTopic('std')">Standardized Tests</div>
 </div>
 
-<main>
 
-  <!-- ===================== MILITARY INTERVENTION ===================== -->
-  <div class="topic-section active" id="topic-mil">
+<!-- ══════════ MILITARY INTERVENTION ══════════ -->
+<div class="topic-section active" id="topic-mil">
 
-    <div class="resolution-banner">
-      <div class="label">Resolution &mdash; Military Intervention</div>
-      Resolved: The United States is justified in using force to remove authoritarian leaders from power.
+  <div class="hero">
+    <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+      
+      <polygon points="160,0 60,295 260,295" fill="#1a4fa8" opacity="0.06"/>
+      <polygon points="520,0 420,295 620,295" fill="#a81a1a" opacity="0.06"/>
+      <rect x="90" y="260" width="140" height="16" rx="3" fill="#3a2a1a"/>
+      <rect x="98" y="252" width="124" height="12" rx="2" fill="#4a3520"/>
+      <path d="M108 252 L88 100 L232 100 L212 252 Z" fill="#5a3d20"/>
+      <line x1="108" y1="252" x2="90" y2="120" stroke="#4a3010" stroke-width="0.8" opacity="0.6"/>
+      <line x1="130" y1="252" x2="114" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.5"/>
+      <line x1="155" y1="252" x2="140" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.4"/>
+      <line x1="180" y1="252" x2="166" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.5"/>
+      <line x1="205" y1="252" x2="192" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.6"/>
+      <rect x="82" y="88" width="156" height="18" rx="3" fill="#4a3520"/>
+      <rect x="90" y="82" width="140" height="14" rx="2" fill="#1a4fa8"/>
+      <rect x="90" y="82" width="140" height="5" rx="2" fill="#2a5fb8" opacity="0.5"/>
+      <path d="M88 100 L82 88 L82 106 L88 120 Z" fill="#3a2510" opacity="0.7"/>
+      <path d="M232 100 L238 88 L238 106 L232 120 Z" fill="#7a5030" opacity="0.4"/>
+      <line x1="148" y1="82" x2="136" y2="52" stroke="#888" stroke-width="1.5"/>
+      <line x1="136" y1="52" x2="128" y2="42" stroke="#888" stroke-width="1.5"/>
+      <ellipse cx="127" cy="40" rx="5" ry="7" fill="#666"/>
+      <line x1="168" y1="82" x2="158" y2="54" stroke="#888" stroke-width="1.5"/>
+      <line x1="158" y1="54" x2="152" y2="44" stroke="#888" stroke-width="1.5"/>
+      <ellipse cx="151" cy="42" rx="4" ry="6" fill="#666"/>
+      <text x="160" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="800" fill="#1a4fa8">AFFIRMATIVE</text>
+      <rect x="450" y="260" width="140" height="16" rx="3" fill="#3a2a1a"/>
+      <rect x="458" y="252" width="124" height="12" rx="2" fill="#4a3520"/>
+      <path d="M468 252 L448 100 L592 100 L572 252 Z" fill="#5a3d20"/>
+      <line x1="468" y1="252" x2="450" y2="120" stroke="#4a3010" stroke-width="0.8" opacity="0.6"/>
+      <line x1="490" y1="252" x2="474" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.5"/>
+      <line x1="515" y1="252" x2="500" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.4"/>
+      <line x1="540" y1="252" x2="526" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.5"/>
+      <line x1="565" y1="252" x2="552" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.6"/>
+      <rect x="442" y="88" width="156" height="18" rx="3" fill="#4a3520"/>
+      <rect x="450" y="82" width="140" height="14" rx="2" fill="#a81a1a"/>
+      <rect x="450" y="82" width="140" height="5" rx="2" fill="#c82a2a" opacity="0.5"/>
+      <path d="M448 100 L442 88 L442 106 L448 120 Z" fill="#3a2510" opacity="0.7"/>
+      <path d="M592 100 L598 88 L598 106 L592 120 Z" fill="#7a5030" opacity="0.4"/>
+      <line x1="512" y1="82" x2="524" y2="52" stroke="#888" stroke-width="1.5"/>
+      <line x1="524" y1="52" x2="532" y2="42" stroke="#888" stroke-width="1.5"/>
+      <ellipse cx="533" cy="40" rx="5" ry="7" fill="#666"/>
+      <line x1="532" y1="82" x2="542" y2="54" stroke="#888" stroke-width="1.5"/>
+      <line x1="542" y1="54" x2="548" y2="44" stroke="#888" stroke-width="1.5"/>
+      <ellipse cx="549" cy="42" rx="4" ry="6" fill="#666"/>
+      <text x="520" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="800" fill="#a81a1a">NEGATIVE</text>
+      <text x="340" y="185" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="800" fill="#cccccc" opacity="0.5">VS</text>
+    </svg>
+    <div class="resolution-strip">
+      <div class="resolution-label">Resolution</div>
+      <div class="resolution-text">Resolved: The United States is justified in using force to remove authoritarian leaders from power.</div>
+    </div>
+  </div>
+
+  <main>
+    <div id="mil-placeholder" class="placeholder-notice" style="display:none;">
+      <strong>&#9888; No data yet</strong>
+      Cards will appear once the sheet has data.
     </div>
 
-    <!-- CASES -->
-    <div class="section-header">
-      <h2>&#128196; Cases</h2>
+    <div class="podium-row">
+      <button class="podium-btn aff" id="mil-aff-btn" onclick="toggleSide('mil','aff')">
+        <div class="pb-label">Click to open</div>
+        <div class="pb-title">Affirmative</div>
+        <div class="pb-meta" id="mil-aff-meta">Loading...</div>
+        <span class="pb-arrow">&#9660;</span>
+      </button>
+      <button class="podium-btn neg" id="mil-neg-btn" onclick="toggleSide('mil','neg')">
+        <div class="pb-label">Click to open</div>
+        <div class="pb-title">Negative</div>
+        <div class="pb-meta" id="mil-neg-meta">Loading...</div>
+        <span class="pb-arrow">&#9660;</span>
+      </button>
     </div>
 
-    <div class="placeholder-notice" id="mil-cases-placeholder">
-      <strong>&#9888; Placeholder</strong>
-      Cards will load automatically once the Google Sheet URL is connected.<br>
-      To activate: open debate/index.html and set <code>MIL_CASES_URL</code> at the top of the script.
+    <div class="side-panel" id="mil-aff-panel">
+      <div class="section-label">Affirmative Case &mdash; Military Intervention</div>
+      <div id="mil-aff-contentions"></div>
     </div>
 
-    <div class="side-tabs">
-      <button class="side-tab aff active" onclick="switchSide('mil','aff')">&#9646; Affirmative</button>
-      <button class="side-tab neg" onclick="switchSide('mil','neg')">&#9646; Negative</button>
+    <div class="side-panel" id="mil-neg-panel">
+      <div class="section-label">Negative Case &mdash; Military Intervention</div>
+      <div id="mil-neg-contentions"></div>
     </div>
 
-    <div id="mil-aff-cases">
-      <!-- Placeholder contentions -->
-      <div class="contention">
-        <div class="contention-header aff" onclick="toggleContention(this)">
-          <span class="contention-title">Contention 1: [Name will appear from sheet]</span>
-          <div class="contention-meta">
-            <span class="card-count">0 cards</span>
-            <span class="chevron">&#9660;</span>
-          </div>
-        </div>
-        <div class="contention-body">
-          <div class="loading-spinner">No cards loaded yet.</div>
-        </div>
-      </div>
+    <div style="margin-top:3rem;">
+      <div class="section-label">Mock Sessions &mdash; Military Intervention</div>
+      <div id="mil-mocks-content"><div class="mocks-empty">Loading mock results...</div></div>
+    </div>
+  </main>
+</div>
+
+
+<!-- ══════════ STANDARDIZED TESTS ══════════ -->
+<div class="topic-section" id="topic-std">
+
+  <div class="hero">
+    <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+      
+      <polygon points="160,0 60,295 260,295" fill="#1a4fa8" opacity="0.06"/>
+      <polygon points="520,0 420,295 620,295" fill="#a81a1a" opacity="0.06"/>
+      <rect x="90" y="260" width="140" height="16" rx="3" fill="#3a2a1a"/>
+      <rect x="98" y="252" width="124" height="12" rx="2" fill="#4a3520"/>
+      <path d="M108 252 L88 100 L232 100 L212 252 Z" fill="#5a3d20"/>
+      <line x1="108" y1="252" x2="90" y2="120" stroke="#4a3010" stroke-width="0.8" opacity="0.6"/>
+      <line x1="130" y1="252" x2="114" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.5"/>
+      <line x1="155" y1="252" x2="140" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.4"/>
+      <line x1="180" y1="252" x2="166" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.5"/>
+      <line x1="205" y1="252" x2="192" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.6"/>
+      <rect x="82" y="88" width="156" height="18" rx="3" fill="#4a3520"/>
+      <rect x="90" y="82" width="140" height="14" rx="2" fill="#1a4fa8"/>
+      <rect x="90" y="82" width="140" height="5" rx="2" fill="#2a5fb8" opacity="0.5"/>
+      <path d="M88 100 L82 88 L82 106 L88 120 Z" fill="#3a2510" opacity="0.7"/>
+      <path d="M232 100 L238 88 L238 106 L232 120 Z" fill="#7a5030" opacity="0.4"/>
+      <line x1="148" y1="82" x2="136" y2="52" stroke="#888" stroke-width="1.5"/>
+      <line x1="136" y1="52" x2="128" y2="42" stroke="#888" stroke-width="1.5"/>
+      <ellipse cx="127" cy="40" rx="5" ry="7" fill="#666"/>
+      <line x1="168" y1="82" x2="158" y2="54" stroke="#888" stroke-width="1.5"/>
+      <line x1="158" y1="54" x2="152" y2="44" stroke="#888" stroke-width="1.5"/>
+      <ellipse cx="151" cy="42" rx="4" ry="6" fill="#666"/>
+      <text x="160" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="800" fill="#1a4fa8">AFFIRMATIVE</text>
+      <rect x="450" y="260" width="140" height="16" rx="3" fill="#3a2a1a"/>
+      <rect x="458" y="252" width="124" height="12" rx="2" fill="#4a3520"/>
+      <path d="M468 252 L448 100 L592 100 L572 252 Z" fill="#5a3d20"/>
+      <line x1="468" y1="252" x2="450" y2="120" stroke="#4a3010" stroke-width="0.8" opacity="0.6"/>
+      <line x1="490" y1="252" x2="474" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.5"/>
+      <line x1="515" y1="252" x2="500" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.4"/>
+      <line x1="540" y1="252" x2="526" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.5"/>
+      <line x1="565" y1="252" x2="552" y2="100" stroke="#4a3010" stroke-width="0.8" opacity="0.6"/>
+      <rect x="442" y="88" width="156" height="18" rx="3" fill="#4a3520"/>
+      <rect x="450" y="82" width="140" height="14" rx="2" fill="#a81a1a"/>
+      <rect x="450" y="82" width="140" height="5" rx="2" fill="#c82a2a" opacity="0.5"/>
+      <path d="M448 100 L442 88 L442 106 L448 120 Z" fill="#3a2510" opacity="0.7"/>
+      <path d="M592 100 L598 88 L598 106 L592 120 Z" fill="#7a5030" opacity="0.4"/>
+      <line x1="512" y1="82" x2="524" y2="52" stroke="#888" stroke-width="1.5"/>
+      <line x1="524" y1="52" x2="532" y2="42" stroke="#888" stroke-width="1.5"/>
+      <ellipse cx="533" cy="40" rx="5" ry="7" fill="#666"/>
+      <line x1="532" y1="82" x2="542" y2="54" stroke="#888" stroke-width="1.5"/>
+      <line x1="542" y1="54" x2="548" y2="44" stroke="#888" stroke-width="1.5"/>
+      <ellipse cx="549" cy="42" rx="4" ry="6" fill="#666"/>
+      <text x="520" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="15" font-weight="800" fill="#a81a1a">NEGATIVE</text>
+      <text x="340" y="185" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="800" fill="#cccccc" opacity="0.5">VS</text>
+    </svg>
+    <div class="resolution-strip">
+      <div class="resolution-label">Resolution</div>
+      <div class="resolution-text">Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.</div>
+    </div>
+  </div>
+
+  <main>
+    <div class="podium-row">
+      <button class="podium-btn aff" id="std-aff-btn" onclick="toggleSide('std','aff')">
+        <div class="pb-label">Click to open</div>
+        <div class="pb-title">Affirmative</div>
+        <div class="pb-meta" id="std-aff-meta">Loading...</div>
+        <span class="pb-arrow">&#9660;</span>
+      </button>
+      <button class="podium-btn neg" id="std-neg-btn" onclick="toggleSide('std','neg')">
+        <div class="pb-label">Click to open</div>
+        <div class="pb-title">Negative</div>
+        <div class="pb-meta" id="std-neg-meta">Loading...</div>
+        <span class="pb-arrow">&#9660;</span>
+      </button>
     </div>
 
-    <div id="mil-neg-cases" style="display:none;">
-      <div class="contention">
-        <div class="contention-header neg" onclick="toggleContention(this)">
-          <span class="contention-title">Contention 1: [Name will appear from sheet]</span>
-          <div class="contention-meta">
-            <span class="card-count">0 cards</span>
-            <span class="chevron">&#9660;</span>
-          </div>
-        </div>
-        <div class="contention-body">
-          <div class="loading-spinner">No cards loaded yet.</div>
-        </div>
-      </div>
+    <div class="side-panel" id="std-aff-panel">
+      <div class="section-label">Affirmative Case &mdash; Standardized Tests</div>
+      <div id="std-aff-contentions"></div>
     </div>
 
-    <!-- MOCKS -->
-    <div class="section-header" style="margin-top:3rem;">
-      <h2>&#127947; Mock Sessions</h2>
+    <div class="side-panel" id="std-neg-panel">
+      <div class="section-label">Negative Case &mdash; Standardized Tests</div>
+      <div id="std-neg-contentions"></div>
     </div>
 
-    <div class="placeholder-notice" id="mil-mocks-placeholder">
-      <strong>&#9888; Placeholder</strong>
-      Mock results will load automatically once the Google Sheet URL is connected.<br>
-      To activate: set <code>MOCKS_URL</code> at the top of the script.
+    <div style="margin-top:3rem;">
+      <div class="section-label">Mock Sessions &mdash; Standardized Tests</div>
+      <div id="std-mocks-content"><div class="mocks-empty">Loading mock results...</div></div>
     </div>
+  </main>
+</div>
 
-    <div id="mil-mocks-table" style="display:none;">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Date</th><th>Side</th><th>Result</th><th>Notes</th></tr></thead>
-          <tbody id="mil-mocks-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-  </div><!-- end mil -->
-
-
-  <!-- ===================== STANDARDIZED TESTS ===================== -->
-  <div class="topic-section" id="topic-std">
-
-    <div class="resolution-banner">
-      <div class="label">Resolution &mdash; Standardized Tests</div>
-      Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.
-    </div>
-
-    <!-- CASES -->
-    <div class="section-header">
-      <h2>&#128196; Cases</h2>
-    </div>
-
-    <div class="placeholder-notice" id="std-cases-placeholder">
-      <strong>&#9888; Placeholder</strong>
-      Cards will load automatically once the Google Sheet URL is connected.<br>
-      To activate: set <code>STD_CASES_URL</code> at the top of the script.
-    </div>
-
-    <div class="side-tabs">
-      <button class="side-tab aff active" onclick="switchSide('std','aff')">&#9646; Affirmative</button>
-      <button class="side-tab neg" onclick="switchSide('std','neg')">&#9646; Negative</button>
-    </div>
-
-    <div id="std-aff-cases">
-      <div class="contention">
-        <div class="contention-header aff" onclick="toggleContention(this)">
-          <span class="contention-title">Contention 1: [Name will appear from sheet]</span>
-          <div class="contention-meta">
-            <span class="card-count">0 cards</span>
-            <span class="chevron">&#9660;</span>
-          </div>
-        </div>
-        <div class="contention-body">
-          <div class="loading-spinner">No cards loaded yet.</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="std-neg-cases" style="display:none;">
-      <div class="contention">
-        <div class="contention-header neg" onclick="toggleContention(this)">
-          <span class="contention-title">Contention 1: [Name will appear from sheet]</span>
-          <div class="contention-meta">
-            <span class="card-count">0 cards</span>
-            <span class="chevron">&#9660;</span>
-          </div>
-        </div>
-        <div class="contention-body">
-          <div class="loading-spinner">No cards loaded yet.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MOCKS -->
-    <div class="section-header" style="margin-top:3rem;">
-      <h2>&#127947; Mock Sessions</h2>
-    </div>
-
-    <div class="placeholder-notice" id="std-mocks-placeholder">
-      <strong>&#9888; Placeholder</strong>
-      Mock results will load here once connected.
-    </div>
-
-    <div id="std-mocks-table" style="display:none;">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Date</th><th>Side</th><th>Result</th><th>Notes</th></tr></thead>
-          <tbody id="std-mocks-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-  </div><!-- end std -->
-
-</main>
 
 <script>
-// ============================================================
-// GOOGLE SHEET URLs — SWAP THESE IN WHEN READY
-// Each should be a published CSV URL from Google Sheets
-// ============================================================
-const MIL_CASES_URL = '';   // Tab: military intervention cards
-const STD_CASES_URL = '';   // Tab: standardized tests cards
-const MOCKS_URL     = '';   // Tab: mock session results
-// ============================================================
+const MIL_URL  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=0&single=true&output=csv';
+const STD_URL  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=1701865872&single=true&output=csv';
+const MOCK_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=223107175&single=true&output=csv';
+
+// track open sides
+const openSides = {};
 
 function parseCSV(text){
-  const lines=text.trim().split('\n');
-  const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
-  return lines.slice(1).map(line=>{
-    const vals=[];let cur='',inQ=false;
-    for(let i=0;i<line.length;i++){
-      if(line[i]==='"'){inQ=!inQ;}
-      else if(line[i]===','&&!inQ){vals.push(cur.trim());cur='';}
-      else{cur+=line[i];}
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').toLowerCase().trim());
+  return lines.slice(1).filter(l => l.trim()).map(line => {
+    const vals = []; let cur = '', inQ = false;
+    for(let i = 0; i < line.length; i++){
+      if(line[i] === '"'){ inQ = !inQ; }
+      else if(line[i] === ',' && !inQ){ vals.push(cur); cur = ''; }
+      else { cur += line[i]; }
     }
-    vals.push(cur.trim());
-    const obj={};headers.forEach((h,i)=>obj[h]=(vals[i]||'').replace(/^"|"$/g,''));
+    vals.push(cur);
+    const obj = {};
+    headers.forEach((h,i) => obj[h] = (vals[i]||'').replace(/^"|"$/g,'').trim());
     return obj;
   });
 }
 
 async function fetchCSV(url){
-  const res=await fetch(url);
+  const res = await fetch(url);
   return parseCSV(await res.text());
 }
 
-function renderCards(rows, side, containerId, placeholderId){
-  const container = document.getElementById(containerId);
-  const placeholder = document.getElementById(placeholderId);
-  if(!rows||rows.length===0) return;
+function buildRolodex(cards, side, containerId){
+  const el = document.getElementById(containerId);
+  if(!cards.length){ el.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;">No cards yet.</div>'; return; }
 
-  // Group by contention
+  let idx = 0;
+
+  function render(){
+    const stack = cards.map((c, i) => {
+      let cls = 'rcard';
+      if(i === idx) cls += ' active';
+      else if(i === idx - 1) cls += ' prev';
+      else if(i === idx + 1) cls += ' next-card';
+      return `<div class="${cls}">
+        <div>
+          <div class="rcard-tag">${c.tagline||'—'}</div>
+          <div class="rcard-cite">${c.full_citation||c['full citation']||''}</div>
+          <blockquote class="rcard-quote ${side}">${c.quote||''}</blockquote>
+        </div>
+        <div class="rcard-author">${c.author||''} ${c.year?'('+c.year+')':''}</div>
+      </div>`;
+    }).join('');
+
+    const dots = cards.map((_, i) =>
+      `<span class="rol-dot ${i===idx?'active '+side:''}" onclick="window._rolJump_${containerId}(${i})"></span>`
+    ).join('');
+
+    el.innerHTML = `
+      <div class="rolodex">
+        <div class="rolodex-stack">${stack}</div>
+        <div class="rolodex-controls">
+          <button class="rol-btn" id="rb-prev-${containerId}" onclick="window._rolPrev_${containerId}()" ${idx===0?'disabled':''}>&#8592;</button>
+          <span class="rol-counter">${idx+1} / ${cards.length}</span>
+          <button class="rol-btn" id="rb-next-${containerId}" onclick="window._rolNext_${containerId}()" ${idx===cards.length-1?'disabled':''}>&#8594;</button>
+          <div class="rol-dots">${dots}</div>
+        </div>
+      </div>`;
+  }
+
+  window[`_rolPrev_${containerId}`] = () => { if(idx > 0){ idx--; render(); } };
+  window[`_rolNext_${containerId}`] = () => { if(idx < cards.length-1){ idx++; render(); } };
+  window[`_rolJump_${containerId}`] = (i) => { idx = i; render(); };
+  render();
+}
+
+function buildContentions(rows, side, containerId){
   const byContention = {};
-  rows.filter(r=>r.side&&r.side.toLowerCase()===side).forEach(r=>{
-    const c = r.contention||'Uncategorized';
-    if(!byContention[c]) byContention[c]=[];
+  rows.filter(r => (r.side||'').toLowerCase() === side).forEach(r => {
+    const c = r.contention || 'Uncategorized';
+    if(!byContention[c]) byContention[c] = [];
     byContention[c].push(r);
   });
 
-  if(Object.keys(byContention).length===0) return;
-  if(placeholder) placeholder.style.display='none';
+  const el = document.getElementById(containerId);
+  if(!Object.keys(byContention).length){
+    el.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:1rem 0;">No cards loaded yet — add rows to the sheet.</div>';
+    return 0;
+  }
 
-  container.innerHTML = Object.entries(byContention).map(([contention, cards])=>`
-    <div class="contention">
-      <div class="contention-header ${side}" onclick="toggleContention(this)">
-        <span class="contention-title">${contention}</span>
-        <div class="contention-meta">
+  el.innerHTML = Object.entries(byContention).map(([name, cards], ci) => {
+    const rolId = `rol-${containerId}-${ci}`;
+    return `<div class="contention">
+      <div class="contention-hdr ${side}" onclick="toggleContention(this)">
+        <span class="contention-title">${name}</span>
+        <div class="cont-meta">
           <span class="card-count">${cards.length} card${cards.length!==1?'s':''}</span>
           <span class="chevron">&#9660;</span>
         </div>
       </div>
       <div class="contention-body">
-        ${cards.map(card=>`
-          <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-              <span class="card-tagline">${card.tagline||'—'}</span>
-              <span class="card-byline">${card.author||''} ${card.year?'('+card.year+')':''}</span>
-            </div>
-            <div class="card-body">
-              <div class="card-citation">${card.full_citation||''}</div>
-              <blockquote class="card-quote ${side}">${card.quote||''}</blockquote>
-            </div>
-          </div>`).join('')}
+        <div id="${rolId}"></div>
       </div>
-    </div>`).join('');
-}
+    </div>`;
+  }).join('');
 
-function renderMocks(rows, topic, tbodyId, tableId, placeholderId){
-  const filtered = rows.filter(r=>{
-    const t=(r.topic||'').toLowerCase();
-    return topic==='mil'?t.includes('military')||t.includes('force')||t.includes('authoritarian')
-                        :t.includes('standard')||t.includes('test')||t.includes('admissions');
+  // Build rolodexes after DOM is set
+  Object.entries(byContention).forEach(([name, cards], ci) => {
+    buildRolodex(cards, side, `rol-${containerId}-${ci}`);
   });
-  if(filtered.length===0) return;
-  document.getElementById(placeholderId).style.display='none';
-  document.getElementById(tableId).style.display='block';
-  document.getElementById(tbodyId).innerHTML=[...filtered].reverse().map(r=>`
-    <tr>
-      <td style="font-family:'Source Code Pro',monospace;font-size:0.82rem;">${r.date||'—'}</td>
-      <td><span class="side-${(r.side||'').toLowerCase()}">${(r.side||'').toUpperCase()}</span></td>
-      <td><span class="${(r.result||'').toLowerCase()==='w'||r.result==='Win'?'win':'loss'}">${r.result||'—'}</span></td>
-      <td style="font-size:0.85rem;color:var(--muted);">${r.notes||''}</td>
-    </tr>`).join('');
+
+  return Object.values(byContention).reduce((a,c)=>a+c.length,0);
 }
 
-// Load data if URLs are set
-(async function(){
-  if(MIL_CASES_URL){
-    try{
-      const rows=await fetchCSV(MIL_CASES_URL);
-      renderCards(rows,'aff','mil-aff-cases','mil-cases-placeholder');
-      renderCards(rows,'neg','mil-neg-cases','mil-cases-placeholder');
-    }catch(e){console.warn('MIL cases failed:',e);}
-  }
-  if(STD_CASES_URL){
-    try{
-      const rows=await fetchCSV(STD_CASES_URL);
-      renderCards(rows,'aff','std-aff-cases','std-cases-placeholder');
-      renderCards(rows,'neg','std-neg-cases','std-cases-placeholder');
-    }catch(e){console.warn('STD cases failed:',e);}
-  }
-  if(MOCKS_URL){
-    try{
-      const rows=await fetchCSV(MOCKS_URL);
-      renderMocks(rows,'mil','mil-mocks-body','mil-mocks-table','mil-mocks-placeholder');
-      renderMocks(rows,'std','std-mocks-body','std-mocks-table','std-mocks-placeholder');
-    }catch(e){console.warn('Mocks failed:',e);}
-  }
-})();
+function buildMocks(rows, topic, containerId){
+  const el = document.getElementById(containerId);
+  const filtered = rows.filter(r => {
+    const t = (r.topic||'').toLowerCase();
+    if(topic === 'mil') return t.includes('military')||t.includes('force')||t.includes('authoritarian')||t.includes('mil');
+    return t.includes('standard')||t.includes('test')||t.includes('admissions')||t.includes('std');
+  });
 
-// UI interactions
+  if(!filtered.length){
+    el.innerHTML = '<div class="mocks-empty">No mock sessions recorded yet.</div>';
+    return;
+  }
+
+  el.innerHTML = '<div class="mocks-grid">' +
+    [...filtered].reverse().map(r => {
+      const res = (r.result||'').trim().toUpperCase();
+      const side = (r.side||'').toLowerCase();
+      return `<div class="mock-card">
+        <div class="mock-result ${res==='W'||res==='WIN'?'W':'L'}">${res==='W'||res==='WIN'?'W':'L'}</div>
+        <div class="mock-side ${side}">${side.toUpperCase()}</div>
+        <div>
+          <div class="mock-notes">${r.notes||'—'}</div>
+          <div class="mock-date">${r.date||''}</div>
+        </div>
+      </div>`;
+    }).join('') + '</div>';
+}
+
+// Toggle side panels
+function toggleSide(topic, side){
+  const panelId = `${topic}-${side}-panel`;
+  const btnId   = `${topic}-${side}-btn`;
+  const panel   = document.getElementById(panelId);
+  const btn     = document.getElementById(btnId);
+  const key     = `${topic}-${side}`;
+  const isOpen  = openSides[key];
+
+  // Close other side
+  const otherSide = side === 'aff' ? 'neg' : 'aff';
+  const otherKey  = `${topic}-${otherSide}`;
+  if(openSides[otherKey]){
+    document.getElementById(`${topic}-${otherSide}-panel`).classList.remove('open');
+    document.getElementById(`${topic}-${otherSide}-btn`).classList.remove('active-side');
+    openSides[otherKey] = false;
+  }
+
+  if(isOpen){
+    panel.classList.remove('open');
+    btn.classList.remove('active-side');
+    openSides[key] = false;
+  } else {
+    panel.classList.add('open');
+    btn.classList.add('active-side');
+    openSides[key] = true;
+    panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+function toggleContention(hdr){
+  const body = hdr.nextElementSibling;
+  const chev = hdr.querySelector('.chevron');
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  chev.classList.toggle('open', !open);
+}
+
 function switchTopic(topic){
-  document.querySelectorAll('.topic-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.topic-tab').forEach(t => t.classList.remove('active'));
   document.querySelector(`[data-topic="${topic}"]`).classList.add('active');
-  document.querySelectorAll('.topic-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.topic-section').forEach(s => s.classList.remove('active'));
   document.getElementById('topic-'+topic).classList.add('active');
 }
 
-function switchSide(topic, side){
-  const tabs=document.querySelectorAll(`#topic-${topic} .side-tab`);
-  tabs.forEach(t=>t.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById(`${topic}-aff-cases`).style.display=side==='aff'?'block':'none';
-  document.getElementById(`${topic}-neg-cases`).style.display=side==='neg'?'block':'none';
-}
+// Load all data
+(async function(){
+  try {
+    const [milRows, stdRows, mockRows] = await Promise.all([
+      fetchCSV(MIL_URL),
+      fetchCSV(STD_URL),
+      fetchCSV(MOCK_URL)
+    ]);
 
-function toggleContention(header){
-  const body=header.nextElementSibling;
-  const chevron=header.querySelector('.chevron');
-  const isOpen=body.classList.contains('open');
-  body.classList.toggle('open',!isOpen);
-  chevron.classList.toggle('open',!isOpen);
-}
+    // Military
+    const milAffCount = buildContentions(milRows, 'aff', 'mil-aff-contentions');
+    const milNegCount = buildContentions(milRows, 'neg', 'mil-neg-contentions');
+    document.getElementById('mil-aff-meta').textContent =
+      milAffCount ? `${milAffCount} card${milAffCount!==1?'s':''}` : 'No cards yet';
+    document.getElementById('mil-neg-meta').textContent =
+      milNegCount ? `${milNegCount} card${milNegCount!==1?'s':''}` : 'No cards yet';
+    buildMocks(mockRows, 'mil', 'mil-mocks-content');
 
-function toggleCard(header){
-  const body=header.nextElementSibling;
-  body.classList.toggle('open');
-}
+    // Standardized
+    const stdAffCount = buildContentions(stdRows, 'aff', 'std-aff-contentions');
+    const stdNegCount = buildContentions(stdRows, 'neg', 'std-neg-contentions');
+    document.getElementById('std-aff-meta').textContent =
+      stdAffCount ? `${stdAffCount} card${stdAffCount!==1?'s':''}` : 'No cards yet';
+    document.getElementById('std-neg-meta').textContent =
+      stdNegCount ? `${stdNegCount} card${stdNegCount!==1?'s':''}` : 'No cards yet';
+    buildMocks(mockRows, 'std', 'std-mocks-content');
+
+  } catch(e) {
+    console.error('Debate data load failed:', e);
+  }
+})();
 </script>
 </body>
 </html>
