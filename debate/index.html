@@ -3,144 +3,177 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Debate — NSDA Nationals 2026</title>
-  <meta name="robots" content="noindex, nofollow" />
+  <title>Debate &mdash; NSDA Nationals 2026</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Source+Code+Pro:wght@400;600&display=swap');
     :root {
-      --bg:#fff;--surface:#f8f8f8;--surface2:#f0f0f0;--border:#e0e0e0;
-      --navy:#1a2744;--navy2:#0f1a30;
-      --aff:#1a4fa8;--aff-bg:#eef3fc;--aff-border:#b8cef5;--aff-dark:#0c347c;
-      --neg:#a81a1a;--neg-bg:#fceeed;--neg-border:#f5b8b8;--neg-dark:#7c0c0c;
-      --text:#1a1a1a;--muted:#666;--radius:8px;--shadow:0 2px 8px rgba(0,0,0,0.08);
+      --navy:#1a2744; --navy2:#0f1a30; --gold:#f0c040; --gold-dark:#c8a020;
+      --aff:#1a4fa8; --aff-bg:#eef3fc; --aff-dark:#0c347c; --aff-border:#b8cef5;
+      --neg:#a81a1a; --neg-bg:#fceeed; --neg-dark:#7c0c0c; --neg-border:#f5b8b8;
+      --bg:#ffffff; --surface:#f8f7f4; --border:#e4e0d8; --muted:#888;
+      --text:#1a1a1a; --radius:6px;
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{font-size:16px;scroll-behavior:smooth;}
-    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
 
-    header{background:var(--navy);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-    .back-link{font-size:0.82rem;color:rgba(255,255,255,0.6);text-decoration:none;}
-    .back-link:hover{color:#fff;}
-    .nsda-badge{display:flex;align-items:center;gap:0.75rem;}
-    .nsda-badge img{height:44px;}
-    .nsda-text{color:rgba(255,255,255,0.85);font-size:0.8rem;line-height:1.4;}
-    .nsda-text strong{color:#fff;font-size:0.9rem;display:block;}
+    /* HEADER */
+    header { background: var(--navy); padding: 1.1rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .back-link { font-size: 0.82rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.15s; }
+    .back-link:hover { color: #fff; }
+    .header-center { display: flex; align-items: center; gap: 1rem; }
+    .header-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.25rem; color: #fff; }
+    .nsda-chip { background: rgba(240,192,64,0.12); border: 1px solid rgba(240,192,64,0.35); color: var(--gold); font-size: 0.72rem; padding: 0.2rem 0.75rem; border-radius: 20px; letter-spacing: 0.07em; font-family: 'Source Code Pro', monospace; white-space: nowrap; }
 
-    .topic-tabs{background:var(--navy2);display:flex;border-bottom:3px solid #0a1020;}
-    .topic-tab{padding:0.85rem 1.75rem;color:rgba(255,255,255,0.5);cursor:pointer;font-size:0.88rem;font-weight:500;border-bottom:3px solid transparent;margin-bottom:-3px;transition:all 0.15s;white-space:nowrap;}
-    .topic-tab:hover{color:rgba(255,255,255,0.85);}
-    .topic-tab.active{color:#fff;border-bottom-color:#f0c040;background:rgba(255,255,255,0.06);}
+    /* TOPIC TABS */
+    .topic-tabs { background: var(--navy2); display: flex; border-bottom: 2px solid #0a1020; }
+    .topic-tab { padding: 0.9rem 1.75rem; color: rgba(255,255,255,0.42); cursor: pointer; font-size: 0.88rem; font-weight: 500; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; white-space: nowrap; letter-spacing: 0.01em; }
+    .topic-tab:hover { color: rgba(255,255,255,0.8); }
+    .topic-tab.active { color: #fff; border-bottom-color: var(--gold); background: rgba(255,255,255,0.04); }
 
-    .topic-section{display:none;}
-    .topic-section.active{display:block;}
+    /* TOPIC SECTIONS */
+    .topic-section { display: none; }
+    .topic-section.active { display: block; }
 
-    /* HERO */
-    .hero{background:transparent;position:relative;overflow:hidden;text-align:center;padding:0;}
-    .hero svg{display:block;max-width:700px;margin:0 auto;}
-    .resolution-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 2rem;margin-top:-0.5rem;}
-    .resolution-label{font-family:'Source Code Pro',monospace;font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.3rem;}
-    .resolution-text{font-family:'Libre Baskerville',serif;font-size:1rem;color:var(--navy);line-height:1.6;max-width:780px;margin:0 auto;font-style:italic;}
+    /* RESOLUTION */
+    .resolution-strip { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center; }
+    .res-label { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 0.5rem; }
+    .res-text { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.05rem; color: var(--navy); font-style: italic; line-height: 1.7; max-width: 800px; margin: 0 auto; }
 
-    .topic-main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem;}
+    /* MAIN CONTENT */
+    .topic-main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
 
-    /* PODIUM BUTTONS */
-    .podium-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+    /* FOLDERS */
+    .folders-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; margin-bottom: 2.5rem; }
+    .folder-btn { background: transparent; border: none; padding: 0; cursor: pointer; text-align: left; width: 100%; transition: transform 0.15s; }
+    .folder-btn:hover { transform: translateY(-3px); }
+    .folder-btn.active-side .folder-body { box-shadow: 0 0 0 3px var(--gold); }
+    .folder-tab-strip { height: 30px; border-radius: 8px 18px 0 0; display: flex; align-items: center; padding: 0 18px; width: 55%; }
+    .folder-tab-strip.aff { background: var(--aff); }
+    .folder-tab-strip.neg { background: var(--neg); }
+    .folder-tab-text { font-size: 0.72rem; font-weight: 700; color: #fff; letter-spacing: 0.12em; text-transform: uppercase; }
+    .folder-body { border-radius: 0 8px 8px 8px; padding: 1.5rem 1.75rem; border: 1.5px solid; transition: box-shadow 0.2s; }
+    .folder-body.aff { background: var(--aff-bg); border-color: var(--aff); }
+    .folder-body.neg { background: var(--neg-bg); border-color: var(--neg); }
+    .folder-papers { position: relative; height: 38px; margin-bottom: 1rem; }
+    .folder-paper { position: absolute; width: 85%; height: 34px; border-radius: 2px; border: 1px solid #d4c88a; background: #fffef0; }
+    .folder-paper:nth-child(1) { top: 0; left: 5%; transform: rotate(-2.5deg); }
+    .folder-paper:nth-child(2) { top: 4px; left: 2.5%; transform: rotate(1.2deg); }
+    .folder-paper:nth-child(3) { top: 7px; left: 0; transform: rotate(-0.5deg); background: #f8f6e8; }
+    .folder-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .folder-title.aff { color: var(--aff-dark); }
+    .folder-title.neg { color: var(--neg-dark); }
+    .folder-meta { font-size: 0.82rem; color: var(--muted); font-family: 'Source Code Pro', monospace; }
 
-    /* BRIEFCASE */
-    .briefcase-btn{border:none;cursor:pointer;background:transparent;padding:0;position:relative;width:100%;text-align:center;}
-    .briefcase-outer{position:relative;display:inline-block;width:100%;}
-    .briefcase-scene{position:relative;width:100%;height:220px;}
-    .briefcase-svg{width:100%;height:220px;display:block;transition:filter 0.3s;}
-    .briefcase-btn:hover .briefcase-svg{filter:drop-shadow(0 4px 12px rgba(0,0,0,0.2));}
-    .briefcase-btn.active-side .briefcase-svg{filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));}
-
-    .pb-title{font-family:'Libre Baskerville',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.04em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.3);}
-    .pb-meta{font-size:0.75rem;color:rgba(255,255,255,0.85);margin-top:0.2rem;font-family:'Source Code Pro',monospace;}
-    .briefcase-label{position:absolute;bottom:20%;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;width:80%;}
-
-    /* Lid pivots from its bottom edge */
-    .bc-lid{transform-origin:center bottom;transition:transform 0.55s cubic-bezier(0.34,1.2,0.64,1);}
-    .briefcase-btn.active-side .bc-lid{transform:rotate(-110deg);}
-
-    /* Papers spill animation */
-    .bc-paper{opacity:0;transition:opacity 0.3s,transform 0.5s cubic-bezier(0.34,1.4,0.64,1);}
-    .briefcase-btn.active-side .bc-paper-1{opacity:1;transform:translate(-28px,-48px) rotate(-18deg);}
-    .briefcase-btn.active-side .bc-paper-2{opacity:1;transform:translate(8px,-58px) rotate(5deg);}
-    .briefcase-btn.active-side .bc-paper-3{opacity:1;transform:translate(30px,-44px) rotate(20deg);}
-    .bc-paper{transform:translate(0,0) rotate(0deg);}
-    /* Stagger paper delays */
-    .bc-paper-1{transition-delay:0.1s;}
-    .bc-paper-2{transition-delay:0.2s;}
-    .bc-paper-3{transition-delay:0.15s;}
-
-    /* SIDE PANEL */
-    .side-panel{display:none;}
-    .side-panel.open{display:block;}
-
-    .section-label{font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+    /* CASE PANEL */
+    .case-panel { display: none; margin-bottom: 2rem; }
+    .case-panel.open { display: block; }
+    .case-panel-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; margin-bottom: 1.25rem; border-bottom: 2px solid var(--border); }
+    .case-panel-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.1rem; color: var(--navy); font-weight: 700; }
+    .case-side-badge { font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 20px; letter-spacing: 0.08em; font-family: 'Source Code Pro', monospace; }
+    .case-side-badge.aff { background: var(--aff-bg); color: var(--aff-dark); border: 1px solid var(--aff-border); }
+    .case-side-badge.neg { background: var(--neg-bg); color: var(--neg-dark); border: 1px solid var(--neg-border); }
 
     /* CONTENTION */
-    .contention{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow);}
-    .contention-hdr{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;cursor:pointer;background:var(--surface);transition:background 0.15s;user-select:none;}
-    .contention-hdr:hover{background:var(--surface2);}
-    .contention-hdr.aff{border-left:4px solid var(--aff);}
-    .contention-hdr.neg{border-left:4px solid var(--neg);}
-    .contention-title{font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--navy);font-weight:700;}
-    .cont-meta{display:flex;align-items:center;gap:0.75rem;}
-    .card-count{font-family:'Source Code Pro',monospace;font-size:0.7rem;color:var(--muted);background:var(--surface2);padding:0.15rem 0.5rem;border-radius:10px;}
-    .chevron{color:var(--muted);transition:transform 0.2s;font-size:0.8rem;}
-    .chevron.open{transform:rotate(180deg);}
-    .contention-body{display:none;padding:1.25rem;background:#fff;}
-    .contention-body.open{display:block;}
+    .contention { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0.85rem; overflow: hidden; }
+    .contention-hdr { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; cursor: pointer; background: var(--surface); transition: background 0.15s; user-select: none; }
+    .contention-hdr:hover { background: #f0ece4; }
+    .contention-hdr.aff { border-left: 4px solid var(--aff); }
+    .contention-hdr.neg { border-left: 4px solid var(--neg); }
+    .contention-title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1rem; color: var(--navy); font-weight: 700; }
+    .contention-meta-wrap { display: flex; align-items: center; gap: 0.75rem; }
+    .contention-count { font-family: 'Source Code Pro', monospace; font-size: 0.7rem; color: var(--muted); background: #e8e4dc; padding: 0.15rem 0.5rem; border-radius: 10px; }
+    .contention-chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.2s; }
+    .contention-chevron.open { transform: rotate(180deg); }
+    .contention-body { display: none; padding: 1.25rem; background: #fff; border-top: 1px solid var(--border); }
+    .contention-body.open { display: block; }
 
     /* ROLODEX */
-    .rolodex{position:relative;user-select:none;}
-    .rolodex-stack{position:relative;height:240px;margin-bottom:1rem;}
-    .rcard{position:absolute;top:0;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem 1.5rem;transition:opacity 0.25s,transform 0.25s;opacity:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;height:220px;overflow:hidden;}
-    .rcard.active{opacity:1;pointer-events:auto;z-index:2;}
-    .rcard.prev{opacity:0.4;transform:translateY(-8px) scale(0.97);z-index:1;}
-    .rcard.next-card{opacity:0.4;transform:translateY(8px) scale(0.97);z-index:1;}
-    .rcard-tag{font-weight:600;font-size:0.95rem;color:var(--navy);font-family:'Libre Baskerville',serif;line-height:1.4;margin-bottom:0.5rem;}
-    .rcard-cite{font-size:0.75rem;color:var(--muted);font-style:italic;margin-bottom:0.75rem;line-height:1.4;}
-    .rcard-quote{font-family:'Libre Baskerville',serif;font-size:0.85rem;line-height:1.7;color:var(--text);padding-left:0.85rem;border-left:3px solid var(--aff-border);flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;}
-    .rcard-quote.neg{border-left-color:var(--neg-border);}
-    .rcard-author{font-family:'Source Code Pro',monospace;font-size:0.72rem;color:var(--muted);margin-top:0.5rem;}
-
-    .rolodex-controls{display:flex;align-items:center;gap:0.75rem;}
-    .rol-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:36px;height:36px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background 0.15s;color:var(--text);}
-    .rol-btn:hover{background:var(--surface2);}
-    .rol-btn:disabled{opacity:0.3;cursor:default;}
-    .rol-counter{font-family:'Source Code Pro',monospace;font-size:0.78rem;color:var(--muted);min-width:60px;text-align:center;}
-    .rol-dots{display:flex;gap:4px;flex-wrap:wrap;max-width:200px;}
-    .rol-dot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:background 0.15s;}
-    .rol-dot.active{background:var(--aff);}
-    .rol-dot.active.neg{background:var(--neg);}
-
-    /* LOADING PLACEHOLDER */
-    .placeholder-notice{background:#fffbea;border:1px solid #f0d060;border-radius:var(--radius);padding:1rem 1.25rem;font-size:0.85rem;color:#7a6020;margin-bottom:1.5rem;font-family:'Source Code Pro',monospace;}
-    .placeholder-notice strong{display:block;margin-bottom:0.25rem;}
+    .rolodex-stack { position: relative; height: 230px; margin-bottom: 0.85rem; }
+    .rcard { position: absolute; top: 0; left: 0; right: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; opacity: 0; pointer-events: none; height: 210px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: opacity 0.25s, transform 0.25s; }
+    .rcard.active { opacity: 1; pointer-events: auto; z-index: 2; transform: none; }
+    .rcard.prev { opacity: 0.3; transform: translateY(-8px) scale(0.97); z-index: 1; }
+    .rcard.next-card { opacity: 0.3; transform: translateY(8px) scale(0.97); z-index: 1; }
+    .rcard-tag { font-family: 'Libre Baskerville', Georgia, serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); line-height: 1.4; margin-bottom: 0.4rem; }
+    .rcard-cite { font-size: 0.75rem; color: var(--muted); font-style: italic; margin-bottom: 0.6rem; line-height: 1.4; }
+    .rcard-quote { font-family: 'Libre Baskerville', Georgia, serif; font-size: 0.85rem; line-height: 1.7; color: var(--text); padding-left: 0.85rem; border-left: 3px solid var(--aff-border); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; }
+    .rcard-quote.neg { border-left-color: var(--neg-border); }
+    .rcard-author { font-family: 'Source Code Pro', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; }
+    .rol-controls { display: flex; align-items: center; gap: 0.6rem; }
+    .rol-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; width: 34px; height: 34px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; color: var(--text); transition: background 0.15s; }
+    .rol-btn:hover { background: #e8e4dc; }
+    .rol-btn:disabled { opacity: 0.3; cursor: default; }
+    .rol-counter { font-family: 'Source Code Pro', monospace; font-size: 0.75rem; color: var(--muted); min-width: 48px; text-align: center; }
+    .rol-dots { display: flex; gap: 4px; flex-wrap: wrap; }
+    .rol-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); cursor: pointer; transition: background 0.15s; }
+    .rol-dot.active { background: var(--aff); }
+    .rol-dot.active.neg { background: var(--neg); }
 
     /* MOCKS */
-    .mocks-grid{display:grid;gap:0.75rem;}
-    .mock-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;display:grid;grid-template-columns:auto auto 1fr;gap:0.75rem;align-items:start;}
-    .mock-result{font-family:'Libre Baskerville',serif;font-size:1.5rem;font-weight:700;width:36px;text-align:center;}
-    .mock-result.W{color:#1a7a1a;}
-    .mock-result.L{color:var(--neg);}
-    .mock-side{font-family:'Source Code Pro',monospace;font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:10px;font-weight:600;align-self:start;margin-top:0.15rem;}
-    .mock-side.aff{background:var(--aff-bg);color:var(--aff-dark);}
-    .mock-side.neg{background:var(--neg-bg);color:var(--neg-dark);}
-    .mock-notes{font-size:0.85rem;color:var(--muted);line-height:1.5;}
-    .mock-date{font-family:'Source Code Pro',monospace;font-size:0.72rem;color:var(--muted);margin-top:0.25rem;}
-    .mocks-empty{text-align:center;padding:2rem;color:var(--muted);font-size:0.88rem;}
+    .section-hdr { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; margin-top: 2.5rem; }
+    .mocks-grid { display: grid; gap: 0.6rem; }
+    .mock-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.85rem 1.1rem; display: grid; grid-template-columns: 36px 54px 1fr; gap: 0.75rem; align-items: start; }
+    .mock-result { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.4rem; font-weight: 700; text-align: center; line-height: 1; padding-top: 2px; }
+    .mock-result.W { color: #1a7a1a; }
+    .mock-result.L { color: var(--neg); }
+    .mock-side-pill { font-family: 'Source Code Pro', monospace; font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 10px; display: inline-block; }
+    .mock-side-pill.aff { background: var(--aff-bg); color: var(--aff-dark); border: 1px solid var(--aff-border); }
+    .mock-side-pill.neg { background: var(--neg-bg); color: var(--neg-dark); border: 1px solid var(--neg-border); }
+    .mock-notes { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+    .mock-date { font-family: 'Source Code Pro', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; }
+    .mocks-empty { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.88rem; }
 
-    
+    /* FUNDRAISING */
+    .fundraise-section { background: var(--navy); margin-top: 3rem; }
+    .fundraise-inner { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+    .fundraise-top { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; margin-bottom: 2.5rem; }
+    .fundraise-headline { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.75rem; color: #fff; line-height: 1.3; margin-bottom: 0.6rem; }
+    .fundraise-headline span { color: var(--gold); }
+    .fundraise-sub { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 580px; }
+    .fundraise-nsda { text-align: right; }
+    .fundraise-nsda img { height: 80px; opacity: 0.9; }
 
-    @media(max-width:640px){
-      header{padding:0.75rem 1rem;}
-      .podium-row{grid-template-columns:1fr;}
-      .topic-main{padding:1.25rem 1rem;}
-      .topic-tab{padding:0.65rem 1rem;font-size:0.8rem;}
-      .mock-card{grid-template-columns:auto auto 1fr;}
+    /* PROGRESS BAR */
+    .progress-wrap { margin-bottom: 2rem; }
+    .progress-labels { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    .progress-raised { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.4rem; color: var(--gold); font-weight: 700; }
+    .progress-goal { font-size: 0.82rem; color: rgba(255,255,255,0.5); font-family: 'Source Code Pro', monospace; align-self: flex-end; padding-bottom: 2px; }
+    .progress-bar-outer { height: 10px; background: rgba(255,255,255,0.12); border-radius: 5px; overflow: hidden; }
+    .progress-bar-inner { height: 100%; background: var(--gold); border-radius: 5px; transition: width 0.6s ease; }
+    .progress-pct { font-family: 'Source Code Pro', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 0.4rem; }
+
+    /* COST BREAKDOWN */
+    .costs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+    .cost-item { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 0.85rem 1rem; }
+    .cost-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); font-family: 'Source Code Pro', monospace; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
+    .cost-amount { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.15rem; color: #fff; font-weight: 700; }
+    .cost-item.total { background: rgba(240,192,64,0.1); border-color: rgba(240,192,64,0.3); }
+    .cost-item.total .cost-label { color: var(--gold); }
+    .cost-item.total .cost-amount { color: var(--gold); font-size: 1.3rem; }
+
+    /* WHAT YOUR GIFT MEANS */
+    .gift-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+    .gift-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 0.85rem 1rem; text-align: center; }
+    .gift-amount { font-family: 'Libre Baskerville', Georgia, serif; font-size: 1.3rem; color: var(--gold); font-weight: 700; margin-bottom: 0.3rem; }
+    .gift-desc { font-size: 0.78rem; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+    /* DONATE BUTTON */
+    .donate-row { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .donate-btn { display: inline-block; background: #fff; color: var(--navy); font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; padding: 0.9rem 2.25rem; border-radius: 4px; text-decoration: none; letter-spacing: 0.01em; transition: background 0.15s; }
+    .donate-btn:hover { background: var(--gold); }
+    .donate-note { font-size: 0.78rem; color: rgba(255,255,255,0.45); font-family: 'Source Code Pro', monospace; line-height: 1.5; }
+
+    /* FOOTER */
+    footer { background: var(--navy2); padding: 1.5rem 2rem; text-align: center; font-family: 'Source Code Pro', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.06); }
+
+    @media (max-width: 640px) {
+      header { padding: 0.75rem 1rem; }
+      .topic-main { padding: 1.5rem 1rem; }
+      .folders-row { grid-template-columns: 1fr; }
+      .fundraise-top { grid-template-columns: 1fr; }
+      .fundraise-nsda { display: none; }
+      .fundraise-inner { padding: 2rem 1rem; }
+      .mock-card { grid-template-columns: 32px 48px 1fr; }
     }
   </style>
 </head>
@@ -148,13 +181,11 @@
 
 <header>
   <a href="../" class="back-link">&#8592; Kister Homeschool</a>
-  <div class="nsda-badge">
-    <img src="../images/nsda.png" alt="NSDA" />
-    <div class="nsda-text">
-      <strong>NSDA Nationals 2026</strong>
-      Richmond, VA &mdash; Public Forum
-    </div>
+  <div class="header-center">
+    <span class="header-title">Debate</span>
+    <span class="nsda-chip">NSDA Nationals 2026 &mdash; Richmond, VA</span>
   </div>
+  <img src="../images/nsda.png" alt="NSDA" style="height:40px;opacity:0.9;" />
 </header>
 
 <div class="topic-tabs">
@@ -162,399 +193,234 @@
   <div class="topic-tab" data-topic="std" onclick="switchTopic('std')">Standardized Tests</div>
 </div>
 
+<!-- SHARED HERO -->
+<div class="resolution-strip" id="res-mil">
+  <div class="res-label">Resolution &mdash; Military Intervention</div>
+  <div class="res-text">Resolved: The United States is justified in using force to remove authoritarian leaders from power.</div>
+</div>
+<div class="resolution-strip" id="res-std" style="display:none;">
+  <div class="res-label">Resolution &mdash; Standardized Tests</div>
+  <div class="res-text">Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.</div>
+</div>
 
-<div class="hero">
-    <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:0 auto;">
-  <!-- Spotlights -->
-  <polygon points="170,0 80,280 260,280" fill="#1a4fa8" opacity="0.05"/>
-  <polygon points="510,0 420,280 600,280" fill="#a81a1a" opacity="0.05"/>
-
-  <!-- ── LEFT LECTERN (AFF) ── -->
-  <!-- Base -->
-  <rect x="96" y="248" width="128" height="14" rx="3" fill="#2a1c0e"/>
-  <rect x="104" y="238" width="112" height="13" rx="2" fill="#3a2510"/>
-  <!-- Body — slimmer trapezoid -->
-  <path d="M116 238 L100 108 L220 108 L204 238 Z" fill="#4e3318"/>
-  <!-- Wood grain — finer lines -->
-  <line x1="116" y1="238" x2="101" y2="118" stroke="#3a2408" stroke-width="0.6" opacity="0.7"/>
-  <line x1="133" y1="238" x2="119" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.5"/>
-  <line x1="152" y1="238" x2="139" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.4"/>
-  <line x1="171" y1="238" x2="158" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.5"/>
-  <line x1="190" y1="238" x2="178" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.7"/>
-  <!-- Shoulder -->
-  <rect x="93" y="97" width="134" height="14" rx="3" fill="#3a2510"/>
-  <!-- Blue top panel -->
-  <rect x="99" y="89" width="122" height="11" rx="2" fill="#1a4fa8"/>
-  <rect x="99" y="89" width="122" height="4" rx="2" fill="#2e62c0" opacity="0.6"/>
-  <!-- Left face -->
-  <path d="M100 108 L93 97 L93 112 L100 124 Z" fill="#2a1808" opacity="0.8"/>
-  <!-- Right face -->
-  <path d="M220 108 L227 97 L227 112 L220 124 Z" fill="#6a4428" opacity="0.35"/>
-  <!-- Mic left 1 -->
-  <line x1="146" y1="89" x2="135" y2="62" stroke="#777" stroke-width="1.2"/>
-  <line x1="135" y1="62" x2="128" y2="53" stroke="#777" stroke-width="1.2"/>
-  <ellipse cx="127" cy="51" rx="3.5" ry="5" fill="#555"/>
-  <!-- Mic left 2 -->
-  <line x1="162" y1="89" x2="153" y2="64" stroke="#777" stroke-width="1.2"/>
-  <line x1="153" y1="64" x2="147" y2="56" stroke="#777" stroke-width="1.2"/>
-  <ellipse cx="146" cy="54" rx="3" ry="4.5" fill="#555"/>
-  <!-- Label -->
-  <text x="160" y="272" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="800" fill="#1a4fa8">AFFIRMATIVE</text>
-
-  <!-- ── RIGHT LECTERN (NEG) ── -->
-  <rect x="456" y="248" width="128" height="14" rx="3" fill="#2a1c0e"/>
-  <rect x="464" y="238" width="112" height="13" rx="2" fill="#3a2510"/>
-  <path d="M476 238 L460 108 L580 108 L564 238 Z" fill="#4e3318"/>
-  <line x1="476" y1="238" x2="461" y2="118" stroke="#3a2408" stroke-width="0.6" opacity="0.7"/>
-  <line x1="493" y1="238" x2="479" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.5"/>
-  <line x1="512" y1="238" x2="499" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.4"/>
-  <line x1="531" y1="238" x2="518" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.5"/>
-  <line x1="550" y1="238" x2="538" y2="108" stroke="#3a2408" stroke-width="0.6" opacity="0.7"/>
-  <rect x="453" y="97" width="134" height="14" rx="3" fill="#3a2510"/>
-  <rect x="459" y="89" width="122" height="11" rx="2" fill="#a81a1a"/>
-  <rect x="459" y="89" width="122" height="4" rx="2" fill="#c42828" opacity="0.6"/>
-  <path d="M460 108 L453 97 L453 112 L460 124 Z" fill="#2a1808" opacity="0.8"/>
-  <path d="M580 108 L587 97 L587 112 L580 124 Z" fill="#6a4428" opacity="0.35"/>
-  <!-- Mic right 1 — mirrored -->
-  <line x1="494" y1="89" x2="505" y2="62" stroke="#777" stroke-width="1.2"/>
-  <line x1="505" y1="62" x2="512" y2="53" stroke="#777" stroke-width="1.2"/>
-  <ellipse cx="513" cy="51" rx="3.5" ry="5" fill="#555"/>
-  <!-- Mic right 2 — mirrored -->
-  <line x1="510" y1="89" x2="519" y2="64" stroke="#777" stroke-width="1.2"/>
-  <line x1="519" y1="64" x2="525" y2="56" stroke="#777" stroke-width="1.2"/>
-  <ellipse cx="526" cy="54" rx="3" ry="4.5" fill="#555"/>
-  <text x="520" y="272" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="800" fill="#a81a1a">NEGATIVE</text>
-
-  <!-- VS -->
-  <text x="340" y="178" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="800" fill="#cccccc" opacity="0.45">VS</text>
-</svg>
-    <div class="resolution-strip" id="res-mil">
-      <div class="resolution-label">Resolution &mdash; Military Intervention</div>
-      <div class="resolution-text">Resolved: The United States is justified in using force to remove authoritarian leaders from power.</div>
-    </div>
-    <div class="resolution-strip" id="res-std" style="display:none;">
-      <div class="resolution-label">Resolution &mdash; Standardized Tests</div>
-      <div class="resolution-text">Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.</div>
-    </div>
-  </div>
-  </div>
-
-
-<!-- ══════════ MILITARY INTERVENTION ══════════ -->
+<!-- ══ MILITARY INTERVENTION ══ -->
 <div class="topic-section active" id="topic-mil">
-
   <div class="topic-main">
-    <div id="mil-placeholder" class="placeholder-notice" style="display:none;">
-      <strong>&#9888; No data yet</strong>
-      Cards will appear once the sheet has data.
+
+    <div class="folders-row">
+      <button class="folder-btn" id="mil-aff-btn" onclick="toggleSide('mil','aff')">
+        <div class="folder-tab-strip aff"><span class="folder-tab-text">Affirmative</span></div>
+        <div class="folder-body aff">
+          <div class="folder-papers">
+            <div class="folder-paper"></div>
+            <div class="folder-paper"></div>
+            <div class="folder-paper"></div>
+          </div>
+          <div class="folder-title aff">Affirmative Case</div>
+          <div class="folder-meta" id="mil-aff-meta">Loading...</div>
+        </div>
+      </button>
+      <button class="folder-btn" id="mil-neg-btn" onclick="toggleSide('mil','neg')">
+        <div class="folder-tab-strip neg"><span class="folder-tab-text">Negative</span></div>
+        <div class="folder-body neg">
+          <div class="folder-papers">
+            <div class="folder-paper"></div>
+            <div class="folder-paper"></div>
+            <div class="folder-paper"></div>
+          </div>
+          <div class="folder-title neg">Negative Case</div>
+          <div class="folder-meta" id="mil-neg-meta">Loading...</div>
+        </div>
+      </button>
     </div>
 
-            <div class="rolodex-counter" id="mil-rc-counter"></div>
+    <div class="case-panel" id="mil-aff-panel">
+      <div class="case-panel-header">
+        <span class="case-side-badge aff">AFF</span>
+        <span class="case-panel-title">Affirmative Case &mdash; Military Intervention</span>
       </div>
-    </div>
-    <div class="podium-row">
-      <button class="briefcase-btn" id="mil-aff-btn" onclick="toggleSide('mil','aff')">
-        <div class="briefcase-outer">
-          <div class="briefcase-scene">
-            <svg class="briefcase-svg" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="as1" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#fff" stop-opacity="0.2"/>
-                  <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <!-- Shadow -->
-              <ellipse cx="140" cy="174" rx="88" ry="5" fill="#1a4fa8" opacity="0.18"/>
-              <!-- Body -->
-              <rect x="22" y="88" width="236" height="82" rx="8" fill="#1a4fa8"/>
-              <rect x="22" y="88" width="236" height="82" rx="8" fill="url(#as1)" opacity="0.5"/>
-              <!-- Mid seam -->
-              <rect x="22" y="126" width="236" height="3" fill="#0c347c" opacity="0.4"/>
-              <!-- Side panels -->
-              <rect x="22" y="88" width="16" height="82" rx="3" fill="#0c347c" opacity="0.2"/>
-              <rect x="242" y="88" width="16" height="82" rx="3" fill="#0c347c" opacity="0.2"/>
-              <!-- Handle -->
-              <path d="M100 88 L100 69 Q100 55 114 55 L166 55 Q180 55 180 69 L180 88" fill="none" stroke="#0c347c" stroke-width="10" stroke-linecap="round"/>
-              <path d="M100 88 L100 69 Q100 59 114 59 L166 59 Q180 59 180 69 L180 88" fill="none" stroke="#2562c8" stroke-width="5.5" stroke-linecap="round"/>
-              <!-- Papers -->
-              <g class="bc-paper bc-paper-1" style="transform-origin:140px 95px;">
-                <rect x="82" y="64" width="50" height="65" rx="2" fill="#fffef0" stroke="#d4c88a" stroke-width="0.7"/>
-                <line x1="88" y1="74" x2="126" y2="74" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="88" y1="81" x2="126" y2="81" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="88" y1="87" x2="120" y2="87" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="88" y1="93" x2="123" y2="93" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <g class="bc-paper bc-paper-3" style="transform-origin:140px 95px;">
-                <rect x="148" y="62" width="50" height="65" rx="2" fill="#f8f4e8" stroke="#c8b880" stroke-width="0.7"/>
-                <line x1="154" y1="72" x2="192" y2="72" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="154" y1="79" x2="192" y2="79" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="154" y1="85" x2="186" y2="85" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <g class="bc-paper bc-paper-2" style="transform-origin:140px 95px;">
-                <rect x="115" y="60" width="50" height="67" rx="2" fill="#fffff8" stroke="#dac890" stroke-width="0.7"/>
-                <line x1="121" y1="70" x2="159" y2="70" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="121" y1="77" x2="159" y2="77" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="121" y1="83" x2="153" y2="83" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="121" y1="89" x2="156" y2="89" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <!-- Lid -->
-              <g class="bc-lid">
-                <rect x="22" y="56" width="236" height="36" rx="8" fill="#2562c8"/>
-                <rect x="22" y="56" width="236" height="36" rx="8" fill="url(#as1)" opacity="0.6"/>
-                <rect x="22" y="84" width="236" height="8" fill="#0c347c" opacity="0.3"/>
-                <rect x="30" y="63" width="220" height="4" rx="2" fill="#4a82e8" opacity="0.35"/>
-              </g>
-              <!-- Latch -->
-              <rect x="118" y="120" width="44" height="20" rx="4" fill="#f0c040"/>
-              <rect x="125" y="126" width="30" height="9" rx="2.5" fill="#c8a020"/>
-              <circle cx="140" cy="130" r="3.5" fill="#f8d040"/>
-              <circle cx="140" cy="130" r="1.2" fill="#a08010"/>
-            </svg>
-            <div class="briefcase-label">
-              <div class="pb-title">Affirmative</div>
-              <div class="pb-meta" id="mil-aff-meta">Loading...</div>
-            </div>
-          </div>
-        </div>
-      </button>
-      <button class="briefcase-btn" id="mil-neg-btn" onclick="toggleSide('mil','neg')">
-        <div class="briefcase-outer">
-          <div class="briefcase-scene">
-            <svg class="briefcase-svg" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="ns1" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#fff" stop-opacity="0.2"/>
-                  <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <!-- Shadow -->
-              <ellipse cx="140" cy="174" rx="88" ry="5" fill="#a81a1a" opacity="0.18"/>
-              <!-- Body -->
-              <rect x="22" y="88" width="236" height="82" rx="8" fill="#a81a1a"/>
-              <rect x="22" y="88" width="236" height="82" rx="8" fill="url(#ns1)" opacity="0.5"/>
-              <!-- Mid seam -->
-              <rect x="22" y="126" width="236" height="3" fill="#7c0c0c" opacity="0.4"/>
-              <!-- Side panels -->
-              <rect x="22" y="88" width="16" height="82" rx="3" fill="#7c0c0c" opacity="0.2"/>
-              <rect x="242" y="88" width="16" height="82" rx="3" fill="#7c0c0c" opacity="0.2"/>
-              <!-- Handle -->
-              <path d="M100 88 L100 69 Q100 55 114 55 L166 55 Q180 55 180 69 L180 88" fill="none" stroke="#7c0c0c" stroke-width="10" stroke-linecap="round"/>
-              <path d="M100 88 L100 69 Q100 59 114 59 L166 59 Q180 59 180 69 L180 88" fill="none" stroke="#c82828" stroke-width="5.5" stroke-linecap="round"/>
-              <!-- Papers -->
-              <g class="bc-paper bc-paper-1" style="transform-origin:140px 95px;">
-                <rect x="82" y="64" width="50" height="65" rx="2" fill="#fffef0" stroke="#d4c88a" stroke-width="0.7"/>
-                <line x1="88" y1="74" x2="126" y2="74" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="88" y1="81" x2="126" y2="81" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="88" y1="87" x2="120" y2="87" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="88" y1="93" x2="123" y2="93" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <g class="bc-paper bc-paper-3" style="transform-origin:140px 95px;">
-                <rect x="148" y="62" width="50" height="65" rx="2" fill="#f8f4e8" stroke="#c8b880" stroke-width="0.7"/>
-                <line x1="154" y1="72" x2="192" y2="72" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="154" y1="79" x2="192" y2="79" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="154" y1="85" x2="186" y2="85" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <g class="bc-paper bc-paper-2" style="transform-origin:140px 95px;">
-                <rect x="115" y="60" width="50" height="67" rx="2" fill="#fffff8" stroke="#dac890" stroke-width="0.7"/>
-                <line x1="121" y1="70" x2="159" y2="70" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="121" y1="77" x2="159" y2="77" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="121" y1="83" x2="153" y2="83" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="121" y1="89" x2="156" y2="89" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <!-- Lid -->
-              <g class="bc-lid">
-                <rect x="22" y="56" width="236" height="36" rx="8" fill="#c82828"/>
-                <rect x="22" y="56" width="236" height="36" rx="8" fill="url(#ns1)" opacity="0.6"/>
-                <rect x="22" y="84" width="236" height="8" fill="#7c0c0c" opacity="0.3"/>
-                <rect x="30" y="63" width="220" height="4" rx="2" fill="#e84848" opacity="0.35"/>
-              </g>
-              <!-- Latch -->
-              <rect x="118" y="120" width="44" height="20" rx="4" fill="#f0c040"/>
-              <rect x="125" y="126" width="30" height="9" rx="2.5" fill="#c8a020"/>
-              <circle cx="140" cy="130" r="3.5" fill="#f8d040"/>
-              <circle cx="140" cy="130" r="1.2" fill="#a08010"/>
-            </svg>
-            <div class="briefcase-label">
-              <div class="pb-title">Negative</div>
-              <div class="pb-meta" id="mil-neg-meta">Loading...</div>
-            </div>
-          </div>
-        </div>
-      </button>
-    </div>
-
-    <div class="side-panel" id="mil-aff-panel">
-      <div class="section-label">Affirmative Case &mdash; Military Intervention</div>
       <div id="mil-aff-contentions"></div>
     </div>
 
-    <div class="side-panel" id="mil-neg-panel">
-      <div class="section-label">Negative Case &mdash; Military Intervention</div>
+    <div class="case-panel" id="mil-neg-panel">
+      <div class="case-panel-header">
+        <span class="case-side-badge neg">NEG</span>
+        <span class="case-panel-title">Negative Case &mdash; Military Intervention</span>
+      </div>
       <div id="mil-neg-contentions"></div>
     </div>
 
-    <div style="margin-top:3rem;">
-      <div class="section-label">Mock Sessions &mdash; Military Intervention</div>
-      <div id="mil-mocks-content"><div class="mocks-empty">Loading mock results...</div></div>
-    </div>
+    <div class="section-hdr">Mock Sessions &mdash; Military Intervention</div>
+    <div id="mil-mocks-content"><div class="mocks-empty">Loading...</div></div>
+
   </div>
 </div>
 
-
-<!-- ══════════ STANDARDIZED TESTS ══════════ -->
+<!-- ══ STANDARDIZED TESTS ══ -->
 <div class="topic-section" id="topic-std">
-
   <div class="topic-main">
-    <div class="podium-row">
-      <button class="briefcase-btn" id="std-aff-btn" onclick="toggleSide('std','aff')">
-        <div class="briefcase-outer">
-          <div class="briefcase-scene">
-            <svg class="briefcase-svg" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="as2" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#fff" stop-opacity="0.2"/>
-                  <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <!-- Shadow -->
-              <ellipse cx="140" cy="174" rx="88" ry="5" fill="#1a4fa8" opacity="0.18"/>
-              <!-- Body -->
-              <rect x="22" y="88" width="236" height="82" rx="8" fill="#1a4fa8"/>
-              <rect x="22" y="88" width="236" height="82" rx="8" fill="url(#as2)" opacity="0.5"/>
-              <!-- Mid seam -->
-              <rect x="22" y="126" width="236" height="3" fill="#0c347c" opacity="0.4"/>
-              <!-- Side panels -->
-              <rect x="22" y="88" width="16" height="82" rx="3" fill="#0c347c" opacity="0.2"/>
-              <rect x="242" y="88" width="16" height="82" rx="3" fill="#0c347c" opacity="0.2"/>
-              <!-- Handle -->
-              <path d="M100 88 L100 69 Q100 55 114 55 L166 55 Q180 55 180 69 L180 88" fill="none" stroke="#0c347c" stroke-width="10" stroke-linecap="round"/>
-              <path d="M100 88 L100 69 Q100 59 114 59 L166 59 Q180 59 180 69 L180 88" fill="none" stroke="#2562c8" stroke-width="5.5" stroke-linecap="round"/>
-              <!-- Papers -->
-              <g class="bc-paper bc-paper-1" style="transform-origin:140px 95px;">
-                <rect x="82" y="64" width="50" height="65" rx="2" fill="#fffef0" stroke="#d4c88a" stroke-width="0.7"/>
-                <line x1="88" y1="74" x2="126" y2="74" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="88" y1="81" x2="126" y2="81" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="88" y1="87" x2="120" y2="87" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="88" y1="93" x2="123" y2="93" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <g class="bc-paper bc-paper-3" style="transform-origin:140px 95px;">
-                <rect x="148" y="62" width="50" height="65" rx="2" fill="#f8f4e8" stroke="#c8b880" stroke-width="0.7"/>
-                <line x1="154" y1="72" x2="192" y2="72" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="154" y1="79" x2="192" y2="79" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="154" y1="85" x2="186" y2="85" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <g class="bc-paper bc-paper-2" style="transform-origin:140px 95px;">
-                <rect x="115" y="60" width="50" height="67" rx="2" fill="#fffff8" stroke="#dac890" stroke-width="0.7"/>
-                <line x1="121" y1="70" x2="159" y2="70" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="121" y1="77" x2="159" y2="77" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="121" y1="83" x2="153" y2="83" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="121" y1="89" x2="156" y2="89" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <!-- Lid -->
-              <g class="bc-lid">
-                <rect x="22" y="56" width="236" height="36" rx="8" fill="#2562c8"/>
-                <rect x="22" y="56" width="236" height="36" rx="8" fill="url(#as2)" opacity="0.6"/>
-                <rect x="22" y="84" width="236" height="8" fill="#0c347c" opacity="0.3"/>
-                <rect x="30" y="63" width="220" height="4" rx="2" fill="#4a82e8" opacity="0.35"/>
-              </g>
-              <!-- Latch -->
-              <rect x="118" y="120" width="44" height="20" rx="4" fill="#f0c040"/>
-              <rect x="125" y="126" width="30" height="9" rx="2.5" fill="#c8a020"/>
-              <circle cx="140" cy="130" r="3.5" fill="#f8d040"/>
-              <circle cx="140" cy="130" r="1.2" fill="#a08010"/>
-            </svg>
-            <div class="briefcase-label">
-              <div class="pb-title">Affirmative</div>
-              <div class="pb-meta" id="std-aff-meta">Loading...</div>
-            </div>
+
+    <div class="folders-row">
+      <button class="folder-btn" id="std-aff-btn" onclick="toggleSide('std','aff')">
+        <div class="folder-tab-strip aff"><span class="folder-tab-text">Affirmative</span></div>
+        <div class="folder-body aff">
+          <div class="folder-papers">
+            <div class="folder-paper"></div>
+            <div class="folder-paper"></div>
+            <div class="folder-paper"></div>
           </div>
+          <div class="folder-title aff">Affirmative Case</div>
+          <div class="folder-meta" id="std-aff-meta">Loading...</div>
         </div>
       </button>
-      <button class="briefcase-btn" id="std-neg-btn" onclick="toggleSide('std','neg')">
-        <div class="briefcase-outer">
-          <div class="briefcase-scene">
-            <svg class="briefcase-svg" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="ns2" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#fff" stop-opacity="0.2"/>
-                  <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <!-- Shadow -->
-              <ellipse cx="140" cy="174" rx="88" ry="5" fill="#a81a1a" opacity="0.18"/>
-              <!-- Body -->
-              <rect x="22" y="88" width="236" height="82" rx="8" fill="#a81a1a"/>
-              <rect x="22" y="88" width="236" height="82" rx="8" fill="url(#ns2)" opacity="0.5"/>
-              <!-- Mid seam -->
-              <rect x="22" y="126" width="236" height="3" fill="#7c0c0c" opacity="0.4"/>
-              <!-- Side panels -->
-              <rect x="22" y="88" width="16" height="82" rx="3" fill="#7c0c0c" opacity="0.2"/>
-              <rect x="242" y="88" width="16" height="82" rx="3" fill="#7c0c0c" opacity="0.2"/>
-              <!-- Handle -->
-              <path d="M100 88 L100 69 Q100 55 114 55 L166 55 Q180 55 180 69 L180 88" fill="none" stroke="#7c0c0c" stroke-width="10" stroke-linecap="round"/>
-              <path d="M100 88 L100 69 Q100 59 114 59 L166 59 Q180 59 180 69 L180 88" fill="none" stroke="#c82828" stroke-width="5.5" stroke-linecap="round"/>
-              <!-- Papers -->
-              <g class="bc-paper bc-paper-1" style="transform-origin:140px 95px;">
-                <rect x="82" y="64" width="50" height="65" rx="2" fill="#fffef0" stroke="#d4c88a" stroke-width="0.7"/>
-                <line x1="88" y1="74" x2="126" y2="74" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="88" y1="81" x2="126" y2="81" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="88" y1="87" x2="120" y2="87" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="88" y1="93" x2="123" y2="93" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <g class="bc-paper bc-paper-3" style="transform-origin:140px 95px;">
-                <rect x="148" y="62" width="50" height="65" rx="2" fill="#f8f4e8" stroke="#c8b880" stroke-width="0.7"/>
-                <line x1="154" y1="72" x2="192" y2="72" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="154" y1="79" x2="192" y2="79" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="154" y1="85" x2="186" y2="85" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <g class="bc-paper bc-paper-2" style="transform-origin:140px 95px;">
-                <rect x="115" y="60" width="50" height="67" rx="2" fill="#fffff8" stroke="#dac890" stroke-width="0.7"/>
-                <line x1="121" y1="70" x2="159" y2="70" stroke="#d4c0a0" stroke-width="1"/>
-                <line x1="121" y1="77" x2="159" y2="77" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="121" y1="83" x2="153" y2="83" stroke="#e8d8b0" stroke-width="0.7"/>
-                <line x1="121" y1="89" x2="156" y2="89" stroke="#e8d8b0" stroke-width="0.7"/>
-              </g>
-              <!-- Lid -->
-              <g class="bc-lid">
-                <rect x="22" y="56" width="236" height="36" rx="8" fill="#c82828"/>
-                <rect x="22" y="56" width="236" height="36" rx="8" fill="url(#ns2)" opacity="0.6"/>
-                <rect x="22" y="84" width="236" height="8" fill="#7c0c0c" opacity="0.3"/>
-                <rect x="30" y="63" width="220" height="4" rx="2" fill="#e84848" opacity="0.35"/>
-              </g>
-              <!-- Latch -->
-              <rect x="118" y="120" width="44" height="20" rx="4" fill="#f0c040"/>
-              <rect x="125" y="126" width="30" height="9" rx="2.5" fill="#c8a020"/>
-              <circle cx="140" cy="130" r="3.5" fill="#f8d040"/>
-              <circle cx="140" cy="130" r="1.2" fill="#a08010"/>
-            </svg>
-            <div class="briefcase-label">
-              <div class="pb-title">Negative</div>
-              <div class="pb-meta" id="std-neg-meta">Loading...</div>
-            </div>
+      <button class="folder-btn" id="std-neg-btn" onclick="toggleSide('std','neg')">
+        <div class="folder-tab-strip neg"><span class="folder-tab-text">Negative</span></div>
+        <div class="folder-body neg">
+          <div class="folder-papers">
+            <div class="folder-paper"></div>
+            <div class="folder-paper"></div>
+            <div class="folder-paper"></div>
           </div>
+          <div class="folder-title neg">Negative Case</div>
+          <div class="folder-meta" id="std-neg-meta">Loading...</div>
         </div>
       </button>
     </div>
 
-    <div class="side-panel" id="std-aff-panel">
-      <div class="section-label">Affirmative Case &mdash; Standardized Tests</div>
+    <div class="case-panel" id="std-aff-panel">
+      <div class="case-panel-header">
+        <span class="case-side-badge aff">AFF</span>
+        <span class="case-panel-title">Affirmative Case &mdash; Standardized Tests</span>
+      </div>
       <div id="std-aff-contentions"></div>
     </div>
 
-    <div class="side-panel" id="std-neg-panel">
-      <div class="section-label">Negative Case &mdash; Standardized Tests</div>
+    <div class="case-panel" id="std-neg-panel">
+      <div class="case-panel-header">
+        <span class="case-side-badge neg">NEG</span>
+        <span class="case-panel-title">Negative Case &mdash; Standardized Tests</span>
+      </div>
       <div id="std-neg-contentions"></div>
     </div>
 
-    <div style="margin-top:3rem;">
-      <div class="section-label">Mock Sessions &mdash; Standardized Tests</div>
-      <div id="std-mocks-content"><div class="mocks-empty">Loading mock results...</div></div>
-    </div>
+    <div class="section-hdr">Mock Sessions &mdash; Standardized Tests</div>
+    <div id="std-mocks-content"><div class="mocks-empty">Loading...</div></div>
+
   </div>
 </div>
 
+<!-- ══ FUNDRAISING ══ -->
+<div class="fundraise-section">
+  <div class="fundraise-inner">
+
+    <div class="fundraise-top">
+      <div>
+        <div class="fundraise-headline">Help Send Our Debaters<br>to <span>Richmond</span></div>
+        <div class="fundraise-sub">
+          Our debaters have qualified for the NSDA National Speech &amp; Debate Tournament
+          in Richmond, Virginia &mdash; one of the most competitive academic events in the country.
+          Getting there takes real resources. Every contribution, large or small, makes a difference.
+        </div>
+      </div>
+      <div class="fundraise-nsda">
+        <img src="../images/nsda.png" alt="NSDA Nationals 2026" />
+      </div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <!-- TO UPDATE: change the RAISED value below -->
+    <div class="progress-wrap" id="progress-section">
+      <div class="progress-labels">
+        <div class="progress-raised" id="raised-display">$0 raised</div>
+        <div class="progress-goal">Goal: $3,000</div>
+      </div>
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" id="progress-bar" style="width:0%"></div>
+      </div>
+      <div class="progress-pct" id="progress-pct">0% of goal</div>
+    </div>
+
+    <!-- COST BREAKDOWN -->
+    <div class="section-hdr" style="border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);margin-top:0;">Where Your Support Goes</div>
+    <div class="costs-grid">
+      <div class="cost-item">
+        <div class="cost-label">NSDA Membership</div>
+        <div class="cost-amount">$349</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-label">Coach Membership</div>
+        <div class="cost-amount">$34</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-label">Coach Buyout Fee</div>
+        <div class="cost-amount">$450</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-label">Nationals Registration</div>
+        <div class="cost-amount">$480</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-label">Travel &amp; Expenses</div>
+        <div class="cost-amount">$1,687+</div>
+      </div>
+      <div class="cost-item total">
+        <div class="cost-label">Total Goal</div>
+        <div class="cost-amount">$3,000</div>
+      </div>
+    </div>
+
+    <!-- WHAT YOUR GIFT MEANS -->
+    <div class="section-hdr" style="border-color:rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);">What Your Gift Covers</div>
+    <div class="gift-grid">
+      <div class="gift-item">
+        <div class="gift-amount">$25</div>
+        <div class="gift-desc">One day of meals in Richmond</div>
+      </div>
+      <div class="gift-item">
+        <div class="gift-amount">$50</div>
+        <div class="gift-desc">Round-trip transportation to the venue</div>
+      </div>
+      <div class="gift-item">
+        <div class="gift-amount">$100</div>
+        <div class="gift-desc">One night of hotel accommodation</div>
+      </div>
+      <div class="gift-item">
+        <div class="gift-amount">$240</div>
+        <div class="gift-desc">Half of the nationals registration fee</div>
+      </div>
+      <div class="gift-item">
+        <div class="gift-amount">$480</div>
+        <div class="gift-desc">Full nationals registration for both debaters</div>
+      </div>
+      <div class="gift-item">
+        <div class="gift-amount">Any amount</div>
+        <div class="gift-desc">Gets our team one step closer to Richmond</div>
+      </div>
+    </div>
+
+    <!-- DONATE -->
+    <div class="donate-row">
+      <a href="https://citrononline.org/donate" target="_blank" class="donate-btn">Donate Now &rarr;</a>
+      <div class="donate-note">
+        Citron Online is a 501(c)(3) nonprofit.<br>
+        Your donation is tax-deductible. Please note &ldquo;Debate Nationals&rdquo; in the donation memo.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Kister Homeschool &mdash; Debate &mdash; NSDA Nationals 2026 &mdash; Public Forum
+</footer>
 
 <script>
+// ── TO UPDATE FUNDRAISING PROGRESS ──
+// Change this number to the current amount raised
+const AMOUNT_RAISED = 0;
+const GOAL = 3000;
+// ────────────────────────────────────
+
 const MIL_URL  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=0&single=true&output=csv';
 const STD_URL  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=1701865872&single=true&output=csv';
 const MOCK_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=223107175&single=true&output=csv';
@@ -791,6 +657,185 @@ function switchTopic(topic){
 })();
 
 
+
+// Global rolodex state
+const _rolState = {};
+
+function rolNav(id, dir){
+  const s = _rolState[id];
+  if(!s) return;
+  if(dir === 'prev' && s.idx > 0) s.idx--;
+  else if(dir === 'next' && s.idx < s.cards.length-1) s.idx++;
+  else if(typeof dir === 'number') s.idx = dir;
+  renderRolodex(id);
+}
+
+function renderRolodex(id){
+  const s = _rolState[id];
+  const el = document.getElementById(id);
+  if(!s || !el) return;
+  const {cards, side, idx} = s;
+  const stack = cards.map((c,i) => {
+    let cls = 'rcard';
+    if(i===idx) cls += ' active';
+    else if(i===idx-1) cls += ' prev';
+    else if(i===idx+1) cls += ' next-card';
+    return `<div class="${cls}">
+      <div>
+        <div class="rcard-tag">${c.tagline||'—'}</div>
+        <div class="rcard-cite">${c.full_citation||c['full citation']||''}</div>
+        <blockquote class="rcard-quote ${side}">${c.quote||''}</blockquote>
+      </div>
+      <div class="rcard-author">${c.author||''} ${c.year?'('+c.year+')':''}</div>
+    </div>`;
+  }).join('');
+  const dots = cards.map((_,i) =>
+    `<span class="rol-dot ${i===idx?'active '+side:''}" onclick="rolNav('${id}',${i})"></span>`
+  ).join('');
+  el.innerHTML = `
+    <div class="rolodex-stack">${stack}</div>
+    <div class="rol-controls">
+      <button class="rol-btn" onclick="rolNav('${id}','prev')" ${idx===0?'disabled':''}>&#8592;</button>
+      <span class="rol-counter">${idx+1} / ${cards.length}</span>
+      <button class="rol-btn" onclick="rolNav('${id}','next')" ${idx===cards.length-1?'disabled':''}>&#8594;</button>
+      <div class="rol-dots">${dots}</div>
+    </div>`;
+}
+
+function buildRolodex(cards, side, id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  if(!cards.length){ el.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:0.5rem 0;">No cards yet.</div>'; return; }
+  _rolState[id] = {cards, side, idx:0};
+  renderRolodex(id);
+}
+
+function buildContentions(rows, side, containerId){
+  const byContention = {};
+  rows.filter(r => (r.side||'').toLowerCase() === side).forEach(r => {
+    const c = r.contention||'Uncategorized';
+    if(!byContention[c]) byContention[c] = [];
+    byContention[c].push(r);
+  });
+  const el = document.getElementById(containerId);
+  if(!Object.keys(byContention).length){
+    el.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:1rem 0;">No cards loaded yet.</div>';
+    return 0;
+  }
+  el.innerHTML = Object.entries(byContention).map(([name,cards],ci) => {
+    const rolId = `rol-${containerId}-${ci}`;
+    return `<div class="contention">
+      <div class="contention-hdr ${side}" onclick="toggleContention(this)">
+        <span class="contention-title">${name}</span>
+        <div class="contention-meta-wrap">
+          <span class="contention-count">${cards.length} card${cards.length!==1?'s':''}</span>
+          <span class="contention-chevron">&#9660;</span>
+        </div>
+      </div>
+      <div class="contention-body">
+        <div id="${rolId}"></div>
+      </div>
+    </div>`;
+  }).join('');
+  Object.entries(byContention).forEach(([name,cards],ci) => {
+    buildRolodex(cards, side, `rol-${containerId}-${ci}`);
+  });
+  return Object.values(byContention).reduce((a,c)=>a+c.length,0);
+}
+
+function buildMocks(rows, topic, containerId){
+  const el = document.getElementById(containerId);
+  const filtered = rows.filter(r => {
+    const t = (r.topic||'').toLowerCase();
+    if(topic==='mil') return t.includes('military')||t.includes('force')||t.includes('authoritarian')||t.includes('mil');
+    return t.includes('standard')||t.includes('test')||t.includes('admissions')||t.includes('std');
+  });
+  if(!filtered.length){ el.innerHTML = '<div class="mocks-empty">No mock sessions recorded yet.</div>'; return; }
+  el.innerHTML = '<div class="mocks-grid">'+[...filtered].reverse().map(r => {
+    const res = (r.result||'').trim().toUpperCase();
+    const side = (r.side||'').toLowerCase();
+    const isWin = res==='W'||res==='WIN';
+    return `<div class="mock-card">
+      <div class="mock-result ${isWin?'W':'L'}">${isWin?'W':'L'}</div>
+      <div><span class="mock-side-pill ${side}">${side.toUpperCase()}</span></div>
+      <div>
+        <div class="mock-notes">${r.notes||'—'}</div>
+        <div class="mock-date">${r.date||''}</div>
+      </div>
+    </div>`;
+  }).join('')+'</div>';
+}
+
+const openSides = {};
+function toggleSide(topic, side){
+  const panelId = `${topic}-${side}-panel`;
+  const btnId = `${topic}-${side}-btn`;
+  const panel = document.getElementById(panelId);
+  const btn = document.getElementById(btnId);
+  const key = `${topic}-${side}`;
+  const isOpen = openSides[key];
+  const otherSide = side==='aff'?'neg':'aff';
+  const otherKey = `${topic}-${otherSide}`;
+  if(openSides[otherKey]){
+    document.getElementById(`${topic}-${otherSide}-panel`).classList.remove('open');
+    document.getElementById(`${topic}-${otherSide}-btn`).classList.remove('active-side');
+    openSides[otherKey] = false;
+  }
+  if(isOpen){
+    panel.classList.remove('open');
+    btn.classList.remove('active-side');
+    openSides[key] = false;
+  } else {
+    panel.classList.add('open');
+    btn.classList.add('active-side');
+    openSides[key] = true;
+    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+  }
+}
+
+function toggleContention(hdr){
+  const body = hdr.nextElementSibling;
+  const chev = hdr.querySelector('.contention-chevron');
+  const open = body.classList.contains('open');
+  body.classList.toggle('open',!open);
+  chev.classList.toggle('open',!open);
+}
+
+function switchTopic(topic){
+  document.querySelectorAll('.topic-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`[data-topic="${topic}"]`).classList.add('active');
+  document.querySelectorAll('.topic-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('topic-'+topic).classList.add('active');
+  document.getElementById('res-mil').style.display = topic==='mil'?'':'none';
+  document.getElementById('res-std').style.display = topic==='std'?'':'none';
+}
+
+// Progress bar
+(function(){
+  const pct = Math.min(100, Math.round((AMOUNT_RAISED/GOAL)*100));
+  document.getElementById('raised-display').textContent = '$'+AMOUNT_RAISED.toLocaleString()+' raised';
+  document.getElementById('progress-bar').style.width = pct+'%';
+  document.getElementById('progress-pct').textContent = pct+'% of goal';
+})();
+
+// Load sheet data
+(async function(){
+  try {
+    const [milRows, stdRows, mockRows] = await Promise.all([
+      fetchCSV(MIL_URL), fetchCSV(STD_URL), fetchCSV(MOCK_URL)
+    ]);
+    const milAff = buildContentions(milRows,'aff','mil-aff-contentions');
+    const milNeg = buildContentions(milRows,'neg','mil-neg-contentions');
+    document.getElementById('mil-aff-meta').textContent = milAff?`${milAff} cards`:'No cards yet';
+    document.getElementById('mil-neg-meta').textContent = milNeg?`${milNeg} cards`:'No cards yet';
+    buildMocks(mockRows,'mil','mil-mocks-content');
+    const stdAff = buildContentions(stdRows,'aff','std-aff-contentions');
+    const stdNeg = buildContentions(stdRows,'neg','std-neg-contentions');
+    document.getElementById('std-aff-meta').textContent = stdAff?`${stdAff} cards`:'No cards yet';
+    document.getElementById('std-neg-meta').textContent = stdNeg?`${stdNeg} cards`:'No cards yet';
+    buildMocks(mockRows,'std','std-mocks-content');
+  } catch(e){ console.error('Data load failed:',e); }
+})();
 </script>
 </body>
 </html>
