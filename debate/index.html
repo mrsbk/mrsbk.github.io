@@ -11,82 +11,54 @@
       --neg:#a81a1a;--neg-bg:#fceeed;--neg-dark:#7c0c0c;--neg-border:#f5b8b8;
       --ink:#1a1a1a;--navy:#1a2744;--gold:#f0c040;
       --bg:#ffffff;--surface:#f8f7f4;--border:#e0dcd4;--muted:#888;
-      --radius:4px;--serif:'Libre Baskerville',Georgia,serif;--sans:'Inter',sans-serif;--mono:'Source Code Pro',monospace;
+      --radius:4px;
+      --serif:'Libre Baskerville',Georgia,serif;
+      --sans:'Inter',sans-serif;
+      --mono:'Source Code Pro',monospace;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{font-size:16px;scroll-behavior:smooth;}
     body{background:var(--bg);color:var(--ink);font-family:var(--sans);}
 
-    /* HEADER */
     header{background:var(--ink);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-    .back-link{font-size:0.8rem;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.02em;}
+    .back-link{font-size:0.8rem;color:rgba(255,255,255,0.5);text-decoration:none;}
     .back-link:hover{color:#fff;}
-    .header-title{font-family:var(--serif);font-size:1.2rem;color:#fff;letter-spacing:0.01em;}
+    .header-title{font-family:var(--serif);font-size:1.2rem;color:#fff;}
     .header-right{display:flex;align-items:center;gap:0.75rem;}
-    .header-tag{font-family:var(--mono);font-size:0.68rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em;}
+    .header-tag{font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;}
 
-    /* TOPIC TABS */
-    .topic-tabs{background:#111;display:flex;border-bottom:3px solid #000;}
-    .topic-tab{padding:0.85rem 1.75rem;color:rgba(255,255,255,0.38);cursor:pointer;font-size:0.85rem;font-weight:600;border-bottom:3px solid transparent;margin-bottom:-3px;transition:all 0.15s;white-space:nowrap;letter-spacing:0.01em;font-family:var(--sans);}
-    .topic-tab:hover{color:rgba(255,255,255,0.75);}
-    .topic-tab.active{color:#fff;border-bottom-color:#fff;}
+    .page-inner{max-width:1100px;margin:0 auto;padding:3rem 2rem;}
 
-    /* TOPIC SECTIONS */
-    .topic-section{display:none;}
-    .topic-section.active{display:block;}
+    .story-block{margin-bottom:3.5rem;}
+    .story-eyebrow{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.75rem;}
+    .story-rule{width:40px;height:3px;background:var(--ink);margin-bottom:1.25rem;}
+    .story-body{font-family:var(--serif);font-size:1rem;line-height:1.9;color:#333;max-width:760px;}
+    .story-body p{margin-bottom:1.1rem;}
+    .story-body p:last-child{margin-bottom:0;}
 
-    /* RESOLUTION */
-    .resolution-wrap{border-bottom:1px solid var(--border);}
-    .resolution-inner{max-width:1100px;margin:0 auto;padding:1.5rem 2rem;}
-    .res-eyebrow{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.5rem;}
-    .res-text{font-family:var(--serif);font-size:1.1rem;color:var(--ink);font-style:italic;line-height:1.7;}
+    .resolution-block{margin-bottom:3.5rem;}
+    .res-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.6rem;}
+    .res-number{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;}
+    .res-rule{flex:1;height:1px;background:var(--border);}
+    .res-text{font-family:var(--serif);font-size:1rem;color:var(--ink);font-style:italic;line-height:1.7;margin-bottom:1.5rem;padding-left:0.75rem;border-left:3px solid var(--ink);}
 
-    /* MAIN */
-    .page-inner{max-width:1100px;margin:0 auto;padding:2.5rem 2rem;}
+    .cases-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+    .case-btn{background:transparent;border:none;padding:0;cursor:pointer;text-align:left;width:100%;transition:transform 0.15s;}
+    .case-btn:hover{transform:translateY(-2px);}
+    .case-btn.active-side .case-card{box-shadow:0 0 0 2px var(--ink);}
+    .case-card{border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.75rem;background:#fff;transition:box-shadow 0.15s;}
+    .case-card.aff{border-top:4px solid var(--aff);}
+    .case-card.neg{border-top:4px solid var(--neg);}
+    .case-eyebrow{font-family:var(--mono);font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem;}
+    .case-card.aff .case-eyebrow{color:var(--aff);}
+    .case-card.neg .case-eyebrow{color:var(--neg);}
+    .case-title{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:0.25rem;}
+    .case-rule{width:24px;height:2px;background:var(--border);margin:0.6rem 0;}
+    .case-meta{font-family:var(--mono);font-size:0.72rem;color:var(--muted);}
 
-    /* OUR PREP */
-    .prep-block{border-left:4px solid var(--ink);padding:0 0 0 1.5rem;margin-bottom:3rem;}
-    .prep-eyebrow{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.75rem;}
-    .prep-body{font-family:var(--serif);font-size:0.98rem;line-height:1.85;color:#333;}
-    .prep-body p{margin-bottom:1rem;}
-    .prep-body p:last-child{margin-bottom:0;}
+    .case-expansion{display:none;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border);}
+    .case-expansion.open{display:block;}
 
-    /* LAST UPDATED */
-    .updated-tag{display:inline-block;font-family:var(--mono);font-size:0.68rem;color:var(--muted);margin-top:0.75rem;border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:2px;}
-
-    /* CASE PANELS ROW */
-    .folders-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem;}
-
-    /* CLEAN PANEL BUTTON */
-    .folder-btn{background:transparent;border:none;padding:0;cursor:pointer;text-align:left;width:100%;transition:transform 0.15s;}
-    .folder-btn:hover{transform:translateY(-2px);}
-    .folder-btn.active-side .folder-body{box-shadow:0 0 0 2px var(--ink);}
-    .folder-tab-strip{display:none;}
-    .folder-tab-text{display:none;}
-    .folder-body{border-radius:var(--radius);padding:1.75rem 1.75rem 1.5rem;border:1px solid var(--border);background:#fff;transition:box-shadow 0.15s;}
-    .folder-body.aff{border-top:4px solid var(--aff);}
-    .folder-body.neg{border-top:4px solid var(--neg);}
-    .folder-papers{display:none;}
-    .fp{display:none;}
-    .folder-eyebrow{font-family:var(--mono);font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.6rem;}
-    .folder-body.aff .folder-eyebrow{color:var(--aff);}
-    .folder-body.neg .folder-eyebrow{color:var(--neg);}
-    .folder-title{font-family:var(--serif);font-size:1.4rem;font-weight:700;margin-bottom:0.35rem;}
-    .folder-title.aff{color:var(--ink);}
-    .folder-title.neg{color:var(--ink);}
-    .folder-meta{font-family:var(--mono);font-size:0.72rem;color:var(--muted);}
-    .folder-rule{width:28px;height:2px;background:var(--border);margin:0.75rem 0;}
-
-    /* CASE PANEL */
-    .case-panel{display:none;margin-bottom:2.5rem;}
-    .case-panel.open{display:block;}
-    .case-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:2px solid var(--ink);}
-    .case-badge{font-family:var(--mono);font-size:0.65rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:2px;letter-spacing:0.1em;}
-    .case-badge.aff{background:var(--aff-bg);color:var(--aff-dark);border:1px solid var(--aff-border);}
-    .case-badge.neg{background:var(--neg-bg);color:var(--neg-dark);border:1px solid var(--neg-border);}
-    .case-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--ink);}
-
-    /* CONTENTION */
     .contention{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:0.75rem;overflow:hidden;}
     .cont-hdr{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;cursor:pointer;background:var(--surface);transition:background 0.15s;user-select:none;}
     .cont-hdr:hover{background:#eeebe4;}
@@ -100,7 +72,6 @@
     .cont-body{display:none;padding:1.25rem;background:#fff;border-top:1px solid var(--border);}
     .cont-body.open{display:block;}
 
-    /* ROLODEX */
     .rol-stack{position:relative;height:220px;margin-bottom:0.75rem;}
     .rcard{position:absolute;inset:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.4rem;opacity:0;pointer-events:none;height:200px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;transition:opacity 0.2s,transform 0.2s;}
     .rcard.active{opacity:1;pointer-events:auto;z-index:2;}
@@ -122,35 +93,13 @@
     .rol-dot.active.aff{background:var(--aff);}
     .rol-dot.active.neg{background:var(--neg);}
 
-    /* SECTION DIVIDER */
-    .sec-divider{display:flex;align-items:center;gap:0.75rem;margin:2.5rem 0 1.25rem;}
-    .sec-divider-line{flex:1;height:1px;background:var(--border);}
-    .sec-divider-label{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;}
-
-    /* MOCKS */
-    .mocks-grid{display:grid;gap:0.6rem;}
-    .mock-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem 1.1rem;display:grid;grid-template-columns:32px 52px 1fr;gap:0.75rem;align-items:start;}
-    .mock-result{font-family:var(--serif);font-size:1.3rem;font-weight:700;text-align:center;line-height:1;padding-top:2px;}
-    .mock-result.W{color:#1a7a1a;}
-    .mock-result.L{color:var(--neg);}
-    .mock-pill{font-family:var(--mono);font-size:0.65rem;font-weight:700;padding:0.18rem 0.5rem;border-radius:2px;display:inline-block;letter-spacing:0.06em;}
-    .mock-pill.aff{background:var(--aff-bg);color:var(--aff-dark);border:1px solid var(--aff-border);}
-    .mock-pill.neg{background:var(--neg-bg);color:var(--neg-dark);border:1px solid var(--neg-border);}
-    .mock-notes{font-size:0.85rem;color:var(--ink);line-height:1.5;}
-    .mock-date{font-family:var(--mono);font-size:0.68rem;color:var(--muted);margin-top:0.2rem;}
-    .mocks-empty{text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem;font-family:var(--mono);}
-
-    /* FUNDRAISING */
-    .fundraise{background:var(--navy);margin-top:3rem;}
+    .fundraise{background:var(--navy);}
     .fundraise-inner{max-width:1100px;margin:0 auto;padding:3rem 2rem;}
     .fundraise-top{display:grid;grid-template-columns:1fr 180px;gap:2rem;align-items:center;margin-bottom:2.5rem;}
     .fundraise-headline{font-family:var(--serif);font-size:2rem;color:#fff;line-height:1.2;margin-bottom:0.75rem;}
     .fundraise-headline em{color:var(--gold);font-style:normal;}
     .fundraise-sub{font-size:0.95rem;color:rgba(255,255,255,0.65);line-height:1.75;max-width:560px;}
-    .fundraise-logo{text-align:center;}
     .fundraise-logo img{width:160px;opacity:0.92;}
-
-    /* PROGRESS */
     .progress-wrap{margin-bottom:2.25rem;}
     .progress-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.5rem;}
     .progress-raised{font-family:var(--serif);font-size:1.6rem;color:var(--gold);font-weight:700;}
@@ -158,8 +107,9 @@
     .pbar-outer{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
     .pbar-inner{height:100%;background:var(--gold);border-radius:4px;transition:width 0.8s ease;}
     .progress-pct{font-family:var(--mono);font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:0.35rem;}
-
-    /* COSTS */
+    .fund-divider{display:flex;align-items:center;gap:0.75rem;margin:2rem 0 1.25rem;}
+    .fund-divider-line{flex:1;height:1px;background:rgba(255,255,255,0.1);}
+    .fund-divider-label{font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;}
     .costs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0.65rem;margin-bottom:2rem;}
     .cost-item{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius);padding:0.8rem 1rem;}
     .cost-label{font-family:var(--mono);font-size:0.68rem;color:rgba(255,255,255,0.45);letter-spacing:0.05em;margin-bottom:0.3rem;}
@@ -167,38 +117,26 @@
     .cost-item.total{background:rgba(240,192,64,0.1);border-color:rgba(240,192,64,0.25);}
     .cost-item.total .cost-label{color:var(--gold);}
     .cost-item.total .cost-amount{color:var(--gold);font-size:1.25rem;}
-
-    /* GIFT GRID */
     .gift-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.65rem;margin-bottom:2.25rem;}
     .gift-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:var(--radius);padding:0.8rem 1rem;text-align:center;}
     .gift-amount{font-family:var(--serif);font-size:1.2rem;color:var(--gold);font-weight:700;margin-bottom:0.3rem;}
     .gift-desc{font-size:0.75rem;color:rgba(255,255,255,0.55);line-height:1.45;}
-
-    /* DONATE */
-    .donate-row{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;}
-    .donate-btn{display:inline-block;background:#fff;color:var(--navy);font-family:var(--sans);font-size:0.95rem;font-weight:700;padding:0.85rem 2rem;border-radius:var(--radius);text-decoration:none;letter-spacing:0.01em;transition:background 0.15s;flex-shrink:0;}
+    .donate-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+    .donate-btn{display:inline-block;background:#fff;color:var(--navy);font-family:var(--sans);font-size:0.95rem;font-weight:700;padding:0.85rem 2rem;border-radius:var(--radius);text-decoration:none;transition:background 0.15s;flex-shrink:0;}
     .donate-btn:hover{background:var(--gold);}
-    .donate-note{line-height:1.6;}
     .donate-note-main{font-family:var(--sans);font-size:0.95rem;color:rgba(255,255,255,0.75);margin-bottom:0.35rem;}
     .donate-note-memo{font-family:var(--sans);font-size:1rem;color:#fff;font-weight:500;}
     .donate-note-memo strong{color:var(--gold);}
 
-    /* FUND DIVIDER */
-    .fund-divider{display:flex;align-items:center;gap:0.75rem;margin:2rem 0 1.25rem;}
-    .fund-divider-line{flex:1;height:1px;background:rgba(255,255,255,0.1);}
-    .fund-divider-label{font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;}
-
-    /* FOOTER */
     footer{background:#111;padding:1.25rem 2rem;text-align:center;font-family:var(--mono);font-size:0.72rem;color:rgba(255,255,255,0.25);border-top:1px solid rgba(255,255,255,0.06);}
 
     @media(max-width:640px){
       header{padding:0.75rem 1rem;}
-      .page-inner{padding:1.5rem 1rem;}
-      .folders-row{grid-template-columns:1fr;}
+      .page-inner{padding:2rem 1rem;}
+      .cases-row{grid-template-columns:1fr;}
       .fundraise-top{grid-template-columns:1fr;}
       .fundraise-logo{display:none;}
       .fundraise-inner{padding:2rem 1rem;}
-      .mock-card{grid-template-columns:28px 46px 1fr;}
       .fundraise-headline{font-size:1.5rem;}
     }
   </style>
@@ -214,141 +152,94 @@
   </div>
 </header>
 
-<div class="topic-tabs">
-  <div class="topic-tab active" data-topic="mil" onclick="switchTopic('mil')">Military Intervention</div>
-  <div class="topic-tab" data-topic="std" onclick="switchTopic('std')">Standardized Tests</div>
-</div>
+<div class="page-inner">
 
-<!-- RESOLUTIONS -->
-<div class="resolution-wrap" id="res-mil">
-  <div class="resolution-inner">
-    <div class="res-eyebrow">Resolution &mdash; Military Intervention</div>
+  <div class="story-block">
+    <div class="story-eyebrow">Our Story</div>
+    <div class="story-rule"></div>
+    <div class="story-body">
+      <p>One year ago, the students at Kister Homeschool were on the outside looking in. There was no school debate program, no team, and no obvious path to competitive debate. That changed when Bubby spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone.</p>
+      <p>Coach Mike at Citron was our point of contact from the start &mdash; he worked with NSDA to establish our homeschool status and onboarded the kids into the program. He taught them the fundamentals: how to flow an argument, how to find and evaluate evidence, how to cut cards, and how to organize a case. Coach Batya worked with them on Speech and Congressional debate, including the finer points of delivery and presentation. Citron set up practice rounds with other schools and guided the kids through a full season of online competition.</p>
+      <p>The qualification to NSDA Nationals in Public Forum, the kids&rsquo; first season in the format, is a direct reflection of that coaching.</p>
+    </div>
+  </div>
+
+  <div class="resolution-block">
+    <div class="res-header">
+      <span class="res-number">Resolution 1</span>
+      <div class="res-rule"></div>
+    </div>
     <div class="res-text">Resolved: The United States is justified in using force to remove authoritarian leaders from power.</div>
+    <div class="cases-row">
+      <div>
+        <button class="case-btn" id="mil-aff-btn" onclick="toggleCase('mil','aff')">
+          <div class="case-card aff">
+            <div class="case-eyebrow">Affirmative</div>
+            <div class="case-title">Case Brief</div>
+            <div class="case-rule"></div>
+            <div class="case-meta" id="mil-aff-meta">Loading&hellip;</div>
+          </div>
+        </button>
+        <div class="case-expansion" id="mil-aff-panel">
+          <div id="mil-aff-contentions"></div>
+        </div>
+      </div>
+      <div>
+        <button class="case-btn" id="mil-neg-btn" onclick="toggleCase('mil','neg')">
+          <div class="case-card neg">
+            <div class="case-eyebrow">Negative</div>
+            <div class="case-title">Case Brief</div>
+            <div class="case-rule"></div>
+            <div class="case-meta" id="mil-neg-meta">Loading&hellip;</div>
+          </div>
+        </button>
+        <div class="case-expansion" id="mil-neg-panel">
+          <div id="mil-neg-contentions"></div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div class="resolution-wrap" id="res-std" style="display:none;">
-  <div class="resolution-inner">
-    <div class="res-eyebrow">Resolution &mdash; Standardized Tests</div>
+
+  <div class="resolution-block">
+    <div class="res-header">
+      <span class="res-number">Resolution 2</span>
+      <div class="res-rule"></div>
+    </div>
     <div class="res-text">Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.</div>
+    <div class="cases-row">
+      <div>
+        <button class="case-btn" id="std-aff-btn" onclick="toggleCase('std','aff')">
+          <div class="case-card aff">
+            <div class="case-eyebrow">Affirmative</div>
+            <div class="case-title">Case Brief</div>
+            <div class="case-rule"></div>
+            <div class="case-meta" id="std-aff-meta">Loading&hellip;</div>
+          </div>
+        </button>
+        <div class="case-expansion" id="std-aff-panel">
+          <div id="std-aff-contentions"></div>
+        </div>
+      </div>
+      <div>
+        <button class="case-btn" id="std-neg-btn" onclick="toggleCase('std','neg')">
+          <div class="case-card neg">
+            <div class="case-eyebrow">Negative</div>
+            <div class="case-title">Case Brief</div>
+            <div class="case-rule"></div>
+            <div class="case-meta" id="std-neg-meta">Loading&hellip;</div>
+          </div>
+        </button>
+        <div class="case-expansion" id="std-neg-panel">
+          <div id="std-neg-contentions"></div>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>
 
-<!-- MILITARY INTERVENTION -->
-<div class="topic-section active" id="topic-mil">
-  <div class="page-inner">
-
-    <div class="prep-block">
-      <div class="prep-eyebrow">Our Prep</div>
-      <div class="prep-body">
-        <p>One year ago, the students at Kister Homeschool were on the outside looking in. There was no school debate program, no team, and no obvious path to competitive debate. That changed when Bubby spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone.</p>
-        <p>Coach Mike at Citron was our point of contact from the start &mdash; he worked with NSDA to establish our homeschool status and onboarded the kids into the program. He taught them the fundamentals: how to flow an argument, how to find and evaluate evidence, how to cut cards, and how to organize a case. Coach Batya worked with them on Speech and Congressional debate, including the finer points of delivery and presentation. Citron set up practice rounds with other schools and guided the kids through a full season of online competition.</p>
-        <p>The qualification to NSDA Nationals in Public Forum, the kids&rsquo; first season in the format, is a direct reflection of that coaching.</p>
-      </div>
-      <div class="updated-tag" id="prep-updated">Last updated &mdash; April 2026</div>
-    </div>
-
-    <div class="folders-row">
-      <button class="folder-btn" id="mil-aff-btn" onclick="toggleSide('mil','aff')">
-        <div class="folder-tab-strip aff"><span class="folder-tab-text">Affirmative</span></div>
-        <div class="folder-body aff">
-          <div class="folder-eyebrow">Affirmative</div>
-          <div class="folder-title aff">Case Brief</div>
-          <div class="folder-rule"></div>
-          <div class="folder-meta" id="mil-aff-meta">Loading&hellip;</div>
-        </div>
-      </button>
-      <button class="folder-btn" id="mil-neg-btn" onclick="toggleSide('mil','neg')">
-        <div class="folder-tab-strip neg"><span class="folder-tab-text">Negative</span></div>
-        <div class="folder-body neg">
-          <div class="folder-eyebrow">Negative</div>
-          <div class="folder-title neg">Case Brief</div>
-          <div class="folder-rule"></div>
-          <div class="folder-meta" id="mil-neg-meta">Loading&hellip;</div>
-        </div>
-      </button>
-    </div>
-
-    <div class="case-panel" id="mil-aff-panel">
-      <div class="case-header">
-        <span class="case-badge aff">AFF</span>
-        <span class="case-title">Affirmative Case &mdash; Military Intervention</span>
-      </div>
-      <div id="mil-aff-contentions"></div>
-    </div>
-    <div class="case-panel" id="mil-neg-panel">
-      <div class="case-header">
-        <span class="case-badge neg">NEG</span>
-        <span class="case-title">Negative Case &mdash; Military Intervention</span>
-      </div>
-      <div id="mil-neg-contentions"></div>
-    </div>
-
-    <div class="sec-divider"><div class="sec-divider-line"></div><div class="sec-divider-label">Mock Sessions &mdash; Military Intervention</div><div class="sec-divider-line"></div></div>
-    <div id="mil-mocks-content"><div class="mocks-empty">No mock sessions recorded yet.</div></div>
-
-  </div>
-</div>
-
-<!-- STANDARDIZED TESTS -->
-<div class="topic-section" id="topic-std">
-  <div class="page-inner">
-
-    <div class="prep-block">
-      <div class="prep-eyebrow">Our Prep</div>
-      <div class="prep-body">
-        <p>One year ago, the students at Kister Homeschool were on the outside looking in. There was no school debate program, no team, and no obvious path to competitive debate. That changed when Bubby spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone.</p>
-        <p>Coach Mike at Citron was our point of contact from the start &mdash; he worked with NSDA to establish our homeschool status and onboarded the kids into the program. He taught them the fundamentals: how to flow an argument, how to find and evaluate evidence, how to cut cards, and how to organize a case. Coach Batya worked with them on Speech and Congressional debate, including the finer points of delivery and presentation. Citron set up practice rounds with other schools and guided the kids through a full season of online competition.</p>
-        <p>The qualification to NSDA Nationals in Public Forum, the kids&rsquo; first season in the format, is a direct reflection of that coaching.</p>
-      </div>
-      <div class="updated-tag">Last updated &mdash; April 2026</div>
-    </div>
-
-    <div class="folders-row">
-      <button class="folder-btn" id="std-aff-btn" onclick="toggleSide('std','aff')">
-        <div class="folder-tab-strip aff"><span class="folder-tab-text">Affirmative</span></div>
-        <div class="folder-body aff">
-          <div class="folder-eyebrow">Affirmative</div>
-          <div class="folder-title aff">Case Brief</div>
-          <div class="folder-rule"></div>
-          <div class="folder-meta" id="std-aff-meta">Loading&hellip;</div>
-        </div>
-      </button>
-      <button class="folder-btn" id="std-neg-btn" onclick="toggleSide('std','neg')">
-        <div class="folder-tab-strip neg"><span class="folder-tab-text">Negative</span></div>
-        <div class="folder-body neg">
-          <div class="folder-eyebrow">Negative</div>
-          <div class="folder-title neg">Case Brief</div>
-          <div class="folder-rule"></div>
-          <div class="folder-meta" id="std-neg-meta">Loading&hellip;</div>
-        </div>
-      </button>
-    </div>
-
-    <div class="case-panel" id="std-aff-panel">
-      <div class="case-header">
-        <span class="case-badge aff">AFF</span>
-        <span class="case-title">Affirmative Case &mdash; Standardized Tests</span>
-      </div>
-      <div id="std-aff-contentions"></div>
-    </div>
-    <div class="case-panel" id="std-neg-panel">
-      <div class="case-header">
-        <span class="case-badge neg">NEG</span>
-        <span class="case-title">Negative Case &mdash; Standardized Tests</span>
-      </div>
-      <div id="std-neg-contentions"></div>
-    </div>
-
-    <div class="sec-divider"><div class="sec-divider-line"></div><div class="sec-divider-label">Mock Sessions &mdash; Standardized Tests</div><div class="sec-divider-line"></div></div>
-    <div id="std-mocks-content"><div class="mocks-empty">No mock sessions recorded yet.</div></div>
-
-  </div>
-</div>
-
-<!-- FUNDRAISING -->
 <div class="fundraise">
   <div class="fundraise-inner">
-
     <div class="fundraise-top">
       <div>
         <div class="fundraise-headline">Help Send Our Debaters<br>to <em>Richmond</em></div>
@@ -359,7 +250,6 @@
       </div>
     </div>
 
-    <!-- PROGRESS — update AMOUNT_RAISED to current total, then push to GitHub -->
     <div class="progress-wrap">
       <div class="progress-top">
         <div class="progress-raised" id="raised-display">$0 raised</div>
@@ -391,12 +281,11 @@
 
     <div class="donate-row">
       <a href="https://citrononline.org/donate" target="_blank" class="donate-btn">Donate Now &rarr;</a>
-      <div class="donate-note">
+      <div>
         <div class="donate-note-main">Citron Online is a 501(c)(3) nonprofit &mdash; your donation is tax-deductible.</div>
         <div class="donate-note-memo">Please note <strong>&ldquo;Team Kister&rdquo;</strong> in the donation memo.</div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -408,11 +297,9 @@ const AMOUNT_RAISED = 0;
 // ─────────────────────────────────────────────────────────────────────────────
 const GOAL = 3000;
 
-const MIL_URL  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=0&single=true&output=csv';
-const STD_URL  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=1701865872&single=true&output=csv';
-const MOCK_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=223107175&single=true&output=csv';
+const MIL_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=0&single=true&output=csv';
+const STD_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=1701865872&single=true&output=csv';
 
-// Progress bar
 (function(){
   const pct = Math.min(100, Math.round((AMOUNT_RAISED / GOAL) * 100));
   document.getElementById('raised-display').textContent = '$' + AMOUNT_RAISED.toLocaleString() + ' raised';
@@ -420,7 +307,6 @@ const MOCK_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3
   document.getElementById('progress-pct').textContent = pct + '% of goal';
 })();
 
-// CSV parser
 function parseCSV(text){
   const lines = text.trim().split('\n');
   const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').toLowerCase());
@@ -443,7 +329,6 @@ async function fetchCSV(url){
   return parseCSV(await r.text());
 }
 
-// Rolodex
 const _RS = {};
 function rolNav(id, dir){
   const s = _RS[id]; if(!s) return;
@@ -486,8 +371,6 @@ function buildRolodex(cards, side, id){
   _RS[id] = {cards, side, idx:0};
   renderRol(id);
 }
-
-// Contentions
 function buildContentions(rows, side, containerId){
   const by={};
   rows.filter(r=>(r.side||'').toLowerCase()===side).forEach(r=>{
@@ -514,40 +397,8 @@ function buildContentions(rows, side, containerId){
   return Object.values(by).reduce((a,c)=>a+c.length,0);
 }
 
-// Mocks
-function buildMocks(rows, topic, id){
-  const el=document.getElementById(id);
-  const f=rows.filter(r=>{
-    const t=(r.topic||'').toLowerCase();
-    return topic==='mil'?t.includes('military')||t.includes('force')||t.includes('mil')
-                        :t.includes('standard')||t.includes('test')||t.includes('std');
-  });
-  if(!f.length){ el.innerHTML='<div class="mocks-empty">No mock sessions recorded yet.</div>'; return; }
-  el.innerHTML='<div class="mocks-grid">'+[...f].reverse().map(r=>{
-    const res=(r.result||'').trim().toUpperCase();
-    const side=(r.side||'').toLowerCase();
-    const w=res==='W'||res==='WIN';
-    return `<div class="mock-card">
-      <div class="mock-result ${w?'W':'L'}">${w?'W':'L'}</div>
-      <div><span class="mock-pill ${side}">${side.toUpperCase()}</span></div>
-      <div><div class="mock-notes">${r.notes||'&mdash;'}</div><div class="mock-date">${r.date||''}</div></div>
-    </div>`;
-  }).join('')+'</div>';
-}
-
-// Topic switching
-function switchTopic(topic){
-  document.querySelectorAll('.topic-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelector(`[data-topic="${topic}"]`).classList.add('active');
-  document.querySelectorAll('.topic-section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('topic-'+topic).classList.add('active');
-  document.getElementById('res-mil').style.display=topic==='mil'?'':'none';
-  document.getElementById('res-std').style.display=topic==='std'?'':'none';
-}
-
-// Side toggle
 const _open={};
-function toggleSide(topic,side){
+function toggleCase(topic, side){
   const panel=document.getElementById(`${topic}-${side}-panel`);
   const btn=document.getElementById(`${topic}-${side}-btn`);
   const key=`${topic}-${side}`;
@@ -566,7 +417,6 @@ function toggleSide(topic,side){
   }
 }
 
-// Contention toggle
 function toggleContention(hdr){
   const body=hdr.nextElementSibling;
   const chev=hdr.querySelector('.cont-chev');
@@ -575,20 +425,17 @@ function toggleContention(hdr){
   chev.classList.toggle('open',!open);
 }
 
-// Load data
 (async function(){
   try{
-    const[milRows,stdRows,mockRows]=await Promise.all([fetchCSV(MIL_URL),fetchCSV(STD_URL),fetchCSV(MOCK_URL)]);
+    const[milRows,stdRows]=await Promise.all([fetchCSV(MIL_URL),fetchCSV(STD_URL)]);
     const ma=buildContentions(milRows,'aff','mil-aff-contentions');
     const mn=buildContentions(milRows,'neg','mil-neg-contentions');
     document.getElementById('mil-aff-meta').textContent=ma?`${ma} cards`:'No cards yet';
     document.getElementById('mil-neg-meta').textContent=mn?`${mn} cards`:'No cards yet';
-    buildMocks(mockRows,'mil','mil-mocks-content');
     const sa=buildContentions(stdRows,'aff','std-aff-contentions');
     const sn=buildContentions(stdRows,'neg','std-neg-contentions');
     document.getElementById('std-aff-meta').textContent=sa?`${sa} cards`:'No cards yet';
     document.getElementById('std-neg-meta').textContent=sn?`${sn} cards`:'No cards yet';
-    buildMocks(mockRows,'std','std-mocks-content');
   }catch(e){console.error('Data load failed:',e);}
 })();
 </script>
