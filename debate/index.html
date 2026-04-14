@@ -54,29 +54,28 @@
     /* LAST UPDATED */
     .updated-tag{display:inline-block;font-family:var(--mono);font-size:0.68rem;color:var(--muted);margin-top:0.75rem;border:1px solid var(--border);padding:0.2rem 0.6rem;border-radius:2px;}
 
-    /* CASE FOLDERS ROW */
+    /* CASE PANELS ROW */
     .folders-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem;}
 
-    /* FOLDER */
+    /* CLEAN PANEL BUTTON */
     .folder-btn{background:transparent;border:none;padding:0;cursor:pointer;text-align:left;width:100%;transition:transform 0.15s;}
     .folder-btn:hover{transform:translateY(-2px);}
-    .folder-btn.active-side .folder-body{outline:2px solid var(--ink);}
-    .folder-tab-strip{height:26px;border-radius:4px 16px 0 0;display:flex;align-items:center;padding:0 14px;width:52%;}
-    .folder-tab-strip.aff{background:var(--aff);}
-    .folder-tab-strip.neg{background:var(--neg);}
-    .folder-tab-text{font-size:0.65rem;font-weight:700;color:#fff;letter-spacing:0.14em;text-transform:uppercase;}
-    .folder-body{border-radius:0 4px 4px 4px;padding:1.25rem 1.5rem;border:1.5px solid;transition:outline 0.15s;}
-    .folder-body.aff{background:var(--aff-bg);border-color:var(--aff);}
-    .folder-body.neg{background:var(--neg-bg);border-color:var(--neg);}
-    .folder-papers{position:relative;height:32px;margin-bottom:0.85rem;}
-    .fp{position:absolute;width:82%;height:28px;border-radius:1px;border:1px solid #d4c88a;background:#fffef0;}
-    .fp:nth-child(1){top:0;left:5%;transform:rotate(-2.5deg);}
-    .fp:nth-child(2){top:3px;left:2.5%;transform:rotate(1.2deg);}
-    .fp:nth-child(3){top:6px;left:0;background:#f8f6e8;}
-    .folder-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:0.25rem;}
-    .folder-title.aff{color:var(--aff-dark);}
-    .folder-title.neg{color:var(--neg-dark);}
+    .folder-btn.active-side .folder-body{box-shadow:0 0 0 2px var(--ink);}
+    .folder-tab-strip{display:none;}
+    .folder-tab-text{display:none;}
+    .folder-body{border-radius:var(--radius);padding:1.75rem 1.75rem 1.5rem;border:1px solid var(--border);background:#fff;transition:box-shadow 0.15s;}
+    .folder-body.aff{border-top:4px solid var(--aff);}
+    .folder-body.neg{border-top:4px solid var(--neg);}
+    .folder-papers{display:none;}
+    .fp{display:none;}
+    .folder-eyebrow{font-family:var(--mono);font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.6rem;}
+    .folder-body.aff .folder-eyebrow{color:var(--aff);}
+    .folder-body.neg .folder-eyebrow{color:var(--neg);}
+    .folder-title{font-family:var(--serif);font-size:1.4rem;font-weight:700;margin-bottom:0.35rem;}
+    .folder-title.aff{color:var(--ink);}
+    .folder-title.neg{color:var(--ink);}
     .folder-meta{font-family:var(--mono);font-size:0.72rem;color:var(--muted);}
+    .folder-rule{width:28px;height:2px;background:var(--border);margin:0.75rem 0;}
 
     /* CASE PANEL */
     .case-panel{display:none;margin-bottom:2.5rem;}
@@ -179,7 +178,10 @@
     .donate-row{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;}
     .donate-btn{display:inline-block;background:#fff;color:var(--navy);font-family:var(--sans);font-size:0.95rem;font-weight:700;padding:0.85rem 2rem;border-radius:var(--radius);text-decoration:none;letter-spacing:0.01em;transition:background 0.15s;flex-shrink:0;}
     .donate-btn:hover{background:var(--gold);}
-    .donate-note{font-family:var(--mono);font-size:0.7rem;color:rgba(255,255,255,0.38);line-height:1.6;}
+    .donate-note{line-height:1.6;}
+    .donate-note-main{font-family:var(--sans);font-size:0.95rem;color:rgba(255,255,255,0.75);margin-bottom:0.35rem;}
+    .donate-note-memo{font-family:var(--sans);font-size:1rem;color:#fff;font-weight:500;}
+    .donate-note-memo strong{color:var(--gold);}
 
     /* FUND DIVIDER */
     .fund-divider{display:flex;align-items:center;gap:0.75rem;margin:2rem 0 1.25rem;}
@@ -238,9 +240,9 @@
     <div class="prep-block">
       <div class="prep-eyebrow">Our Prep</div>
       <div class="prep-body">
-        <p>Our debaters are homeschoolers &mdash; there was no school program, no team, no obvious path to competitive debate. That changed when Bubbe spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone. Citron didn&rsquo;t just open the door &mdash; they walked us through it. They worked with NSDA to establish our homeschool status, made their full coaching staff available for online sessions &mdash; including coaches Batya, Mercedes, and Mike &mdash; set up practice rounds with other schools, and guided the kids through a full season of online competition.</p>
-        <p>Coach Mike in particular shaped not just how the kids debate, but how they think &mdash; how to build an argument, how to listen to an opponent, how to stay composed under pressure. The qualification to NSDA Nationals in Public Forum, the kids&rsquo; first season in the format, is a direct reflection of that coaching.</p>
-        <p>This page is where we organize the preparation for Richmond.</p>
+        <p>One year ago, the students at Kister Homeschool were on the outside looking in. There was no school debate program, no team, and no obvious path to competitive debate. That changed when Bubby spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone.</p>
+        <p>Coach Mike at Citron was our point of contact from the start &mdash; he worked with NSDA to establish our homeschool status and onboarded the kids into the program. He taught them the fundamentals: how to flow an argument, how to find and evaluate evidence, how to cut cards, and how to organize a case. Coach Batya worked with them on Speech and Congressional debate, including the finer points of delivery and presentation. Citron set up practice rounds with other schools and guided the kids through a full season of online competition.</p>
+        <p>The qualification to NSDA Nationals in Public Forum, the kids&rsquo; first season in the format, is a direct reflection of that coaching.</p>
       </div>
       <div class="updated-tag" id="prep-updated">Last updated &mdash; April 2026</div>
     </div>
@@ -249,16 +251,18 @@
       <button class="folder-btn" id="mil-aff-btn" onclick="toggleSide('mil','aff')">
         <div class="folder-tab-strip aff"><span class="folder-tab-text">Affirmative</span></div>
         <div class="folder-body aff">
-          <div class="folder-papers"><div class="fp"></div><div class="fp"></div><div class="fp"></div></div>
-          <div class="folder-title aff">Affirmative Case</div>
+          <div class="folder-eyebrow">Affirmative</div>
+          <div class="folder-title aff">Case Brief</div>
+          <div class="folder-rule"></div>
           <div class="folder-meta" id="mil-aff-meta">Loading&hellip;</div>
         </div>
       </button>
       <button class="folder-btn" id="mil-neg-btn" onclick="toggleSide('mil','neg')">
         <div class="folder-tab-strip neg"><span class="folder-tab-text">Negative</span></div>
         <div class="folder-body neg">
-          <div class="folder-papers"><div class="fp"></div><div class="fp"></div><div class="fp"></div></div>
-          <div class="folder-title neg">Negative Case</div>
+          <div class="folder-eyebrow">Negative</div>
+          <div class="folder-title neg">Case Brief</div>
+          <div class="folder-rule"></div>
           <div class="folder-meta" id="mil-neg-meta">Loading&hellip;</div>
         </div>
       </button>
@@ -292,9 +296,9 @@
     <div class="prep-block">
       <div class="prep-eyebrow">Our Prep</div>
       <div class="prep-body">
-        <p>Our debaters are homeschoolers &mdash; there was no school program, no team, no obvious path to competitive debate. That changed when Bubbe spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone. Citron didn&rsquo;t just open the door &mdash; they walked us through it. They worked with NSDA to establish our homeschool status, made their full coaching staff available for online sessions &mdash; including coaches Batya, Mercedes, and Mike &mdash; set up practice rounds with other schools, and guided the kids through a full season of online competition.</p>
-        <p>Coach Mike in particular shaped not just how the kids debate, but how they think &mdash; how to build an argument, how to listen to an opponent, how to stay composed under pressure. The qualification to NSDA Nationals in Public Forum, the kids&rsquo; first season in the format, is a direct reflection of that coaching.</p>
-        <p>This page is where we organize the preparation for Richmond.</p>
+        <p>One year ago, the students at Kister Homeschool were on the outside looking in. There was no school debate program, no team, and no obvious path to competitive debate. That changed when Bubby spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone.</p>
+        <p>Coach Mike at Citron was our point of contact from the start &mdash; he worked with NSDA to establish our homeschool status and onboarded the kids into the program. He taught them the fundamentals: how to flow an argument, how to find and evaluate evidence, how to cut cards, and how to organize a case. Coach Batya worked with them on Speech and Congressional debate, including the finer points of delivery and presentation. Citron set up practice rounds with other schools and guided the kids through a full season of online competition.</p>
+        <p>The qualification to NSDA Nationals in Public Forum, the kids&rsquo; first season in the format, is a direct reflection of that coaching.</p>
       </div>
       <div class="updated-tag">Last updated &mdash; April 2026</div>
     </div>
@@ -303,16 +307,18 @@
       <button class="folder-btn" id="std-aff-btn" onclick="toggleSide('std','aff')">
         <div class="folder-tab-strip aff"><span class="folder-tab-text">Affirmative</span></div>
         <div class="folder-body aff">
-          <div class="folder-papers"><div class="fp"></div><div class="fp"></div><div class="fp"></div></div>
-          <div class="folder-title aff">Affirmative Case</div>
+          <div class="folder-eyebrow">Affirmative</div>
+          <div class="folder-title aff">Case Brief</div>
+          <div class="folder-rule"></div>
           <div class="folder-meta" id="std-aff-meta">Loading&hellip;</div>
         </div>
       </button>
       <button class="folder-btn" id="std-neg-btn" onclick="toggleSide('std','neg')">
         <div class="folder-tab-strip neg"><span class="folder-tab-text">Negative</span></div>
         <div class="folder-body neg">
-          <div class="folder-papers"><div class="fp"></div><div class="fp"></div><div class="fp"></div></div>
-          <div class="folder-title neg">Negative Case</div>
+          <div class="folder-eyebrow">Negative</div>
+          <div class="folder-title neg">Case Brief</div>
+          <div class="folder-rule"></div>
           <div class="folder-meta" id="std-neg-meta">Loading&hellip;</div>
         </div>
       </button>
@@ -386,8 +392,8 @@
     <div class="donate-row">
       <a href="https://citrononline.org/donate" target="_blank" class="donate-btn">Donate Now &rarr;</a>
       <div class="donate-note">
-        Citron Online is a 501(c)(3) nonprofit. Your donation is tax-deductible.<br>
-        Please note &ldquo;Debate Nationals&rdquo; in the donation memo.
+        <div class="donate-note-main">Citron Online is a 501(c)(3) nonprofit &mdash; your donation is tax-deductible.</div>
+        <div class="donate-note-memo">Please note <strong>&ldquo;Team Kister&rdquo;</strong> in the donation memo.</div>
       </div>
     </div>
 
