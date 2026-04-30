@@ -29,69 +29,12 @@
 
     .page-inner{max-width:1100px;margin:0 auto;padding:3rem 2rem;}
 
-    .story-block{margin-bottom:3.5rem;}
+    .story-block{margin-bottom:3rem;}
     .story-eyebrow{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:0.75rem;}
     .story-rule{width:40px;height:3px;background:var(--ink);margin-bottom:1.25rem;}
     .story-body{font-family:var(--serif);font-size:1rem;line-height:1.9;color:#333;max-width:760px;}
-    .story-body p{margin-bottom:1.1rem;}
+    .story-body p{margin-bottom:1rem;}
     .story-body p:last-child{margin-bottom:0;}
-
-    .resolution-block{margin-bottom:3.5rem;}
-    .res-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.6rem;}
-    .res-number{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;}
-    .res-rule{flex:1;height:1px;background:var(--border);}
-    .res-text{font-family:var(--serif);font-size:1rem;color:var(--ink);font-style:italic;line-height:1.7;margin-bottom:1.5rem;padding-left:0.75rem;border-left:3px solid var(--ink);}
-
-    .cases-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
-    .case-btn{background:transparent;border:none;padding:0;cursor:pointer;text-align:left;width:100%;transition:transform 0.15s;}
-    .case-btn:hover{transform:translateY(-2px);}
-    .case-btn.active-side .case-card{box-shadow:0 0 0 2px var(--ink);}
-    .case-card{border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.75rem;background:#fff;transition:box-shadow 0.15s;}
-    .case-card.aff{border-top:4px solid var(--aff);}
-    .case-card.neg{border-top:4px solid var(--neg);}
-    .case-eyebrow{font-family:var(--mono);font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem;}
-    .case-card.aff .case-eyebrow{color:var(--aff);}
-    .case-card.neg .case-eyebrow{color:var(--neg);}
-    .case-title{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:0.25rem;}
-    .case-rule{width:24px;height:2px;background:var(--border);margin:0.6rem 0;}
-    .case-meta{font-family:var(--mono);font-size:0.72rem;color:var(--muted);}
-
-    .case-expansion{display:none;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border);}
-    .case-expansion.open{display:block;}
-
-    .contention{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:0.75rem;overflow:hidden;}
-    .cont-hdr{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;cursor:pointer;background:var(--surface);transition:background 0.15s;user-select:none;}
-    .cont-hdr:hover{background:#eeebe4;}
-    .cont-hdr.aff{border-left:3px solid var(--aff);}
-    .cont-hdr.neg{border-left:3px solid var(--neg);}
-    .cont-title{font-family:var(--serif);font-size:0.95rem;font-weight:700;color:var(--ink);}
-    .cont-right{display:flex;align-items:center;gap:0.6rem;}
-    .cont-count{font-family:var(--mono);font-size:0.68rem;color:var(--muted);background:#e8e4dc;padding:0.12rem 0.45rem;border-radius:2px;}
-    .cont-chev{color:var(--muted);font-size:0.72rem;transition:transform 0.2s;}
-    .cont-chev.open{transform:rotate(180deg);}
-    .cont-body{display:none;padding:1.25rem;background:#fff;border-top:1px solid var(--border);}
-    .cont-body.open{display:block;}
-
-    .rol-stack{position:relative;height:220px;margin-bottom:0.75rem;}
-    .rcard{position:absolute;inset:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.4rem;opacity:0;pointer-events:none;height:200px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;transition:opacity 0.2s,transform 0.2s;}
-    .rcard.active{opacity:1;pointer-events:auto;z-index:2;}
-    .rcard.prev{opacity:0.25;transform:translateY(-6px) scale(0.97);z-index:1;}
-    .rcard.next-card{opacity:0.25;transform:translateY(6px) scale(0.97);z-index:1;}
-    .rcard-tag{font-family:var(--serif);font-size:0.92rem;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:0.35rem;}
-    .rcard-cite{font-size:0.72rem;color:var(--muted);font-style:italic;margin-bottom:0.5rem;line-height:1.4;}
-    .rcard-quote{font-family:var(--serif);font-size:0.82rem;line-height:1.7;color:#333;padding-left:0.75rem;border-left:2px solid var(--border);overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;flex:1;}
-    .rcard-quote.aff{border-left-color:var(--aff-border);}
-    .rcard-quote.neg{border-left-color:var(--neg-border);}
-    .rcard-author{font-family:var(--mono);font-size:0.68rem;color:var(--muted);margin-top:0.35rem;}
-    .rol-controls{display:flex;align-items:center;gap:0.5rem;}
-    .rol-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:32px;height:32px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background 0.15s;}
-    .rol-btn:hover{background:#e8e4dc;}
-    .rol-btn:disabled{opacity:0.3;cursor:default;}
-    .rol-counter{font-family:var(--mono);font-size:0.72rem;color:var(--muted);min-width:44px;text-align:center;}
-    .rol-dots{display:flex;gap:4px;flex-wrap:wrap;}
-    .rol-dot{width:5px;height:5px;border-radius:50%;background:var(--border);cursor:pointer;transition:background 0.15s;}
-    .rol-dot.active.aff{background:var(--aff);}
-    .rol-dot.active.neg{background:var(--neg);}
 
     .fundraise{background:var(--navy);}
     .fundraise-inner{max-width:1100px;margin:0 auto;padding:3rem 2rem;}
@@ -107,6 +50,7 @@
     .pbar-outer{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;}
     .pbar-inner{height:100%;background:var(--gold);border-radius:4px;transition:width 0.8s ease;}
     .progress-pct{font-family:var(--mono);font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:0.35rem;}
+    .grant-note{font-family:var(--mono);font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:0.6rem;}
     .fund-divider{display:flex;align-items:center;gap:0.75rem;margin:2rem 0 1.25rem;}
     .fund-divider-line{flex:1;height:1px;background:rgba(255,255,255,0.1);}
     .fund-divider-label{font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;}
@@ -133,7 +77,6 @@
     @media(max-width:640px){
       header{padding:0.75rem 1rem;}
       .page-inner{padding:2rem 1rem;}
-      .cases-row{grid-template-columns:1fr;}
       .fundraise-top{grid-template-columns:1fr;}
       .fundraise-logo{display:none;}
       .fundraise-inner{padding:2rem 1rem;}
@@ -158,81 +101,8 @@
     <div class="story-eyebrow">Our Story</div>
     <div class="story-rule"></div>
     <div class="story-body">
-      <p>One year ago, the students at Kister Homeschool were on the outside looking in. There was no school debate program, no team, and no obvious path to competitive debate. That changed when Bubby spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone.</p>
-      <p>Coach Mike at Citron was our point of contact from the start &mdash; he worked with NSDA to establish our homeschool status and onboarded the kids into the program. He taught them the fundamentals: how to flow an argument, how to find and evaluate evidence, how to cut cards, and how to organize a case. Coach Batya worked with them on Speech and Congressional debate, including the finer points of delivery and presentation. Citron set up practice rounds with other schools and guided the kids through a full season of online competition.</p>
-      <p>The qualification to NSDA Nationals in Public Forum, the kids&rsquo; first season in the format, is a direct reflection of that coaching.</p>
-    </div>
-  </div>
-
-  <div class="resolution-block">
-    <div class="res-header">
-      <span class="res-number">Resolution 1</span>
-      <div class="res-rule"></div>
-    </div>
-    <div class="res-text">Resolved: The United States is justified in using force to remove authoritarian leaders from power.</div>
-    <div class="cases-row">
-      <div>
-        <button class="case-btn" id="mil-aff-btn" onclick="toggleCase('mil','aff')">
-          <div class="case-card aff">
-            <div class="case-eyebrow">Affirmative</div>
-            <div class="case-title">Case Brief</div>
-            <div class="case-rule"></div>
-            <div class="case-meta" id="mil-aff-meta">Loading&hellip;</div>
-          </div>
-        </button>
-        <div class="case-expansion" id="mil-aff-panel">
-          <div id="mil-aff-contentions"></div>
-        </div>
-      </div>
-      <div>
-        <button class="case-btn" id="mil-neg-btn" onclick="toggleCase('mil','neg')">
-          <div class="case-card neg">
-            <div class="case-eyebrow">Negative</div>
-            <div class="case-title">Case Brief</div>
-            <div class="case-rule"></div>
-            <div class="case-meta" id="mil-neg-meta">Loading&hellip;</div>
-          </div>
-        </button>
-        <div class="case-expansion" id="mil-neg-panel">
-          <div id="mil-neg-contentions"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="resolution-block">
-    <div class="res-header">
-      <span class="res-number">Resolution 2</span>
-      <div class="res-rule"></div>
-    </div>
-    <div class="res-text">Resolved: In the United States, the benefits of using standardized tests in undergraduate college admissions outweigh the harms.</div>
-    <div class="cases-row">
-      <div>
-        <button class="case-btn" id="std-aff-btn" onclick="toggleCase('std','aff')">
-          <div class="case-card aff">
-            <div class="case-eyebrow">Affirmative</div>
-            <div class="case-title">Case Brief</div>
-            <div class="case-rule"></div>
-            <div class="case-meta" id="std-aff-meta">Loading&hellip;</div>
-          </div>
-        </button>
-        <div class="case-expansion" id="std-aff-panel">
-          <div id="std-aff-contentions"></div>
-        </div>
-      </div>
-      <div>
-        <button class="case-btn" id="std-neg-btn" onclick="toggleCase('std','neg')">
-          <div class="case-card neg">
-            <div class="case-eyebrow">Negative</div>
-            <div class="case-title">Case Brief</div>
-            <div class="case-rule"></div>
-            <div class="case-meta" id="std-neg-meta">Loading&hellip;</div>
-          </div>
-        </button>
-        <div class="case-expansion" id="std-neg-panel">
-          <div id="std-neg-contentions"></div>
-        </div>
-      </div>
+      <p>One year ago our kids had no debate program, no team, and no obvious path to competitive debate. That changed when Bubby spotted an article about Citron Online, founded by Alex Libkind on the belief that debate should be accessible to everyone. Citron worked with NSDA to bring our homeschool family into the fold &mdash; Coach Mike onboarded the kids and taught them the craft, and Coach Batya worked with them on speech and delivery. They ran practice rounds with other schools and guided the kids through a full season of competition.</p>
+      <p>Qualifying for NSDA Nationals in their first season of Public Forum is a direct result of that coaching.</p>
     </div>
   </div>
 
@@ -257,7 +127,7 @@
       </div>
       <div class="pbar-outer"><div class="pbar-inner" id="pbar" style="width:0%"></div></div>
       <div class="progress-pct" id="progress-pct">0% of goal</div>
-      <div style="font-family:var(--mono);font-size:0.72rem;color:rgba(255,255,255,0.45);margin-top:0.6rem;">We have applied for a Road to Nationals grant through the NSDA. Any grant received will be applied directly to our goal.</div>
+      <div class="grant-note">We have applied for a Road to Nationals grant through the NSDA. Any grant received will be applied directly to our goal.</div>
     </div>
 
     <div class="fund-divider"><div class="fund-divider-line"></div><div class="fund-divider-label">Where Your Support Goes</div><div class="fund-divider-line"></div></div>
@@ -299,9 +169,6 @@ const AMOUNT_RAISED = 0;
 // ─────────────────────────────────────────────────────────────────────────────
 const GOAL = 4000;
 
-const MIL_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=0&single=true&output=csv';
-const STD_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=1701865872&single=true&output=csv';
-
 (function(){
   const pct = Math.min(100, Math.round((AMOUNT_RAISED / GOAL) * 100));
   document.getElementById('raised-display').textContent = '$' + AMOUNT_RAISED.toLocaleString() + ' raised';
@@ -309,137 +176,9 @@ const STD_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_
   document.getElementById('progress-pct').textContent = pct + '% of goal';
 })();
 
-function parseCSV(text){
-  const lines = text.trim().split('\n');
-  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').toLowerCase());
-  return lines.slice(1).filter(l => l.trim()).map(line => {
-    const vals = []; let cur = '', inQ = false;
-    for(let i = 0; i < line.length; i++){
-      if(line[i] === '"'){ inQ = !inQ; }
-      else if(line[i] === ',' && !inQ){ vals.push(cur); cur = ''; }
-      else { cur += line[i]; }
-    }
-    vals.push(cur);
-    const obj = {};
-    headers.forEach((h,i) => obj[h] = (vals[i]||'').replace(/^"|"$/g,'').trim());
-    return obj;
-  });
-}
-
-async function fetchCSV(url){
-  const r = await fetch(url);
-  return parseCSV(await r.text());
-}
-
-const _RS = {};
-function rolNav(id, dir){
-  const s = _RS[id]; if(!s) return;
-  if(dir==='prev' && s.idx>0) s.idx--;
-  else if(dir==='next' && s.idx<s.cards.length-1) s.idx++;
-  else if(typeof dir==='number') s.idx=dir;
-  renderRol(id);
-}
-function renderRol(id){
-  const s = _RS[id]; const el = document.getElementById(id);
-  if(!s||!el) return;
-  const {cards,side,idx} = s;
-  el.innerHTML = `
-    <div class="rol-stack">
-      ${cards.map((c,i)=>{
-        let cls='rcard';
-        if(i===idx) cls+=' active';
-        else if(i===idx-1) cls+=' prev';
-        else if(i===idx+1) cls+=' next-card';
-        return `<div class="${cls}">
-          <div>
-            <div class="rcard-tag">${c.tagline||'&mdash;'}</div>
-            <div class="rcard-cite">${c.full_citation||c['full citation']||''}</div>
-            <blockquote class="rcard-quote ${side}">${c.quote||''}</blockquote>
-          </div>
-          <div class="rcard-author">${c.author||''}${c.year?' ('+c.year+')':''}</div>
-        </div>`;
-      }).join('')}
-    </div>
-    <div class="rol-controls">
-      <button class="rol-btn" onclick="rolNav('${id}','prev')" ${idx===0?'disabled':''}>&#8592;</button>
-      <span class="rol-counter">${idx+1} / ${cards.length}</span>
-      <button class="rol-btn" onclick="rolNav('${id}','next')" ${idx===cards.length-1?'disabled':''}>&#8594;</button>
-      <div class="rol-dots">${cards.map((_,i)=>`<span class="rol-dot${i===idx?' active '+side:''}" onclick="rolNav('${id}',${i})"></span>`).join('')}</div>
-    </div>`;
-}
-function buildRolodex(cards, side, id){
-  const el = document.getElementById(id); if(!el) return;
-  if(!cards.length){ el.innerHTML='<div style="color:var(--muted);font-size:0.82rem;padding:0.5rem 0;font-family:var(--mono);">No cards yet.</div>'; return; }
-  _RS[id] = {cards, side, idx:0};
-  renderRol(id);
-}
-function buildContentions(rows, side, containerId){
-  const by={};
-  rows.filter(r=>(r.side||'').toLowerCase()===side).forEach(r=>{
-    const c=r.contention||'Uncategorized';
-    if(!by[c]) by[c]=[];
-    by[c].push(r);
-  });
-  const el=document.getElementById(containerId);
-  if(!Object.keys(by).length){ el.innerHTML='<div style="color:var(--muted);font-size:0.85rem;padding:1rem 0;font-family:var(--mono);">No cards loaded yet.</div>'; return 0; }
-  el.innerHTML=Object.entries(by).map(([name,cards],ci)=>{
-    const rolId=`rol-${containerId}-${ci}`;
-    return `<div class="contention">
-      <div class="cont-hdr ${side}" onclick="toggleContention(this)">
-        <span class="cont-title">${name}</span>
-        <div class="cont-right">
-          <span class="cont-count">${cards.length} card${cards.length!==1?'s':''}</span>
-          <span class="cont-chev">&#9660;</span>
-        </div>
-      </div>
-      <div class="cont-body"><div id="${rolId}"></div></div>
-    </div>`;
-  }).join('');
-  Object.entries(by).forEach(([,cards],ci)=>buildRolodex(cards,side,`rol-${containerId}-${ci}`));
-  return Object.values(by).reduce((a,c)=>a+c.length,0);
-}
-
-const _open={};
-function toggleCase(topic, side){
-  const panel=document.getElementById(`${topic}-${side}-panel`);
-  const btn=document.getElementById(`${topic}-${side}-btn`);
-  const key=`${topic}-${side}`;
-  const other=side==='aff'?'neg':'aff';
-  const otherKey=`${topic}-${other}`;
-  if(_open[otherKey]){
-    document.getElementById(`${topic}-${other}-panel`).classList.remove('open');
-    document.getElementById(`${topic}-${other}-btn`).classList.remove('active-side');
-    _open[otherKey]=false;
-  }
-  if(_open[key]){
-    panel.classList.remove('open'); btn.classList.remove('active-side'); _open[key]=false;
-  } else {
-    panel.classList.add('open'); btn.classList.add('active-side'); _open[key]=true;
-    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
-  }
-}
-
-function toggleContention(hdr){
-  const body=hdr.nextElementSibling;
-  const chev=hdr.querySelector('.cont-chev');
-  const open=body.classList.contains('open');
-  body.classList.toggle('open',!open);
-  chev.classList.toggle('open',!open);
-}
-
-(async function(){
-  try{
-    const[milRows,stdRows]=await Promise.all([fetchCSV(MIL_URL),fetchCSV(STD_URL)]);
-    const ma=buildContentions(milRows,'aff','mil-aff-contentions');
-    const mn=buildContentions(milRows,'neg','mil-neg-contentions');
-    document.getElementById('mil-aff-meta').textContent=ma?`${ma} cards`:'No cards yet';
-    document.getElementById('mil-neg-meta').textContent=mn?`${mn} cards`:'No cards yet';
-    const sa=buildContentions(stdRows,'aff','std-aff-contentions');
-    const sn=buildContentions(stdRows,'neg','std-neg-contentions');
-    document.getElementById('std-aff-meta').textContent=sa?`${sa} cards`:'No cards yet';
-    document.getElementById('std-neg-meta').textContent=sn?`${sn} cards`:'No cards yet';
-  }catch(e){console.error('Data load failed:',e);}
-})();
+// Case data URLs — uncomment when ready to restore cases
+// const MIL_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=0&single=true&output=csv';
+// const STD_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHghSKFlFtkU3_1rRnLqZB915smn47BXCjVIt9SY2kiD07kdZ_nnbLwTMZsIpcjHME_8EA7MUg-SFw/pub?gid=1701865872&single=true&output=csv';
 </script>
 </body>
 </html>
